@@ -41,7 +41,7 @@ app.get('/signup', index.signup);
 app.get('/:user/profile', user.profile);
 app.get('/:user/followers', user.followers);
 app.get('/:user/following', user.following);
-app.get('/feed/:hashtag', hashfeed.index);
+app.get('/feed/:hashtag', hashfeed.feed);
 
 http.createServer(app).listen(app.get('port'), 
 	function()
