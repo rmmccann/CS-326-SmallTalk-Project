@@ -3,6 +3,6 @@
  * GET hash feed.
  */
 
-exports.index = function(req, res){
-  res.render('index', { title: 'Hashfeed' });
+exports.feed = function(req, res){
+  res.render('hashfeed', { title: 'Hashfeed' });
 };
