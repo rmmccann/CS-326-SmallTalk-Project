@@ -4,5 +4,5 @@
  */
 
 exports.feed = function(req, res){
-  res.render('index', { title: 'Hashfeed' });
+  res.render('hashfeed', { title: 'Hashfeed' });
 };
