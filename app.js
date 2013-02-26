@@ -30,7 +30,11 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
-app.get('/users', user.list);
+app.get('/signup', index.signup);
+app.get('/:user/profile', user.profile);
+app.get('/:user/followers', user.followers);
+app.get('/:user/following', user.following);
+app.get('/feed/:hashtag', hashfeed.index);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
