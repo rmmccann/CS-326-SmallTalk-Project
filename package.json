@@ -1,6 +1,6 @@
 {
-  "name": "smallTalk",
-  "version": "0.1",
+  "name": "SmallTalk",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node app"
