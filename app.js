@@ -4,7 +4,7 @@
  */
 
 var express = require('express');
-var routes = require('./routes');
+var index = require('./routes/index');
 var user = require('./routes/user');
 var hashfeed = require('./routes/hashfeed');
 var http = require('http');
@@ -36,7 +36,7 @@ app.configure('development',
 	}
 );
 
-app.get('/', routes.index);
+app.get('/', index.index);
 app.get('/signup', index.signup);
 app.get('/:user/profile', user.profile);
 app.get('/:user/followers', user.followers);
