@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to the <%= title %> page</p>
+    
+    <form method= "POST" action= "/addNewUser"  >
+    	<input id= "username" type= "text" value = "Desired Username" name= "username"/> <br>
+    	<input id= "password" type= "text" value = "Password" name= "password"/> <br>
+    	<input id= "validatePass" type= "text" value = "Retype Password" name= "dummypass"/> <br>
+    	<input id= "submitButton" type= "submit" value= "Submit" name="submitButton"/> 
+    </form>
+
+
+  </body>
+
+</html>

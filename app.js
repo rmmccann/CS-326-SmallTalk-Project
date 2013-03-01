@@ -43,6 +43,8 @@ app.get('/:user/followers', user.followers);
 app.get('/:user/following', user.following);
 app.get('/feed/:hashtag', hashfeed.feed);
 
+app.post('/addNewUser', index.createNewUser);
+
 http.createServer(app).listen(app.get('port'), 
 	function()
 	{
