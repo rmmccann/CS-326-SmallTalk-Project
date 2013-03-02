@@ -1,11 +1,8 @@
-
-/*
- * GET users listing.
- */
+var profile_data = require("../lib/profile");
 
 exports.profile = function(req, res)
 {
-	res.render('profile', {});
+	res.render('profile', {name: profile_data.username});
 };
 
 exports.followers = function(req, res)
