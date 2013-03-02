@@ -15,14 +15,12 @@ exports.signup = function(req, res)
 
 exports.createNewUser = function(req, res)
 {
-
-	var name = req.query.username;
-	var pass = req.query.password;
-
+	var name = req.param("username");
+	var pass = req.param("password");
+	
 	if(name && pass)
 	{
 		console.log(name + " " + pass);
 		// enter name into the database
 	}
-
 };
