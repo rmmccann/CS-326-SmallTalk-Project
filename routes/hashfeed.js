@@ -4,6 +4,11 @@
  */
 
 exports.feed = function(req, res)
-{
-	res.render('hashfeed', { title: 'Hashfeed' });
+{	
+	var hashtag = req.params.hashtag;
+	if(hashtag == undefined){
+		hashtag = "All"
+	}
+	hashtag = hashtag.charAt(0).toUpperCase() + hashtag.slice(1);
+	res.render('hashfeed', { title: hashtag });
 };

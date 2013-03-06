@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Who <%= name %> is Following</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= name %></h1>
+    <p>Is Following:</p>
+    <% following.forEach(function(name){ %>
+    	<li><%= name %></li>
+    <% });%>
+  </body>
+</html>

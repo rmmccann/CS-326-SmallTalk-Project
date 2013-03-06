@@ -7,10 +7,10 @@ exports.profile = function(req, res)
 
 exports.followers = function(req, res)
 {
-	res.render('followers', {});
+	res.render('followers', {name: profile_data.username, followers: profile_data.followers});
 };
 
 exports.following = function(req, res)
 {
-	res.render('following', {});
+	res.render('following', {name: profile_data.username, following: profile_data.following});
 };
