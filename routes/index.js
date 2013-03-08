@@ -5,7 +5,7 @@
 
 exports.index = function(req, res)
 {
-	res.render('index', { title: 'Express' });
+	res.render('index', { title: 'Express', routes: app.routes.get });
 };
 
 exports.signup = function(req, res)
@@ -22,5 +22,9 @@ exports.createNewUser = function(req, res)
 	{
 		console.log(name + " " + pass);
 		// enter name into the database
+
+		res.redirect("/"); //if signup is successful, send them to home
 	}
+
+	res.redirect("/signup");
 };
