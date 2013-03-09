@@ -1,4 +1,6 @@
 //var User = require('../lib/tables').User;
+var Users = require('../lib/User/').Users;
+
 /*
  * GET home page.
  */
@@ -32,15 +34,50 @@ exports.signup = function(req, res)
 
 exports.createNewUser = function(req, res)
 {
-	var name = req.param("username");
-	var pass = req.param("password");
-	
-	if(name && pass)
-	{
-		console.log(name + " " + pass);
-		// enter name into the database
+	//forEach(fucntion(objsinarray){objsinarray.getstuff})
 
-		res.redirect("/"); //if signup is successful, send them to home
+	var username = req.param("username");
+	var pass = req.param("password");
+	var email = req.param("email");
+	var firstname = req.param("firstname");
+	var lastname = req.param("lastname");
+
+
+
+	if(username && pass && email)
+	{
+		var user = {
+			username: "",
+			password: "",
+			email: "",
+			firstname: "",
+			lastname: "",
+			followers: [],
+			following: []
+		}
+		// enter name into the database
+		
+
+		if(firstname)
+		{
+			user.firstname = firstname;
+		}
+		if(lastname)
+		{
+			user.lastname = lastname;
+		}
+
+		res.redirect("/"); //if signup is successful, send them to home(cookie required)
+	}
+	else if(username = "" || pass = "" || email = "")
+	{
+		//return error (enter a valid username, pass, and email)
+		res.redirect("/");
+	}
+	else
+	{
+		//return error (enter a valid username, pass, and email)
+		res.redirect("/");
 	}
 
 	res.redirect("/signup");
