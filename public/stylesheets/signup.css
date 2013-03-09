@@ -1,7 +1,7 @@
 input[type='text']
 {
 	color: #000000;
-	width: 150px;
+	width: 200px;
 	transition: .5s;
 	-webkit-transition: .5s;
 }
@@ -10,6 +10,11 @@ input:focus
 	color: #888888;
 	transition: .5s;
 	-webkit-transition: .5s;
+}
+
+#lastname, #firstname
+{
+	width: 91px;
 }
 
 #ok
