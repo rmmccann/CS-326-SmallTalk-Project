@@ -5,7 +5,12 @@
 
 exports.index = function(req, res)
 {
-	res.render('index', { title: 'Express', routes: app.routes.get });
+	//check for cookie to see if user is logged in. If so, send them to the homepage instead of index (login) page.
+	// if(/*cookie*/){
+		res.render('index', { title: 'Express', routes: app.routes.get });
+	// }else{
+	//	res.render('home', {});
+	// }
 };
 
 exports.signup = function(req, res)
