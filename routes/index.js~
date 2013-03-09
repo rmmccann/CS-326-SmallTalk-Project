@@ -1,4 +1,5 @@
 //var User = require('../lib/tables').User;
+var Users = require('../lib/User');
 /*
  * GET home page.
  */
