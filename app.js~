@@ -9,7 +9,7 @@ var user = require('./routes/user');
 var hashfeed = require('./routes/hashfeed');
 var http = require('http');
 var path = require('path');
-//var smalltalkdb = require('./lib/SmallTalkDB')
+var smalltalkdb = require('./lib/SmallTalkDB')
 
 app = express();
 
@@ -36,11 +36,6 @@ app.configure('development',
 		app.use(express.errorHandler());
 	}
 );
-
-//creating tables here
-//smalltalkdb.User.sync();
-//smalltalkdb.Tweet.sync();
-
 
 app.get('/', index.index);
 app.get('/signup', index.signup);
