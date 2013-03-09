@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html>
-  
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to the <%= title %> page</p>
-    
-    <form method= "POST" action= "/addNewUser"  >
-    	<input id= "username" type= "text" value = "Desired Username" name= "username"/> <br>
-    	<input id= "password" type= "text" value = "Password" name= "password"/> <br>
-    	<input id= "validatePass" type= "text" value = "Retype Password" name= "dummypass"/> <br>
-    	<input id= "submitButton" type= "submit" value= "Submit" name="submitButton"/> 
-    </form>
+	
+	<head>
+		<title><%= title %></title>
 
+		<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="/stylesheets/style.css" />
+		<link rel="stylesheet" href="/stylesheets/signup.css" />
 
-  </body>
-
+		<script type="text/javascript" src="/lib/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="/javascripts/signup.js"></script>
+	</head>
+	
+	<body>
+		<h1><%= title %></h1>
+		<p>Welcome to SmallTalk.</p>
+		
+		<form method="POST" action="/addNewUser">
+			<input id="username" type="text" value="Username" name="username" placeholder="Username" /><br>
+			<input id="password" type="text" value="Password" name="password" placeholder="Password" /><br>
+			<input id="validatePass" type="text" value="Confirm Password" name="dummypass" placeholder="Confirm Password" /><i id="ok" class="icon-ok" style="display: none;"></i><br>
+			<input id="submitButton" type="submit" value="Submit" name="submitButton" class="btn" />
+		</form>
+	</body>
 </html>
