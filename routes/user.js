@@ -2,7 +2,7 @@ var profile_data = require("../lib/profile");
 
 exports.profile = function(req, res)
 {
-	res.render('profile', {name: profile_data.username});
+	res.render('profile', {title: profile_data.username, name: profile_data.username});
 };
 
 exports.followers = function(req, res)
