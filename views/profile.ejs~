@@ -4,4 +4,3 @@
 <a href="/<%= name %>/followers">followers</a> ~ <a href="/<%= name %>/following">following</a>
 
 <% include template/footer.ejs %>
->>>>>>> ce7264c04c86dc7b5592cce6f746a966fce90115

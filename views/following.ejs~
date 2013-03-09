@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Who <%= name %> is Following</title>
+    <title><%= name %>:Following</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>

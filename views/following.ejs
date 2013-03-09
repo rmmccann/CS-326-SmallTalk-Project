@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= name %>:Following</title>
+    <title><%= User.username %>:Following</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= name %></h1>
+    <h1><%= User.username %></h1>
     <p>Is Following:</p>
-    <% following.forEach(function(name){ %>
-    	<li><%= name %></li>
+    <% User.following.forEach(function(followed_user){ %>
+    	<li><%= followed_user %></li>
     <% });%>
   </body>
 </html>

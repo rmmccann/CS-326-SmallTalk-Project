@@ -1,6 +1,6 @@
 <% include template/header.ejs %>
-<h1><%= name %></h1>
+<h1><%= User.username %></h1>
 <p>My profile page!</p>
-<a href="/<%= name %>/followers">followers</a> ~ <a href="/<%= name %>/following">following</a>
+<a href="/<%= User.username %>/followers">followers</a> ~ <a href="/<%= User.username %>/following">following</a>
 
 <% include template/footer.ejs %>

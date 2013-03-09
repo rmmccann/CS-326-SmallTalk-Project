@@ -2,7 +2,7 @@
 
 		<h1><%= title %></h1>
 		<p>Welcome to SmallTalk.</p>
-
+		
 		<form method="POST" action="/signin">
 			<input id="username" type="text" value="Username" name="username" placeholder="Username" /><br>
 			<input id="password" type="text" value="Password" name="password" placeholder="Password" /><br>

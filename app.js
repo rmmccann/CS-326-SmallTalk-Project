@@ -9,7 +9,7 @@ var user = require('./routes/user');
 var hashfeed = require('./routes/hashfeed');
 var http = require('http');
 var path = require('path');
-//var smalltalkdb = require('./lib/SmallTalkDB')
+//var tables = require('./lib/Tables')
 
 app = express();
 
@@ -38,8 +38,8 @@ app.configure('development',
 );
 
 //creating tables here
-//smalltalkdb.User.sync();
-//smalltalkdb.Tweet.sync();
+//tables.User.sync();
+//tables.Tweet.sync();
 
 
 app.get('/', index.index);
@@ -47,8 +47,9 @@ app.get('/signup', index.signup);
 app.get('/:user/profile', user.profile);
 app.get('/:user/followers', user.followers);
 app.get('/:user/following', user.following);
-app.get('/feed', hashfeed.feed);
 app.get('/feed/:hashtag', hashfeed.feed);
+
+app.post('/signin', index.signin);
 app.post('/addNewUser', index.createNewUser);
 
 http.createServer(app).listen(app.get('port'), 

@@ -1,0 +1,10 @@
+
+exports.User = {username:"JDoe",
+	 	firstname:"John",
+		lastname:"Doe",
+		 password:"password",
+		followers:["Georgina", "Frank", "Howard", "Dominic"],
+		following:["Caroline", "Howard", "Marvin", "Carlton"]
+		//followers and following will eventually be a function that 
+		//return the followers of a user from the db
+		}
