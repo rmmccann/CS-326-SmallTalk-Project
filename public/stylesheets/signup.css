@@ -1,4 +1,4 @@
-input[type='text']
+input
 {
 	color: #000000;
 	width: 200px;
@@ -10,6 +10,11 @@ input:focus
 	color: #888888;
 	transition: .5s;
 	-webkit-transition: .5s;
+}
+
+::-moz-placeholder, ::-webkit-input-placeholder
+{
+	color: #000000;
 }
 
 #lastname, #firstname
