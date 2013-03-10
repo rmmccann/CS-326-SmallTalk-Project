@@ -7,11 +7,12 @@ var User = require('../lib/User/');
 
 exports.index = function(req, res)
 {
+	console.log(req.session.username);
 	//check for cookie to see if user is logged in. If so, send them to the homepage instead of index (login) page.
 	if(req.session.username == undefined){
 		res.render('index', { title: 'SmallTalk', routes: app.routes.get });
 	 }else{
-		res.render('home', {title: req.session.username});
+		res.render('home', {title: "Welcome to SmallTalk"});
 	 }
 };
 
@@ -37,7 +38,8 @@ exports.signup = function(req, res)
 
  exports.logout = function(req,res)
 {//find user in database, compare 'stored' password with input password
-	req.session.username == undefined;
+	req.session.username = undefined;
+	console.log("Logging Out");
 	res.redirect('/');
 }
 
