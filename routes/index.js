@@ -22,7 +22,7 @@ exports.signup = function(req, res)
 };
 
 
- exports.signin = function(req,res)
+exports.signin = function(req,res)
 {//find user in database, compare 'stored' password with input password
 		user = User.getUser(req.param("username"));
 
@@ -36,7 +36,7 @@ exports.signup = function(req, res)
 	res.redirect('/');
 }
 
- exports.logout = function(req,res)
+exports.signout = function(req,res)
 {//find user in database, compare 'stored' password with input password
 	req.session.username = undefined;
 	console.log("Logging Out");

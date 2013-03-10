@@ -51,7 +51,7 @@ app.get('/:user/followers', user.followers);
 app.get('/:user/following', user.following);
 app.get('/feed/:hashtag', hashfeed.feed);
 
-app.post('/logout', index.logout);
+app.get('/signout', index.signout);
 app.post('/signin', index.signin);
 app.post('/addNewUser', index.createNewUser);
 
