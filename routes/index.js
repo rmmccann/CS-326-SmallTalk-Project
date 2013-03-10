@@ -60,16 +60,20 @@ exports.createNewUser = function(req, res)
 
 	if(user.username != "" && user.password != "" && user.email != "")
 	{	
-		
-		User.UserTable.push(user);
-		tabled_user = User.getUser(user.username)
-		if(tabled_user != undefined){//username is already taken
-			res.redirect("/singup");
-		}
-		req.session.username = username;
-		res.redirect("/"); //if signup is successful, send them to home(cookie required)
-	}
+		tabled_user = User.getUser(user.username);
 
-	//return error (enter a valid username, pass, and email)
-	res.redirect("/signup");
+		if(tabled_user != undefined){//username is already taken
+			res.redirect("/signup"); //if signup is successful, send them to home(cookie required)
+		}
+		else
+		{
+			User.UserTable.push(user);
+			req.session.username = username;
+			res.redirect("/");
+		}
+	}
+	else
+	{
+		res.redirect("/signup");
+	}
 };
