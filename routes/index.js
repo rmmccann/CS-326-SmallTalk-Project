@@ -7,11 +7,12 @@ var User = require('../lib/User/');
 
 exports.index = function(req, res)
 {
+	console.log(req.session.username);
 	//check for cookie to see if user is logged in. If so, send them to the homepage instead of index (login) page.
 	if(req.session.username == undefined){
 		res.render('index', { title: 'SmallTalk', routes: app.routes.get });
 	 }else{
-		res.render('home', {title: req.session.username});
+		res.render('home', {title: "Welcome to SmallTalk"});
 	 }
 };
 
@@ -37,7 +38,8 @@ exports.signup = function(req, res)
 
  exports.logout = function(req,res)
 {//find user in database, compare 'stored' password with input password
-	req.session.username == undefined;
+	req.session.username = undefined;
+	console.log("Logging Out");
 	res.redirect('/');
 }
 
@@ -60,14 +62,20 @@ exports.createNewUser = function(req, res)
 
 	if(user.username != "" && user.password != "" && user.email != "")
 	{	
-		tabled_user = User.getUser(user.username)
-		if(tabled_user != undefined){//username is already taken
-			res.redirect("/singup");
-		}
-		req.session.username = username;
-		res.redirect("/"); //if signup is successful, send them to home(cookie required)
-	}
+		tabled_user = User.getUser(user.username);
 
-	//return error (enter a valid username, pass, and email)
-	res.redirect("/signup");
+		if(tabled_user != undefined){//username is already taken
+			res.redirect("/signup"); //if signup is successful, send them to home(cookie required)
+		}
+		else
+		{
+			User.UserTable.push(user);
+			req.session.username = username;
+			res.redirect("/");
+		}
+	}
+	else
+	{
+		res.redirect("/signup");
+	}
 };
