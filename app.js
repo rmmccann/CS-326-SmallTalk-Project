@@ -13,6 +13,7 @@ var path = require('path');
 
 app = express();
 
+
 app.configure(
 	function()
 	{
@@ -25,6 +26,7 @@ app.configure(
 		app.use(express.methodOverride());
 		app.use(express.cookieParser('your secret here'));
 		app.use(express.session());
+		app.use(function(req, res, next){ res.locals.current_user = req.session.username; next(); });
 		app.use(app.router);
 		app.use(express.static(path.join(__dirname, 'public')));
 	}
@@ -44,6 +46,7 @@ app.configure('development',
 
 app.get('/', index.index);
 app.get('/signup', index.signup);
+app.get('/logout', index.logout);
 app.get('/:user/profile', user.profile);
 app.get('/:user/followers', user.followers);
 app.get('/:user/following', user.following);
@@ -51,6 +54,8 @@ app.get('/feed/:hashtag', hashfeed.feed);
 
 app.post('/signin', index.signin);
 app.post('/addNewUser', index.createNewUser);
+
+
 
 http.createServer(app).listen(app.get('port'), 
 	function()

@@ -1,5 +1,5 @@
 //var User = require('../lib/tables').User;
-var Users = require('../lib/User/').Users;
+var User = require('../lib/User/');
 
 /*
  * GET home page.
@@ -8,11 +8,11 @@ var Users = require('../lib/User/').Users;
 exports.index = function(req, res)
 {
 	//check for cookie to see if user is logged in. If so, send them to the homepage instead of index (login) page.
-	// if(/*cookie*/){
-		res.render('index', { title: 'Express', routes: app.routes.get });
-	// }else{
-	//	res.render('home', {});
-	// }
+	if(req.session.username == undefined){
+		res.render('index', { title: 'SmallTalk', routes: app.routes.get });
+	 }else{
+		res.render('home', {title: req.session.username});
+	 }
 };
 
 exports.signup = function(req, res)
@@ -23,12 +23,21 @@ exports.signup = function(req, res)
 
  exports.signin = function(req,res)
 {//find user in database, compare 'stored' password with input password
+		user = User.getUser(req.param("username"));
 
-	//var user = User.find(req.params.username)
-	//if(user.password == req.params.password)
-	//{
-	//	res.redirect('home', {user: user})
-	//}
+		if(user != undefined){
+			if(user.password == req.param("password")){
+				req.session.username = user.username;
+				res.redirect('home', {})
+			}
+		}
+
+	res.redirect('/');
+}
+
+ exports.logout = function(req,res)
+{//find user in database, compare 'stored' password with input password
+	req.session.username == undefined;
 	res.redirect('/');
 }
 
@@ -42,43 +51,23 @@ exports.createNewUser = function(req, res)
 	var firstname = req.param("firstname");
 	var lastname = req.param("lastname");
 
+	var user = User.NewUser;
+	user.username = username;
+	user.password = password;
+	user.email = email;
+	user.firstname = firstname;//no validations 
+	user.lastname = lastname;// for real names, just add to user object
 
-
-	if(username && pass && email)
-	{
-		var user = {
-			username: "",
-			password: "",
-			email: "",
-			firstname: "",
-			lastname: "",
-			followers: [],
-			following: []
+	if(user.username != "" && user.password != "" && user.email != "")
+	{	
+		tabled_user = User.getUser(user.username)
+		if(tabled_user != undefined){//username is already taken
+			res.redirect("/singup");
 		}
-		// enter name into the database
-		
-
-		if(firstname)
-		{
-			user.firstname = firstname;
-		}
-		if(lastname)
-		{
-			user.lastname = lastname;
-		}
-
+		req.session.username = username;
 		res.redirect("/"); //if signup is successful, send them to home(cookie required)
 	}
-	else if(username = "" || pass = "" || email = "")
-	{
-		//return error (enter a valid username, pass, and email)
-		res.redirect("/");
-	}
-	else
-	{
-		//return error (enter a valid username, pass, and email)
-		res.redirect("/");
-	}
 
+	//return error (enter a valid username, pass, and email)
 	res.redirect("/signup");
 };
