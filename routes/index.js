@@ -46,7 +46,7 @@ exports.createNewUser = function(req, res)
 	//forEach(fucntion(objsinarray){objsinarray.getstuff})
 
 	var username = req.param("username");
-	var pass = req.param("password");
+	var password = req.param("password");
 	var email = req.param("email");
 	var firstname = req.param("firstname");
 	var lastname = req.param("lastname");
