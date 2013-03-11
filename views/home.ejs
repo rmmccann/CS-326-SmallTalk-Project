@@ -1,19 +1,21 @@
 <% include template/header.ejs %>
 
 
-<h1><%= title %></h1>
+	<div id="content">
+		<h1><%= title %></h1>
 
-<p>Welcome home <%= current_user %>!</p>
+		<p>Welcome home <%= current_user %>!</p>
 
-	<form method="POST" action="/submitNewPost">
-				
-		<textarea id="postTextField" type="text" name="postTextField" placeholder="Compose a new post..."></textarea>
-		Like
-		<input id="like" type="checkbox" name="like" /><br>
-		<input id="submitButton" type="submit" value="Post" name="submitButton" class="btn" />
-		
-		<div id="usersPosts">  </div>
-	</form>
+		<form method="POST" action="/submitNewPost">
+					
+			<textarea id="postTextField" type="text" name="postTextField" placeholder="Compose a new post..."></textarea>
+			Like
+			<input id="like" type="checkbox" name="like" /><br>
+			<input id="submitButton" type="submit" value="Post" name="submitButton" class="btn" />
+			
+			<div id="usersPosts">  </div>
+		</form>
+	</div>
 
 
 <% include template/footer.ejs %>

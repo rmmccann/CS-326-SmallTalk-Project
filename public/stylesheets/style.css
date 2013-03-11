@@ -10,12 +10,16 @@ a {
 /* Fixed Position Global Nav Bar */
 #sticky-bar
 {
+	/* Positioning */
 	position: fixed;
 	height: 30px;
 	width: 100%;
 	top: 0px;
 	left: 0px;
+
 	background: lightsteelblue;
+
+	line-height: 30px; /* vertically aligns text */
 }
 #container
 {
@@ -24,6 +28,17 @@ a {
 
 #gear-menu
 {
+	/*margin: 4px;*/
+	/*float: right;*/
+}
+
+#gear-menu > a
+{
 	margin: 4px;
-	float: right;
+}
+
+#content
+{
+	margin: auto;
+	width: 1000px;
 }

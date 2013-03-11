@@ -2,22 +2,34 @@
 <html>
 <head>
 	<title><%= title %></title>
-	<link rel="stylesheet" href="/stylesheets/style.css" />
+	<link rel="stylesheet" href="/lib/normalize.css" />
 	<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap-responsive.min.css" />
-	<link rel="stylesheet" href="/lib/normalize.css" />
+	<link rel="stylesheet" href="/stylesheets/style.css" />
 	<script type="text/javascript" src="/lib/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="/lib/modernizr-2.6.2.min.js"></script>
 	<script type="text/javascript" src="/lib/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/javascripts/main.js"></script>
 </head>
 <body>
+
 <div id="sticky-bar">
-	<!-- <h3 style="margin: 3px;">Welcome to SmallTalk!</h3> -->
+	<!-- <h4 style="margin: 3px;">Welcome to SmallTalk!</h4> -->
 	<span>Welcome to SmallTalk</span>
 
-	<div class="btn-group">
-		<a id="gear-menu" class="btn btn-mini dropdown-toggle" data-toggle="dropdown"><i class="icon-cog"></i></a>
+	<span><a href="/">home</a></span>
+	<span><a href="/user/profile">profile</a></span>
+
+	<!-- <span class="clearfix"></span> -->
+	<form class="form-search" style="display: inline;">
+		<div class="input-append">
+			<input type="text" class="span2 input-small search-query">
+			<button type="submit" class="btn btn-small"><i class="icon-search"></i></button>
+		</div>
+	</form>
+
+	<div id="gear-menu" class="btn-group pull-right">
+		<a class="btn btn-mini dropdown-toggle" data-toggle="dropdown"><i class="icon-cog"></i></a>
 		<ul class="dropdown-menu">
 			<li><a tabindex="-1" href="#">Settings</a></i>
 			<li><a tabindex="-1" href="#">Get Help</a></i>
@@ -25,4 +37,5 @@
 		</ul>
 	</div>
 </div>
+
 <div id="container">
