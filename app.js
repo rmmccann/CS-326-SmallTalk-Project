@@ -8,7 +8,7 @@ var user = require('./routes/user');
 var hashfeed = require('./routes/hashfeed');
 var http = require('http');
 var path = require('path');
-//var tables = require('./lib/Tables')
+
 
 app = express();
 
@@ -38,10 +38,10 @@ app.configure('development',
 	}
 );
 
-//creating tables here
-//tables.User.sync();
-//tables.Tweet.sync();
-
+/* creating tables here
+* tables.User.sync();
+* tables.Tweet.sync();
+*/
 
 app.get('/', index.index);
 app.get('/signup', index.signup);

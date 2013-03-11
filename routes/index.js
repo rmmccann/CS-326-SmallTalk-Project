@@ -2,9 +2,6 @@
 var User = require('../lib/User/');
 var Post = require('../lib/Post/');
 
-/*
- * GET home page.
- */
 
 exports.index = function(req, res)
 {
@@ -18,12 +15,13 @@ exports.index = function(req, res)
 	 }
 };
 
+//Display the Sign Up view
 exports.signup = function(req, res)
 {
 	res.render('signup', {title: 'Sign Up'});
 };
 
-
+//Submits a new post by the user to the database
 exports.submitNewPost = function(req, res)
 {
 	var regexp = /%\w+/; // regular expression to accept a % followed by the set [a-z ,A-Z ,0-9,_] at least one or more times
@@ -33,7 +31,6 @@ exports.submitNewPost = function(req, res)
 
 	var newPost = {message:"", language:[], user:"", relationship: true}; // creates a new post object to be populated
 
-	console.log(newPost)
 	// if(desiredlangs != null)
 	// {
 	// 	for(var counter = 0; counter < desiredlangs.length; counter++)
@@ -50,17 +47,15 @@ exports.submitNewPost = function(req, res)
 	newPost.user = req.session.user.username;
 	newPost.language = desiredlangs;
 	newPost.relationship = liked;
-
-	console.log(Post.PostTable)
-	console.log("--------------------");
 	Post.PostTable.push(newPost);
-	console.log(Post.PostTable)
+	
 
 
 	res.redirect("/");
 
 };
 
+//Creates a session for the user upon entering username and password
 exports.signin = function(req, res)
 {//find user in database, compare 'stored' password with input password
 		user = User.getUser(req.param("username"));
@@ -75,6 +70,7 @@ exports.signin = function(req, res)
 	res.redirect('/');
 }
 
+//Ends the session for the user
 exports.signout = function(req,res)
 {//find user in database, compare 'stored' password with input password
 	req.session.user = undefined;
@@ -82,6 +78,7 @@ exports.signout = function(req,res)
 	res.redirect('/');
 }
 
+//Allows the user to follow/unfollow other users
 exports.toggleFollow = function(req, res){
 
 	var toggled_user = req.param("toggle_follow_user");
@@ -101,6 +98,7 @@ exports.toggleFollow = function(req, res){
 	res.redirect("/"+toggled_user+"/profile");
 }
 
+//Validates fields and creates a user in the temporary database
 exports.createNewUser = function(req, res)
 {
 	//forEach(fucntion(objsinarray){objsinarray.getstuff})

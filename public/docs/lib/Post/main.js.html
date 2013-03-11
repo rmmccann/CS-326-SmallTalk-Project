@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>main.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../doc-style.css" />
+  <script src="../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../", thisFile = "lib/Post/main.js", defaultSidebar = true;
+  </script>
+  <script src="../../doc-script.js"></script>
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs">
+          <h1>main.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="nx">PostTable</span> <span class="o">=</span> <span class="p">[];</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">PostTable</span> <span class="o">=</span> <span class="nx">PostTable</span><span class="p">;</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2">&#182;</a>
+</div>
+<p>List of supported languages for the language hashtag for example: %Java;</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">languages</span> <span class="o">=</span> <span class="p">[</span>
+
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;ABAP&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;ActionScript&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Ada&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Apex&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;AppleScript&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Arc&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Arduino&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;ASP&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Assembly&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Augeas&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;AutoHotkey&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Awk&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Boo&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Bro&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;C&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;C#&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;C++&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Ceylon&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;CLIPS&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Clojure&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;CoffeeScript&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;ColdFusion&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Common Lisp&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Coq&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;D&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Dart&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;DCPU-16 ASM&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Delphi&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;DOT&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Dylan&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;eC&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Ecl&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Eiffel&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Elixir&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Emacs Lisp&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Erlang&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;F#&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Factor&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Fancy&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Fantom&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Forth&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;FORTRAN&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Go&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Gosu&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Groovy&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Haskell&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Haxe&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Io&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Ioke&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Java&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;JavaScript&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Julia&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Kotlin&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Lasso&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;LiveScript&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Logos&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Logtalk&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Lua&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Matlab&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Max&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Mirah&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Monkey&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;MoonScript&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Nemerle&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Nimrod&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Nu&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Objective-C&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Objective-J&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;OCaml&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Omgrofl&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;ooc&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Opa&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;OpenEdge ABL&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Parrot&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Perl&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;PHP&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Pike&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;PogoScript&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;PowerShell&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Prolog&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Puppet&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Pure Data&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Python&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;R&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Racket&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Ragel in Ruby Host&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Rebol&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Rouge&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Ruby&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Rust&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Scala&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Scheme&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Scilab&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Self&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Shell&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Smalltalk&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Standard ML&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;SuperCollider&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Tcl&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Turing&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;TXL&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;TypeScript&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Vala&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Verilog&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;VHDL&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;VimL&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Visual Basic&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;XML&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;XQuery&quot;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;Xtend&quot;</span><span class="p">}</span>
+
+<span class="p">]</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+</div>
+<p>Traverses languages[] to find the correct language</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">getLanguage</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">languages</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">languages</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">name</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span> <span class="o">==</span> <span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">};</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4">&#182;</a>
+</div>
+<p>Finds all posts that have used the specific language hashtag in the past and returns them</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">getFollowedPosts</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">following</span><span class="p">,</span> <span class="nx">user</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">postsToReturn</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="nx">PostTable</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">post</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">post</span><span class="p">.</span><span class="nx">user</span> <span class="o">==</span> <span class="nx">user</span> <span class="o">||</span> <span class="nx">following</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">post</span><span class="p">.</span><span class="nx">user</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">){</span>
+      <span class="nx">postsToReturn</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">post</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+  <span class="k">return</span> <span class="nx">postsToReturn</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>

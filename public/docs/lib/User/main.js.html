@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>main.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../doc-style.css" />
+  <script src="../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../", thisFile = "lib/User/main.js", defaultSidebar = true;
+  </script>
+  <script src="../../doc-script.js"></script>
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs">
+          <h1>main.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
+</div>
+<p>Dummy data</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="nx">UserTable</span> <span class="o">=</span> <span class="p">[</span>
+
+  <span class="p">{</span><span class="nx">username</span><span class="o">:</span><span class="s2">&quot;JDoe&quot;</span><span class="p">,</span><span class="nx">firstname</span><span class="o">:</span><span class="s2">&quot;John&quot;</span><span class="p">,</span><span class="nx">lastname</span><span class="o">:</span><span class="s2">&quot;Doe&quot;</span><span class="p">,</span><span class="nx">email</span><span class="o">:</span><span class="s2">&quot;jdoe@sm.com&quot;</span><span class="p">,</span><span class="nx">password</span><span class="o">:</span><span class="s2">&quot;password&quot;</span><span class="p">,</span><span class="nx">followers</span><span class="o">:</span><span class="p">[</span><span class="s2">&quot;jcivey&quot;</span><span class="p">,</span> <span class="s2">&quot;danton&quot;</span><span class="p">,</span> <span class="s2">&quot;srojee&quot;</span><span class="p">,</span> <span class="s2">&quot;rmmccann&quot;</span><span class="p">],</span><span class="nx">following</span><span class="o">:</span><span class="p">[</span><span class="s2">&quot;jcivey&quot;</span><span class="p">,</span> <span class="s2">&quot;danton&quot;</span><span class="p">,</span> <span class="s2">&quot;srojee&quot;</span><span class="p">,</span> <span class="s2">&quot;rmmccann&quot;</span><span class="p">]},</span>
+  <span class="p">{</span><span class="nx">username</span><span class="o">:</span><span class="s2">&quot;jcivey&quot;</span><span class="p">,</span><span class="nx">firstname</span><span class="o">:</span><span class="s2">&quot;Justin&quot;</span><span class="p">,</span><span class="nx">lastname</span><span class="o">:</span><span class="s2">&quot;Ivey&quot;</span><span class="p">,</span><span class="nx">email</span><span class="o">:</span><span class="s2">&quot;jcivey@sm.com&quot;</span><span class="p">,</span><span class="nx">password</span><span class="o">:</span><span class="s2">&quot;password&quot;</span><span class="p">,</span><span class="nx">followers</span><span class="o">:</span><span class="p">[</span><span class="s2">&quot;JDoe&quot;</span><span class="p">,</span> <span class="s2">&quot;danton&quot;</span><span class="p">,</span> <span class="s2">&quot;srojee&quot;</span><span class="p">,</span> <span class="s2">&quot;rmmccann&quot;</span><span class="p">],</span><span class="nx">following</span><span class="o">:</span><span class="p">[</span><span class="s2">&quot;JDoe&quot;</span><span class="p">,</span> <span class="s2">&quot;danton&quot;</span><span class="p">,</span> <span class="s2">&quot;srojee&quot;</span><span class="p">,</span> <span class="s2">&quot;rmmccann&quot;</span><span class="p">]},</span>
+  <span class="p">{</span><span class="nx">username</span><span class="o">:</span><span class="s2">&quot;danton&quot;</span><span class="p">,</span><span class="nx">firstname</span><span class="o">:</span><span class="s2">&quot;Derek&quot;</span><span class="p">,</span><span class="nx">lastname</span><span class="o">:</span><span class="s2">&quot;Anton&quot;</span><span class="p">,</span><span class="nx">email</span><span class="o">:</span><span class="s2">&quot;danton@sm.com&quot;</span><span class="p">,</span><span class="nx">password</span><span class="o">:</span><span class="s2">&quot;password&quot;</span><span class="p">,</span><span class="nx">followers</span><span class="o">:</span><span class="p">[</span><span class="s2">&quot;JDoe&quot;</span><span class="p">,</span> <span class="s2">&quot;jcivey&quot;</span><span class="p">,</span> <span class="s2">&quot;srojee&quot;</span><span class="p">,</span> <span class="s2">&quot;rmmccann&quot;</span><span class="p">],</span><span class="nx">following</span><span class="o">:</span><span class="p">[</span><span class="s2">&quot;JDoe&quot;</span><span class="p">,</span> <span class="s2">&quot;jcivey&quot;</span><span class="p">,</span> <span class="s2">&quot;srojee&quot;</span><span class="p">,</span> <span class="s2">&quot;rmmccann&quot;</span><span class="p">]},</span>
+  <span class="p">{</span><span class="nx">username</span><span class="o">:</span><span class="s2">&quot;srojee&quot;</span><span class="p">,</span><span class="nx">firstname</span><span class="o">:</span><span class="s2">&quot;Scott&quot;</span><span class="p">,</span><span class="nx">lastname</span><span class="o">:</span><span class="s2">&quot;Rojee&quot;</span><span class="p">,</span><span class="nx">email</span><span class="o">:</span><span class="s2">&quot;srojee@sm.com&quot;</span><span class="p">,</span><span class="nx">password</span><span class="o">:</span><span class="s2">&quot;password&quot;</span><span class="p">,</span><span class="nx">followers</span><span class="o">:</span><span class="p">[</span><span class="s2">&quot;JDoe&quot;</span><span class="p">,</span> <span class="s2">&quot;jcivey&quot;</span><span class="p">,</span> <span class="s2">&quot;danton&quot;</span><span class="p">,</span> <span class="s2">&quot;rmmccann&quot;</span><span class="p">],</span><span class="nx">following</span><span class="o">:</span><span class="p">[</span><span class="s2">&quot;JDoe&quot;</span><span class="p">,</span> <span class="s2">&quot;jcivey&quot;</span><span class="p">,</span> <span class="s2">&quot;danton&quot;</span><span class="p">,</span> <span class="s2">&quot;rmmccann&quot;</span><span class="p">]},</span>
+  <span class="p">{</span><span class="nx">username</span><span class="o">:</span><span class="s2">&quot;rmmccann&quot;</span><span class="p">,</span><span class="nx">firstname</span><span class="o">:</span><span class="s2">&quot;Ryan&quot;</span><span class="p">,</span><span class="nx">lastname</span><span class="o">:</span><span class="s2">&quot;Mccann&quot;</span><span class="p">,</span><span class="nx">email</span><span class="o">:</span><span class="s2">&quot;rmmccann@sm.com&quot;</span><span class="p">,</span><span class="nx">password</span><span class="o">:</span><span class="s2">&quot;password&quot;</span><span class="p">,</span><span class="nx">followers</span><span class="o">:</span><span class="p">[</span><span class="s2">&quot;JDoe&quot;</span><span class="p">,</span> <span class="s2">&quot;jcivey&quot;</span><span class="p">,</span> <span class="s2">&quot;danton&quot;</span><span class="p">,</span> <span class="s2">&quot;srojee&quot;</span><span class="p">],</span><span class="nx">following</span><span class="o">:</span><span class="p">[</span><span class="s2">&quot;JDoe&quot;</span><span class="p">,</span> <span class="s2">&quot;jcivey&quot;</span><span class="p">,</span> <span class="s2">&quot;danton&quot;</span><span class="p">,</span> <span class="s2">&quot;srojee&quot;</span><span class="p">]}</span>
+
+  <span class="p">];</span>
+
+
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">UserTable</span> <span class="o">=</span> <span class="nx">UserTable</span><span class="p">;</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2">&#182;</a>
+</div>
+<p>For the given user, the list of followers and followed users are returned</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">getUser</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">username</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="kc">undefined</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">username</span><span class="p">){</span><span class="nx">username</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">}</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">UserTable</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">UserTable</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">username</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span> <span class="o">==</span> <span class="nx">username</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">())</span> <span class="p">{</span>
+            <span class="nx">c</span> <span class="o">=</span> <span class="nx">UserTable</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">c</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>

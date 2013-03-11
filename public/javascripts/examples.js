@@ -1,3 +1,5 @@
+
+//Used for testing
 	$(document).ready(function(){
 		$("#submitButton").click(function(){
 	 		if($("#password").val() !== $("#validatePass").val())

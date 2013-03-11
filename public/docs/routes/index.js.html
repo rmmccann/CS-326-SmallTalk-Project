@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>index.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../", thisFile = "routes/index.js", defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs">
+          <h1>index.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
+</div>
+<p>var User = require('../lib/tables').User;</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">User</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../lib/User/&#39;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">Post</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../lib/Post/&#39;</span><span class="p">);</span>
+
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">index</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span>
+<span class="p">{</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2">&#182;</a>
+</div>
+<p>check for cookie to see if user is logged in. If so, send them to the homepage instead of index (login) page.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="k">if</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span> <span class="o">==</span> <span class="kc">undefined</span><span class="p">){</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;SmallTalk&#39;</span><span class="p">,</span> <span class="nx">Post</span><span class="o">:</span><span class="p">[]</span> <span class="p">});</span>
+   <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">posts</span> <span class="o">=</span> <span class="nx">Post</span><span class="p">.</span><span class="nx">getFollowedPosts</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">following</span><span class="p">,</span> <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">username</span><span class="p">);</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;home&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">title</span><span class="o">:</span> <span class="s2">&quot;Welcome to SmallTalk&quot;</span><span class="p">,</span> <span class="nx">posts</span><span class="o">:</span> <span class="nx">posts</span><span class="p">});</span>
+
+   <span class="p">}</span>
+<span class="p">};</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+</div>
+<p>Display the Sign Up view</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">signup</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;signup&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Sign Up&#39;</span><span class="p">});</span>
+<span class="p">};</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4">&#182;</a>
+</div>
+<p>Submits a new post by the user to the database</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">submitNewPost</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">regexp</span> <span class="o">=</span> <span class="sr">/%\w+/</span><span class="p">;</span> <span class="c1">// regular expression to accept a % followed by the set [a-z ,A-Z ,0-9,_] at least one or more times</span>
+  <span class="kd">var</span> <span class="nx">postmsg</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s2">&quot;postTextField&quot;</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">liked</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s2">&quot;like&quot;</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">desiredlangs</span> <span class="o">=</span> <span class="nx">regexp</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="nx">postmsg</span><span class="p">);</span> <span class="c1">// takes in the the postmsg and returns an array of any string that fits the regular expression defined above</span>
+
+  <span class="kd">var</span> <span class="nx">newPost</span> <span class="o">=</span> <span class="p">{</span><span class="nx">message</span><span class="o">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="nx">language</span><span class="o">:</span><span class="p">[],</span> <span class="nx">user</span><span class="o">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="nx">relationship</span><span class="o">:</span> <span class="kc">true</span><span class="p">};</span> <span class="c1">// creates a new post object to be populated</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5">&#182;</a>
+</div>
+<p>if(desiredlangs != null)
+{
+    for(var counter = 0; counter &lt; desiredlangs.length; counter++)
+    {
+        desiredlangs[counter].slice(1, desiredlangs[counter].length);
+        /<em>if(!Post.getLanguage(desiredlangs[counter]))
+        {
+            this will be for the nice dropdown box, async javascript
+        }</em>/
+    }
+}</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+  <span class="nx">newPost</span><span class="p">.</span><span class="nx">message</span> <span class="o">=</span> <span class="nx">postmsg</span><span class="p">;</span>
+  <span class="nx">newPost</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">username</span><span class="p">;</span>
+  <span class="nx">newPost</span><span class="p">.</span><span class="nx">language</span> <span class="o">=</span> <span class="nx">desiredlangs</span><span class="p">;</span>
+  <span class="nx">newPost</span><span class="p">.</span><span class="nx">relationship</span> <span class="o">=</span> <span class="nx">liked</span><span class="p">;</span>
+  <span class="nx">Post</span><span class="p">.</span><span class="nx">PostTable</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">newPost</span><span class="p">);</span>
+  
+
+
+  <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">);</span>
+
+<span class="p">};</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6">&#182;</a>
+</div>
+<p>Creates a session for the user upon entering username and password</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">signin</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span>
+<span class="p">{</span><span class="c1">//find user in database, compare &#39;stored&#39; password with input password</span>
+    <span class="nx">user</span> <span class="o">=</span> <span class="nx">User</span><span class="p">.</span><span class="nx">getUser</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">));</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="nx">user</span> <span class="o">!=</span> <span class="kc">undefined</span><span class="p">){</span>
+      <span class="k">if</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">password</span> <span class="o">==</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s2">&quot;password&quot;</span><span class="p">)){</span>
+        <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="nx">user</span><span class="p">;</span>
+        <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;home&#39;</span><span class="p">,</span> <span class="p">{})</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+  <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-7" id="section-7">&#182;</a>
+</div>
+<p>Ends the session for the user</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">signout</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span>
+<span class="p">{</span><span class="c1">//find user in database, compare &#39;stored&#39; password with input password</span>
+  <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="kc">undefined</span><span class="p">;</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Logging Out&quot;</span><span class="p">);</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-8" id="section-8">&#182;</a>
+</div>
+<p>Allows the user to follow/unfollow other users</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">toggleFollow</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">){</span>
+
+  <span class="kd">var</span> <span class="nx">toggled_user</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s2">&quot;toggle_follow_user&quot;</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">current_user</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">;</span>
+
+  <span class="kd">var</span> <span class="nx">index</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+
+  <span class="k">if</span><span class="p">((</span><span class="nx">index</span> <span class="o">=</span> <span class="p">(</span><span class="nx">current_user</span><span class="p">.</span><span class="nx">following</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">toggled_user</span><span class="p">)))</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">){</span>
+    <span class="nx">User</span><span class="p">.</span><span class="nx">getUser</span><span class="p">(</span><span class="nx">current_user</span><span class="p">.</span><span class="nx">username</span><span class="p">).</span><span class="nx">following</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">toggled_user</span><span class="p">)</span>
+  <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+    <span class="nx">User</span><span class="p">.</span><span class="nx">getUser</span><span class="p">(</span><span class="nx">current_user</span><span class="p">.</span><span class="nx">username</span><span class="p">).</span><span class="nx">following</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="nx">User</span><span class="p">.</span><span class="nx">getUser</span><span class="p">(</span><span class="nx">current_user</span><span class="p">.</span><span class="nx">username</span><span class="p">);</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">following</span><span class="p">)</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="nx">toggled_user</span><span class="o">+</span><span class="s2">&quot;/profile&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-9" id="section-9">&#182;</a>
+</div>
+<p>Validates fields and creates a user in the temporary database</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">createNewUser</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span>
+<span class="p">{</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-10" id="section-10">&#182;</a>
+</div>
+<p>forEach(fucntion(objsinarray){objsinarray.getstuff})</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+  <span class="kd">var</span> <span class="nx">username</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">password</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s2">&quot;password&quot;</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">email</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s2">&quot;email&quot;</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">firstname</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s2">&quot;firstname&quot;</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">lastname</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s2">&quot;lastname&quot;</span><span class="p">);</span>
+
+  <span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="p">{</span><span class="nx">username</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span><span class="nx">password</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span><span class="nx">email</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span><span class="nx">firstname</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span><span class="nx">lastname</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span><span class="nx">followers</span><span class="o">:</span> <span class="p">[],</span><span class="nx">following</span><span class="o">:</span> <span class="p">[]};</span>
+  <span class="nx">user</span><span class="p">.</span><span class="nx">username</span> <span class="o">=</span> <span class="nx">username</span><span class="p">;</span>
+  <span class="nx">user</span><span class="p">.</span><span class="nx">password</span> <span class="o">=</span> <span class="nx">password</span><span class="p">;</span>
+  <span class="nx">user</span><span class="p">.</span><span class="nx">email</span> <span class="o">=</span> <span class="nx">email</span><span class="p">;</span>
+  <span class="nx">user</span><span class="p">.</span><span class="nx">firstname</span> <span class="o">=</span> <span class="nx">firstname</span><span class="p">;</span><span class="c1">//no validations </span>
+  <span class="nx">user</span><span class="p">.</span><span class="nx">lastname</span> <span class="o">=</span> <span class="nx">lastname</span><span class="p">;</span><span class="c1">// for real names, just add to user object</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">username</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span> <span class="o">&amp;&amp;</span> <span class="nx">user</span><span class="p">.</span><span class="nx">password</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span> <span class="o">&amp;&amp;</span> <span class="nx">user</span><span class="p">.</span><span class="nx">email</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+  <span class="p">{</span> 
+    <span class="nx">tabled_user</span> <span class="o">=</span> <span class="nx">User</span><span class="p">.</span><span class="nx">getUser</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">username</span><span class="p">);</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="nx">tabled_user</span> <span class="o">!=</span> <span class="kc">undefined</span><span class="p">){</span><span class="c1">//username is already taken</span>
+      <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s2">&quot;/signup&quot;</span><span class="p">);</span> <span class="c1">//if signup is successful, send them to home(cookie required)</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+      <span class="nx">User</span><span class="p">.</span><span class="nx">UserTable</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span>
+      <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="nx">user</span><span class="p">;</span>
+      <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">else</span>
+  <span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s2">&quot;/signup&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>
