@@ -1,12 +1,5 @@
 $(document).ready(function()
 {
-	$("input:text").focus(function(){
-		if(this.value===this.placeholder) this.value="";
-	});
-	$("input:text").blur(function(){
-		if(this.value==="") this.value=this.placeholder;
-	});
-
 	$("#submitButton").click(function(){
 		//TODO validate form:
 		//		-call checkpass()

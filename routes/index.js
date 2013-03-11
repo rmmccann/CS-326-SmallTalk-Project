@@ -1,5 +1,6 @@
 //var User = require('../lib/tables').User;
 var User = require('../lib/User/');
+var Post = require('../lib/Post/');
 
 /*
  * GET home page.
@@ -22,7 +23,39 @@ exports.signup = function(req, res)
 };
 
 
- exports.signin = function(req,res)
+exports.submitNewPost = function(req, res)
+{
+	var regexp = /%\w+/;
+	var postmsg = req.param("postTextField");
+	var liked = req.param("like");
+	var desiredlangs = regexp.exec(postmsg);
+	//check if desired if not null.
+
+	var newPost = Post.NewPost;
+
+	if(desiredlangs != null)
+	{
+		for(var counter = 0; counter < desiredlangs.length; counter++)
+		{
+			desiredlangs[counter].slice(1, desiredlangs[counter].length);
+			/*if(!Post.getLanguage(desiredlangs[counter]))
+			{
+				this will be for the nice dropdown box, async javascript
+			}*/
+		}
+	}
+	newPost.message = postmsg;
+	newPost.user = req.session.username;
+	newPost.language = desiredlangs;
+	newPost.releationship = liked;
+
+	Post.PostTable.push(newPost);
+
+	res.redirect("/");
+
+};
+
+exports.signin = function(req, res)
 {//find user in database, compare 'stored' password with input password
 		user = User.getUser(req.param("username"));
 
@@ -36,7 +69,7 @@ exports.signup = function(req, res)
 	res.redirect('/');
 }
 
- exports.logout = function(req,res)
+exports.signout = function(req,res)
 {//find user in database, compare 'stored' password with input password
 	req.session.username = undefined;
 	console.log("Logging Out");
