@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -49,7 +48,7 @@ app.get('/signup', index.signup);
 app.get('/:user/profile', user.profile);
 app.get('/:user/followers', user.followers);
 app.get('/:user/following', user.following);
-app.get('/feed/:hashtag', hashfeed.feed);
+app.get('/feed/:language', hashfeed.feed);
 
 app.get('/signout', index.signout);
 app.post('/signin', index.signin);

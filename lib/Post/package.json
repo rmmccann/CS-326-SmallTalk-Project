@@ -1,7 +1,7 @@
 { 
-    "name"     : "Tweet",
+    "name"     : "Post",
     "verstion" : "0.0.1",
     "author"   : "Justin Ivey <jcivey@student.umass.edu>",
-    "description" : "a library for accessing tweets",
+    "description" : "a library for accessing posts",
     "main": "./main.js" 
 }
