@@ -53,6 +53,7 @@ app.get('/feed/:language', hashfeed.feed);
 app.get('/signout', index.signout);
 app.post('/signin', index.signin);
 app.post('/addNewUser', index.createNewUser);
+app.post('/submitNewPost', index.submitNewPost);
 
 
 
