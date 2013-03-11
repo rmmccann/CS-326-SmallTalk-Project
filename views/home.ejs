@@ -1,6 +1,5 @@
 <% include template/header.ejs %>
 
-
 	<div id="content">
 		<h1><%= title %></h1>
 
@@ -14,18 +13,10 @@
 			<input id="submitButton" type="submit" value="Post" name="submitButton" class="btn" />
 			
 			<div id="users-post-area">
-			<p> <%= current_user %>'s Posts</p>  
-
-
-<!-- Is there a way i could make the html below into an "object" so that each time a user posts, it adds another post div obj to the user-post-area div?-->
-
-				<% include template/post.ejs %>
-
-
+				<p> <%= current_user %>'s Posts</p>  
+				<% include template/post.ejs %> <!-- This is a post object -->
 			</div>
 
 		</form>
 	</div>
-
-
 <% include template/footer.ejs %>

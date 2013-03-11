@@ -25,13 +25,12 @@ exports.signup = function(req, res)
 
 exports.submitNewPost = function(req, res)
 {
-	var regexp = /%\w+/;
+	var regexp = /%\w+/; // regular expression to accept a % followed by the set [a-z ,A-Z ,0-9,_] at least one or more times
 	var postmsg = req.param("postTextField");
 	var liked = req.param("like");
-	var desiredlangs = regexp.exec(postmsg);
-	//check if desired if not null.
+	var desiredlangs = regexp.exec(postmsg); // takes in the the postmsg and returns an array of any string that fits the regular expression defined above
 
-	var newPost = Post.NewPost;
+	var newPost = Post.NewPost; // creates a new post object to be populated
 
 	if(desiredlangs != null)
 	{

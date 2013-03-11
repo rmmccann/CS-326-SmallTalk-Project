@@ -17,6 +17,17 @@ a {
 	background: lightsteelblue;
 
 }
+#users-post
+{
+	height: 50px;
+	width: 400px;
+}
+#postTextField
+{
+	resize: none;
+	height: 50px;
+	width: 490px;
+}
 
 
 
@@ -54,4 +65,16 @@ a {
 {
 	margin: auto;
 	width: 1000px;
+}
+
+/* why does this not already exist in bootstrap? oh well */
+.text-input-small
+{
+	margin-top: -5px;
+	height: 15px;
+	padding: 2px 10px;
+	font-size: 11.9px;
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		border-radius: 3px;
 }
