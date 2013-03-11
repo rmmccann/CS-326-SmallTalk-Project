@@ -7,6 +7,30 @@ a {
   color: #00B7FF;
 }
 
+/* for home.ejs, the style for the area in which posts are stored.*/
+#users-post-area
+{
+
+	height: 400px;
+	width: 500px;
+
+	background: lightsteelblue;
+
+}
+#users-post
+{
+	height: 50px;
+	width: 400px;
+}
+#postTextField
+{
+	resize: none;
+	height: 50px;
+	width: 490px;
+}
+
+
+
 /* Fixed Position Global Nav Bar */
 #sticky-bar
 {
