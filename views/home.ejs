@@ -16,12 +16,12 @@
 
 			<div id="users-post-area">
 				<p> <%= current_user.username %>'s Posts</p>  
-					<% Post.reverse().forEach(function(post){ %>
+					<% posts.reverse().forEach(function(post){ %>
 						<div class= "post-container">
 							<table>
 								<tr>
 									<td><img src="/images/User-icon-scaled.png"></img></td>
-									<td><p class="post_message"><%= post.message%></p><br></td>
+									<td style= "background:white; width: 420px;"><p class="post_message"><%= post.message%></p><br></td>
 								</tr>
 							</table>
 							<span> <%= post.user  %> </span>

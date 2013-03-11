@@ -13,7 +13,7 @@ exports.index = function(req, res)
 		res.render('index', { title: 'SmallTalk', Post:[] });
 	 }else{
 	 	var posts = Post.getFollowedPosts(req.session.user.following, req.session.user.username);
-		res.render('home', {title: "Welcome to SmallTalk", Post: posts});
+		res.render('home', {title: "Welcome to SmallTalk", posts: posts});
 
 	 }
 };
@@ -77,7 +77,7 @@ exports.signin = function(req, res)
 
 exports.signout = function(req,res)
 {//find user in database, compare 'stored' password with input password
-	req.session.username = undefined;
+	req.session.user = undefined;
 	console.log("Logging Out");
 	res.redirect('/');
 }
