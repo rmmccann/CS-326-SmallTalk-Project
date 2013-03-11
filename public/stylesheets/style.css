@@ -28,7 +28,10 @@ a {
 	height: 50px;
 	width: 490px;
 }
-
+.post_message
+{
+	background: white;
+}
 
 
 /* Fixed Position Global Nav Bar */

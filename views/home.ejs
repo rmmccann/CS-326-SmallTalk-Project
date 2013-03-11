@@ -13,9 +13,20 @@
 			<input id="like" type="checkbox" name="like" /><br>
 			<input id="submitButton" type="submit" value="Post" name="submitButton" class="btn" />
 			
+
 			<div id="users-post-area">
-				<p> <%= current_user %>'s Posts</p>  
-				<% include template/post.ejs %> <!-- This is a post object -->
+				<p> <%= current_user.username %>'s Posts</p>  
+					<% Post.reverse().forEach(function(post){ %>
+						<div class= "post-container">
+							<table>
+								<tr>
+									<td><img src="/images/User-icon-scaled.png"></img></td>
+									<td><p class="post_message"><%= post.message%></p><br></td>
+								</tr>
+							</table>
+							<span> <%= post.user  %> </span>
+						</div>
+					<% }) %>
 			</div>
 
 		</form>

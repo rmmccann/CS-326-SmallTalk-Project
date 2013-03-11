@@ -10,9 +10,11 @@ exports.index = function(req, res)
 {
 	//check for cookie to see if user is logged in. If so, send them to the homepage instead of index (login) page.
 	if(req.session.user == undefined){
-		res.render('index', { title: 'SmallTalk', routes: app.routes.get });
+		res.render('index', { title: 'SmallTalk', Post:[] });
 	 }else{
-		res.render('home', {title: "Welcome to SmallTalk"});
+	 	var posts = Post.getFollowedPosts(req.session.user.following, req.session.user.username);
+		res.render('home', {title: "Welcome to SmallTalk", Post: posts});
+
 	 }
 };
 
@@ -29,25 +31,31 @@ exports.submitNewPost = function(req, res)
 	var liked = req.param("like");
 	var desiredlangs = regexp.exec(postmsg); // takes in the the postmsg and returns an array of any string that fits the regular expression defined above
 
-	var newPost = Post.NewPost; // creates a new post object to be populated
+	var newPost = {message:"", language:[], user:"", relationship: true}; // creates a new post object to be populated
 
-	if(desiredlangs != null)
-	{
-		for(var counter = 0; counter < desiredlangs.length; counter++)
-		{
-			desiredlangs[counter].slice(1, desiredlangs[counter].length);
-			/*if(!Post.getLanguage(desiredlangs[counter]))
-			{
-				this will be for the nice dropdown box, async javascript
-			}*/
-		}
-	}
+	console.log(newPost)
+	// if(desiredlangs != null)
+	// {
+	// 	for(var counter = 0; counter < desiredlangs.length; counter++)
+	// 	{
+	// 		desiredlangs[counter].slice(1, desiredlangs[counter].length);
+	// 		/*if(!Post.getLanguage(desiredlangs[counter]))
+	// 		{
+	// 			this will be for the nice dropdown box, async javascript
+	// 		}*/
+	// 	}
+	// }
+
 	newPost.message = postmsg;
-	newPost.user = req.session.username;
+	newPost.user = req.session.user.username;
 	newPost.language = desiredlangs;
-	newPost.releationship = liked;
+	newPost.relationship = liked;
 
+	console.log(Post.PostTable)
+	console.log("--------------------");
 	Post.PostTable.push(newPost);
+	console.log(Post.PostTable)
+
 
 	res.redirect("/");
 
@@ -103,7 +111,7 @@ exports.createNewUser = function(req, res)
 	var firstname = req.param("firstname");
 	var lastname = req.param("lastname");
 
-	var user = User.NewUser;
+	var user = {username: "",password: "",email: "",firstname: "",lastname: "",followers: [],following: []};
 	user.username = username;
 	user.password = password;
 	user.email = email;
