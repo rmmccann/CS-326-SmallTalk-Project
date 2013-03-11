@@ -6,11 +6,11 @@ exports.profile = function(req, res)
 };
 
 exports.followers = function(req, res)
-{
-	res.render('followers', {User:User.getUser(res.locals.current_user), title: res.locals.current_user});
+{	var user = User.getUser(req.param("user"))
+	res.render('followers', {User: user, title: user.username});
 };
 
 exports.following = function(req, res)
-{
-	res.render('following', {User:User.getUser(res.locals.current_user), title: res.locals.current_user});
+{	var user = User.getUser(req.param("user"))
+	res.render('following', {User: user, title: user.username});
 };

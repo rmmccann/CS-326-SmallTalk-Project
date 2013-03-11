@@ -1,6 +1,23 @@
 <% include template/header.ejs %>
 <h1><%= User.username %></h1>
+
+<%if(current_user.username == User.username){%>
 <p>My profile page!</p>
+<%}else{%>
+<p><%=User.username%>'s profile page!</p>
+<%}%>
+
+<%if(current_user.username != User.username){%>
+	<form method="POST" action="/toggleFollow">
+		<%if(current_user.following.indexOf(User.username) != -1){%>
+			<input id="toggle_follow" type="submit" value="Unfollow" name="toggle_follow" class="btn" />
+		<%}else{%>
+			<input id="toggle_follow" type="submit" value="Follow" name="toggle_follow" class="btn" />
+		<%}%>
+		<input id="toggle_follow_user" type="hidden" value="<%=User.username%>" name="toggle_follow_user" class="btn" />
+	</form>
+<%}%>
+
 <a href="/<%= User.username %>/followers">followers</a> ~ <a href="/<%= User.username %>/following">following</a>
 
 <% include template/footer.ejs %>

@@ -18,7 +18,7 @@
 	<span>Welcome to SmallTalk</span>
 
 	<span><a href="/">home</a></span>
-	<span><a href="/<%= current_user %>/profile">profile</a></span>
+	<% if(current_user){%><span><a href="/<%= current_user.username %>/profile">profile</a></span><%}%>
 
 	<!-- <span class="clearfix"></span> -->
 	<form class="form-search" style="display: inline;">

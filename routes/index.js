@@ -8,9 +8,8 @@ var Post = require('../lib/Post/');
 
 exports.index = function(req, res)
 {
-	console.log(req.session.username);
 	//check for cookie to see if user is logged in. If so, send them to the homepage instead of index (login) page.
-	if(req.session.username == undefined){
+	if(req.session.user == undefined){
 		res.render('index', { title: 'SmallTalk', routes: app.routes.get });
 	 }else{
 		res.render('home', {title: "Welcome to SmallTalk"});
@@ -61,7 +60,7 @@ exports.signin = function(req, res)
 
 		if(user != undefined){
 			if(user.password == req.param("password")){
-				req.session.username = user.username;
+				req.session.user = user;
 				res.redirect('home', {})
 			}
 		}
@@ -74,6 +73,25 @@ exports.signout = function(req,res)
 	req.session.username = undefined;
 	console.log("Logging Out");
 	res.redirect('/');
+}
+
+exports.toggleFollow = function(req, res){
+
+	var toggled_user = req.param("toggle_follow_user");
+	var current_user = req.session.user;
+
+	var index = -1;
+
+	if((index = (current_user.following.indexOf(toggled_user))) == -1){
+		User.getUser(current_user.username).following.push(toggled_user)
+	}else{
+		User.getUser(current_user.username).following.splice(index,1)
+	}
+
+	req.session.user = User.getUser(current_user.username);
+
+	console.log(req.session.user.following)
+	res.redirect("/"+toggled_user+"/profile");
 }
 
 exports.createNewUser = function(req, res)
@@ -103,7 +121,7 @@ exports.createNewUser = function(req, res)
 		else
 		{
 			User.UserTable.push(user);
-			req.session.username = username;
+			req.session.user = user;
 			res.redirect("/");
 		}
 	}

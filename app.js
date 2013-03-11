@@ -25,7 +25,7 @@ app.configure(
 		app.use(express.methodOverride());
 		app.use(express.cookieParser('your secret here'));
 		app.use(express.session());
-		app.use(function(req, res, next){ res.locals.current_user = req.session.username; next(); });
+		app.use(function(req, res, next){ res.locals.current_user = req.session.user; next(); });
 		app.use(app.router);
 		app.use(express.static(path.join(__dirname, 'public')));
 	}
@@ -52,6 +52,7 @@ app.get('/feed/:language', hashfeed.feed);
 
 app.get('/signout', index.signout);
 app.post('/signin', index.signin);
+app.post('/toggleFollow', index.toggleFollow)
 app.post('/addNewUser', index.createNewUser);
 app.post('/submitNewPost', index.submitNewPost);
 

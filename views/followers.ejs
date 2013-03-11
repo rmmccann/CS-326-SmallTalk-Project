@@ -3,7 +3,7 @@
     <h1><%= User.username %></h1>
     <p>Here are your Followers</p>
     <% User.followers.forEach(function(follower){ %>
-    	<li><%= follower %></li>
+    	<li><a href="/<%= follower %>/profile"><%= follower %></a></li>
     <% });%>
 
 <% include template/footer.ejs %>
