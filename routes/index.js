@@ -2,7 +2,6 @@
 var User = require('../lib/User/');
 var Post = require('../lib/Post/');
 
-
 exports.index = function(req, res)
 {
 	//check for cookie to see if user is logged in. If so, send them to the homepage instead of index (login) page.
@@ -73,10 +72,17 @@ exports.signin = function(req, res)
 //Ends the session for the user
 exports.signout = function(req,res)
 {//find user in database, compare 'stored' password with input password
-	req.session.user = undefined;
+	var user = req.session.user;
+
+	if (user === undefined) {
+    	res.redirect('/signin');
+  }
+
+  	delete req.session.user;
 	console.log("Logging Out");
 	res.redirect('/');
 }
+
 
 //Allows the user to follow/unfollow other users
 exports.toggleFollow = function(req, res){
