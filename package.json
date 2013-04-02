@@ -1,15 +1,14 @@
 {
-  "name": "SmallTalk",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "start": "node app"
-  },
-  "dependencies": {
-    "express": "3.1.0",
-    "ejs": "*",
-    "sqlite3": ">= 2.1.7",
-    "mysql": ">= 2.0.0-alpha7",
-    "async": ">= 0.2.6"
-  }
+	"name": "SmallTalk",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"start": "node app"
+	},
+	"dependencies": {
+		"express": "3.1.0",
+		"ejs": "*",
+		"sqlite3": ">= 2.0.0",
+		"async": ">= 0.2.6"
+	}
 }
