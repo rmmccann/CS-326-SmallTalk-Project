@@ -25,6 +25,7 @@ app.configure(
 		app.use(express.methodOverride());
 		app.use(express.cookieParser('your secret here'));
 		app.use(express.session());
+		app.use(function(req, res, next){ res.locals.current_user = req.session.user; next(); });
 		app.use(app.router);
 		app.use(express.static(path.join(__dirname, 'public')));
 	}
