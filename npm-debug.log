@@ -1,0 +1,269 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install' ]
+2 info using npm@1.2.11
+3 info using node@v0.8.21
+4 verbose read json /Users/scottyro33/gitstuff/CS-326-SmallTalk-Project/package.json
+5 verbose readDependencies using package.json deps
+6 verbose install where, deps [ '/Users/scottyro33/gitstuff/CS-326-SmallTalk-Project',
+6 verbose install   [ 'express', 'ejs', 'sqlite3', 'async' ] ]
+7 verbose from cache /Users/scottyro33/gitstuff/CS-326-SmallTalk-Project/package.json
+8 info preinstall SmallTalk@0.0.1
+9 verbose read json /Users/scottyro33/gitstuff/CS-326-SmallTalk-Project/node_modules/async/package.json
+10 verbose read json /Users/scottyro33/gitstuff/CS-326-SmallTalk-Project/node_modules/ejs/package.json
+11 verbose read json /Users/scottyro33/gitstuff/CS-326-SmallTalk-Project/node_modules/express/package.json
+12 verbose read json /Users/scottyro33/gitstuff/CS-326-SmallTalk-Project/node_modules/mysql/package.json
+13 verbose from cache /Users/scottyro33/gitstuff/CS-326-SmallTalk-Project/package.json
+14 verbose readDependencies using package.json deps
+15 verbose from cache /Users/scottyro33/gitstuff/CS-326-SmallTalk-Project/node_modules/async/package.json
+16 verbose from cache /Users/scottyro33/gitstuff/CS-326-SmallTalk-Project/node_modules/ejs/package.json
+17 verbose from cache /Users/scottyro33/gitstuff/CS-326-SmallTalk-Project/node_modules/express/package.json
+18 verbose from cache /Users/scottyro33/gitstuff/CS-326-SmallTalk-Project/node_modules/mysql/package.json
+19 verbose already installed skipping express@3.1.0 /Users/scottyro33/gitstuff/CS-326-SmallTalk-Project
+20 verbose already installed skipping ejs@* /Users/scottyro33/gitstuff/CS-326-SmallTalk-Project
+21 verbose cache add [ 'sqlite3@>= 2.0.0', null ]
+22 verbose cache add name=undefined spec="sqlite3@>= 2.0.0" args=["sqlite3@>= 2.0.0",null]
+23 verbose parsed url { pathname: 'sqlite3@%3E=%202.0.0',
+23 verbose parsed url   path: 'sqlite3@%3E=%202.0.0',
+23 verbose parsed url   href: 'sqlite3@%3E=%202.0.0' }
+24 verbose cache add name="sqlite3" spec=">= 2.0.0" args=["sqlite3",">= 2.0.0"]
+25 verbose parsed url { pathname: '%3E=%202.0.0',
+25 verbose parsed url   path: '%3E=%202.0.0',
+25 verbose parsed url   href: '%3E=%202.0.0' }
+26 verbose addNamed [ 'sqlite3', '>= 2.0.0' ]
+27 verbose addNamed [ null, '>=2.0.0' ]
+28 verbose already installed skipping async@>= 0.2.6 /Users/scottyro33/gitstuff/CS-326-SmallTalk-Project
+29 silly lockFile b4735404-sqlite3-2-0-0 sqlite3@>= 2.0.0
+30 verbose lock sqlite3@>= 2.0.0 /Users/scottyro33/.npm/b4735404-sqlite3-2-0-0.lock
+31 silly addNameRange { name: 'sqlite3', range: '>=2.0.0', hasData: false }
+32 verbose url raw sqlite3
+33 verbose url resolving [ 'https://registry.npmjs.org/', './sqlite3' ]
+34 verbose url resolved https://registry.npmjs.org/sqlite3
+35 info trying registry request attempt 1 at 17:09:04
+36 verbose etag "C4T936DXJIUP3GY8DNQH8E52V"
+37 http GET https://registry.npmjs.org/sqlite3
+38 http 304 https://registry.npmjs.org/sqlite3
+39 silly registry.get cb [ 304,
+39 silly registry.get   { server: 'CouchDB/1.2.1 (Erlang OTP/R15B03)',
+39 silly registry.get     etag: '"C4T936DXJIUP3GY8DNQH8E52V"',
+39 silly registry.get     date: 'Wed, 03 Apr 2013 21:09:03 GMT',
+39 silly registry.get     'content-length': '0' } ]
+40 verbose etag sqlite3 from cache
+41 silly addNameRange number 2 { name: 'sqlite3', range: '>=2.0.0', hasData: true }
+42 silly addNameRange versions [ 'sqlite3',
+42 silly addNameRange   [ '2.0.0',
+42 silly addNameRange     '2.0.1',
+42 silly addNameRange     '2.0.2',
+42 silly addNameRange     '2.0.3',
+42 silly addNameRange     '2.0.4',
+42 silly addNameRange     '2.0.5',
+42 silly addNameRange     '2.0.6',
+42 silly addNameRange     '2.0.7',
+42 silly addNameRange     '2.0.8',
+42 silly addNameRange     '2.0.9',
+42 silly addNameRange     '2.0.10',
+42 silly addNameRange     '2.0.11',
+42 silly addNameRange     '2.0.12',
+42 silly addNameRange     '2.0.13',
+42 silly addNameRange     '2.0.14',
+42 silly addNameRange     '2.0.15',
+42 silly addNameRange     '2.0.16',
+42 silly addNameRange     '2.0.17',
+42 silly addNameRange     '2.0.18',
+42 silly addNameRange     '2.1.0',
+42 silly addNameRange     '2.1.1',
+42 silly addNameRange     '2.1.2',
+42 silly addNameRange     '2.1.3',
+42 silly addNameRange     '2.1.4',
+42 silly addNameRange     '2.1.5',
+42 silly addNameRange     '2.1.7' ] ]
+43 verbose addNamed [ 'sqlite3', '2.1.7' ]
+44 verbose addNamed [ '2.1.7', '2.1.7' ]
+45 silly lockFile cb8bb12f-sqlite3-2-1-7 sqlite3@2.1.7
+46 verbose lock sqlite3@2.1.7 /Users/scottyro33/.npm/cb8bb12f-sqlite3-2-1-7.lock
+47 verbose read json /Users/scottyro33/.npm/sqlite3/2.1.7/package/package.json
+48 silly lockFile cb8bb12f-sqlite3-2-1-7 sqlite3@2.1.7
+49 silly lockFile cb8bb12f-sqlite3-2-1-7 sqlite3@2.1.7
+50 silly lockFile b4735404-sqlite3-2-0-0 sqlite3@>= 2.0.0
+51 silly lockFile b4735404-sqlite3-2-0-0 sqlite3@>= 2.0.0
+52 silly resolved [ { name: 'sqlite3',
+52 silly resolved     description: 'Asynchronous, non-blocking SQLite3 bindings',
+52 silly resolved     version: '2.1.7',
+52 silly resolved     homepage: 'http://github.com/developmentseed/node-sqlite3',
+52 silly resolved     author:
+52 silly resolved      { name: 'Development Seed',
+52 silly resolved        email: 'info@developmentseed.org',
+52 silly resolved        url: 'http://developmentseed.org/' },
+52 silly resolved     contributors:
+52 silly resolved      [ [Object],
+52 silly resolved        [Object],
+52 silly resolved        [Object],
+52 silly resolved        [Object],
+52 silly resolved        [Object],
+52 silly resolved        [Object],
+52 silly resolved        [Object],
+52 silly resolved        [Object],
+52 silly resolved        [Object],
+52 silly resolved        [Object],
+52 silly resolved        [Object],
+52 silly resolved        [Object],
+52 silly resolved        [Object],
+52 silly resolved        [Object] ],
+52 silly resolved     repository:
+52 silly resolved      { type: 'git',
+52 silly resolved        url: 'git://github.com/developmentseed/node-sqlite3.git' },
+52 silly resolved     devDependencies: { step: '0.0.4', mocha: '~1.7' },
+52 silly resolved     engines: { node: '>= 0.6.13 && < 0.11.0' },
+52 silly resolved     scripts: { test: 'mocha -R spec', install: 'node-gyp rebuild' },
+52 silly resolved     licenses: [ [Object] ],
+52 silly resolved     main: './lib/sqlite3',
+52 silly resolved     gypfile: true,
+52 silly resolved     readme: '# NAME\n\nnode-sqlite3 - Asynchronous, non-blocking [SQLite3](http://sqlite.org/) bindings for [node.js](https://github.com/joyent/node) 0.2-0.4 (versions 2.0.x), **0.6.13+ and 0.8.x** (versions 2.1.x).\n\n\n\n# USAGE\n\nInstall with `npm install sqlite3`.\n\n``` js\nvar sqlite3 = require(\'sqlite3\').verbose();\nvar db = new sqlite3.Database(\':memory:\');\n\ndb.serialize(function() {\n  db.run("CREATE TABLE lorem (info TEXT)");\n\n  var stmt = db.prepare("INSERT INTO lorem VALUES (?)");\n  for (var i = 0; i < 10; i++) {\n      stmt.run("Ipsum " + i);\n  }\n  stmt.finalize();\n\n  db.each("SELECT rowid AS id, info FROM lorem", function(err, row) {\n      console.log(row.id + ": " + row.info);\n  });\n});\n\ndb.close();\n```\n\n\n\n# FEATURES\n\n* Straightforward query and parameter binding interface\n* Full Buffer/Blob support\n* Extensive [debugging support](https://github.com/developmentseed/node-sqlite3/wiki/Debugging)\n* [Query serialization](https://github.com/developmentseed/node-sqlite3/wiki/Control-Flow) API\n* [Extension support](https://github.com/developmentseed/node-sqlite3/wiki/Extensions)\n* Big test suite\n* Written in modern C++ and tested for memory leaks\n\n\n\n# API\n\nSee the [API documentation](https://github.com/developmentseed/node-sqlite3/wiki) in the wiki.\n\n\n# BUILDING\n\nMake sure you have the sources for `sqlite3` installed. Mac OS X ships with these by default. If you don\'t have them installed, install the `-dev` package with your package manager, e.g. `apt-get install libsqlite3-dev` for Debian/Ubuntu. Make sure that you have at least `libsqlite3` >= 3.6.\n\nBulding also requires node-gyp to be installed. You can do this with npm:\n\n    npm install -g node-gyp\n\nTo obtain and build the bindings:\n\n    git clone git://github.com/developmentseed/node-sqlite3.git\n    cd node-sqlite3\n    ./configure\n    make\n\nYou can also use [`npm`](https://github.com/isaacs/npm) to download and install them:\n\n    npm install sqlite3\n\n\n\n# TESTS\n\n[expresso](https://github.com/visionmedia/expresso) is required to run unit tests.\n\n    npm install expresso\n    make test\n\n\n\n# CONTRIBUTORS\n\n* [Konstantin Käfer](https://github.com/kkaefer)\n* [Dane Springmeyer](https://github.com/springmeyer)\n* [Will White](https://github.com/willwhite)\n* [Orlando Vazquez](https://github.com/orlandov)\n* [Artem Kustikov](https://github.com/artiz)\n* [Eric Fredricksen](https://github.com/grumdrig)\n* [John Wright](https://github.com/mrjjwright)\n* [Ryan Dahl](https://github.com/ry)\n* [Tom MacWright](https://github.com/tmcw)\n* [Carter Thaxton](https://github.com/carter-thaxton)\n* [Audrius Kažukauskas](https://github.com/audriusk)\n* [Johannes Schauer](https://github.com/pyneo)\n\n\n\n# ACKNOWLEDGEMENTS\n\nThanks to [Orlando Vazquez](https://github.com/orlandov),\n[Eric Fredricksen](https://github.com/grumdrig) and\n[Ryan Dahl](https://github.com/ry) for their SQLite bindings for node, and to mraleph on Freenode\'s #v8 for answering questions.\n\nDevelopment of this module is sponsored by [Development Seed](http://developmentseed.org/).\n\n\n# LICENSE\n\n`node-sqlite3` is [BSD licensed](https://github.com/developmentseed/node-sqlite3/raw/master/LICENSE).\n',
+52 silly resolved     readmeFilename: 'README.md',
+52 silly resolved     _id: 'sqlite3@2.1.7',
+52 silly resolved     _from: 'sqlite3@>= 2.0.0' } ]
+53 info install sqlite3@2.1.7 into /Users/scottyro33/gitstuff/CS-326-SmallTalk-Project
+54 info installOne sqlite3@2.1.7
+55 verbose from cache /Users/scottyro33/.npm/sqlite3/2.1.7/package/package.json
+56 info /Users/scottyro33/gitstuff/CS-326-SmallTalk-Project/node_modules/sqlite3 unbuild
+57 verbose read json /Users/scottyro33/gitstuff/CS-326-SmallTalk-Project/node_modules/sqlite3/package.json
+58 verbose tar unpack /Users/scottyro33/.npm/sqlite3/2.1.7/package.tgz
+59 silly lockFile 27f614ab-alk-Project-node-modules-sqlite3 /Users/scottyro33/gitstuff/CS-326-SmallTalk-Project/node_modules/sqlite3
+60 verbose lock /Users/scottyro33/gitstuff/CS-326-SmallTalk-Project/node_modules/sqlite3 /Users/scottyro33/.npm/27f614ab-alk-Project-node-modules-sqlite3.lock
+61 silly lockFile 0acbb84a-33-npm-sqlite3-2-1-7-package-tgz /Users/scottyro33/.npm/sqlite3/2.1.7/package.tgz
+62 verbose lock /Users/scottyro33/.npm/sqlite3/2.1.7/package.tgz /Users/scottyro33/.npm/0acbb84a-33-npm-sqlite3-2-1-7-package-tgz.lock
+63 silly gunzTarPerm modes [ '755', '644' ]
+64 silly gunzTarPerm extractEntry package.json
+65 silly gunzTarPerm extractEntry .npmignore
+66 silly gunzTarPerm extractEntry README.md
+67 silly gunzTarPerm extractEntry LICENSE
+68 silly gunzTarPerm extractEntry sqlite3.js
+69 silly gunzTarPerm extractEntry deps/sqlite3/README
+70 silly gunzTarPerm extractEntry deps/sqlite3/Makefile.in
+71 silly gunzTarPerm extractEntry deps/sqlite3/config.guess
+72 silly gunzTarPerm extractEntry deps/sqlite3/config.sub
+73 silly gunzTarPerm extractEntry deps/sqlite3/configure
+74 silly gunzTarPerm extractEntry deps/sqlite3/configure.ac
+75 silly gunzTarPerm extractEntry deps/sqlite3/depcomp
+76 silly gunzTarPerm extractEntry deps/sqlite3/INSTALL
+77 silly gunzTarPerm extractEntry deps/sqlite3/install-sh
+78 silly gunzTarPerm extractEntry deps/sqlite3/ltmain.sh
+79 silly gunzTarPerm extractEntry deps/sqlite3/Makefile.am
+80 silly gunzTarPerm extractEntry deps/sqlite3/binding.gyp
+81 silly gunzTarPerm extractEntry deps/sqlite3/missing
+82 silly gunzTarPerm extractEntry deps/sqlite3/aclocal.m4
+83 silly gunzTarPerm extractEntry deps/sqlite3/shell.c
+84 silly gunzTarPerm extractEntry deps/sqlite3/sqlite3.1
+85 silly gunzTarPerm extractEntry deps/sqlite3/sqlite3.c
+86 silly gunzTarPerm extractEntry deps/sqlite3/sqlite3.h
+87 silly gunzTarPerm extractEntry deps/sqlite3/sqlite3.pc
+88 silly gunzTarPerm extractEntry deps/sqlite3/sqlite3.pc.in
+89 silly gunzTarPerm extractEntry deps/sqlite3/sqlite3ext.h
+90 silly gunzTarPerm extractEntry deps/sqlite3/tea/README
+91 silly gunzTarPerm extractEntry deps/sqlite3/tea/license.terms
+92 silly gunzTarPerm extractEntry deps/sqlite3/tea/configure.in
+93 silly gunzTarPerm extractEntry deps/sqlite3/tea/doc/sqlite3.n
+94 silly gunzTarPerm extractEntry deps/sqlite3/tea/generic/tclsqlite3.c
+95 silly gunzTarPerm extractEntry deps/sqlite3/tea/configure
+96 silly gunzTarPerm extractEntry deps/sqlite3/tea/Makefile.in
+97 silly gunzTarPerm extractEntry deps/sqlite3/tea/pkgIndex.tcl.in
+98 silly gunzTarPerm extractEntry deps/sqlite3/tea/aclocal.m4
+99 silly gunzTarPerm extractEntry deps/sqlite3/tea/tclconfig/install-sh
+100 silly gunzTarPerm extractEntry deps/sqlite3/tea/tclconfig/tcl.m4
+101 silly gunzTarPerm extractEntry deps/sqlite3/tea/win/makefile.vc
+102 silly gunzTarPerm extractEntry deps/sqlite3/tea/win/nmakehlp.c
+103 silly gunzTarPerm extractEntry deps/sqlite3/tea/win/rules.vc
+104 silly gunzTarPerm extractEntry examples/simple-chaining.js
+105 silly gunzTarPerm extractEntry lib/index.js
+106 silly gunzTarPerm extractEntry lib/sqlite3.js
+107 silly gunzTarPerm extractEntry lib/trace.js
+108 silly gunzTarPerm extractEntry benchmark/insert.js
+109 silly gunzTarPerm extractEntry benchmark/insert-transaction.sql
+110 silly gunzTarPerm extractEntry Makefile
+111 silly gunzTarPerm extractEntry configure
+112 silly gunzTarPerm extractEntry binding.gyp
+113 silly gunzTarPerm extractEntry src/async.h
+114 silly gunzTarPerm extractEntry src/database.cc
+115 silly gunzTarPerm extractEntry src/database.h
+116 silly gunzTarPerm extractEntry src/macros.h
+117 silly gunzTarPerm extractEntry src/node_sqlite3.cc
+118 silly gunzTarPerm extractEntry src/statement.cc
+119 silly gunzTarPerm extractEntry src/statement.h
+120 silly gunzTarPerm extractEntry src/threading.h
+121 silly gunzTarPerm extractEntry test/affected.test.js
+122 silly gunzTarPerm extractEntry test/fts-content.test.js
+123 silly gunzTarPerm extractEntry test/map.test.js
+124 silly gunzTarPerm extractEntry test/named_columns.test.js
+125 silly gunzTarPerm extractEntry test/extension.test.js
+126 silly gunzTarPerm extractEntry test/blob.test.js
+127 silly gunzTarPerm extractEntry test/open_close.test.js
+128 silly gunzTarPerm extractEntry test/other_objects.test.js
+129 silly gunzTarPerm extractEntry test/parallel_insert.test.js
+130 silly gunzTarPerm extractEntry test/prepare.test.js
+131 silly gunzTarPerm extractEntry test/exec.test.js
+132 silly gunzTarPerm extractEntry test/profile.test.js
+133 silly gunzTarPerm extractEntry test/each.test.js
+134 silly gunzTarPerm extractEntry test/rerun.test.js
+135 silly gunzTarPerm extractEntry test/database_fail.test.js
+136 silly gunzTarPerm extractEntry test/scheduling.test.js
+137 silly gunzTarPerm extractEntry test/constants.test.js
+138 silly gunzTarPerm extractEntry test/serialization.test.js
+139 silly gunzTarPerm extractEntry test/cache.test.js
+140 silly gunzTarPerm extractEntry test/trace.test.js
+141 silly gunzTarPerm extractEntry test/named_params.test.js
+142 silly gunzTarPerm extractEntry test/unicode.test.js
+143 silly gunzTarPerm extractEntry test/null_error.test.js
+144 silly gunzTarPerm extractEntry test/support/createdb.js
+145 silly gunzTarPerm extractEntry test/support/helper.js
+146 silly gunzTarPerm extractEntry test/support/elmo.png
+147 silly gunzTarPerm extractEntry test/support/prepare.db
+148 silly gunzTarPerm extractEntry test/support/script.sql
+149 verbose read json /Users/scottyro33/gitstuff/CS-326-SmallTalk-Project/node_modules/sqlite3/package.json
+150 silly lockFile 27f614ab-alk-Project-node-modules-sqlite3 /Users/scottyro33/gitstuff/CS-326-SmallTalk-Project/node_modules/sqlite3
+151 silly lockFile 27f614ab-alk-Project-node-modules-sqlite3 /Users/scottyro33/gitstuff/CS-326-SmallTalk-Project/node_modules/sqlite3
+152 silly lockFile 0acbb84a-33-npm-sqlite3-2-1-7-package-tgz /Users/scottyro33/.npm/sqlite3/2.1.7/package.tgz
+153 silly lockFile 0acbb84a-33-npm-sqlite3-2-1-7-package-tgz /Users/scottyro33/.npm/sqlite3/2.1.7/package.tgz
+154 info preinstall sqlite3@2.1.7
+155 verbose from cache /Users/scottyro33/gitstuff/CS-326-SmallTalk-Project/node_modules/sqlite3/package.json
+156 verbose readDependencies using package.json deps
+157 verbose from cache /Users/scottyro33/gitstuff/CS-326-SmallTalk-Project/node_modules/sqlite3/package.json
+158 verbose readDependencies using package.json deps
+159 silly resolved []
+160 verbose about to build /Users/scottyro33/gitstuff/CS-326-SmallTalk-Project/node_modules/sqlite3
+161 info build /Users/scottyro33/gitstuff/CS-326-SmallTalk-Project/node_modules/sqlite3
+162 verbose from cache /Users/scottyro33/gitstuff/CS-326-SmallTalk-Project/node_modules/sqlite3/package.json
+163 verbose linkStuff [ false,
+163 verbose linkStuff   false,
+163 verbose linkStuff   false,
+163 verbose linkStuff   '/Users/scottyro33/gitstuff/CS-326-SmallTalk-Project/node_modules' ]
+164 info linkStuff sqlite3@2.1.7
+165 verbose linkBins sqlite3@2.1.7
+166 verbose linkMans sqlite3@2.1.7
+167 verbose rebuildBundles sqlite3@2.1.7
+168 info install sqlite3@2.1.7
+169 verbose unsafe-perm in lifecycle true
+170 silly exec sh "-c" "node-gyp rebuild"
+171 silly sh,-c,node-gyp rebuild,/Users/scottyro33/gitstuff/CS-326-SmallTalk-Project/node_modules/sqlite3 spawning
+172 info sqlite3@2.1.7 Failed to exec install script
+173 info /Users/scottyro33/gitstuff/CS-326-SmallTalk-Project/node_modules/sqlite3 unbuild
+174 verbose from cache /Users/scottyro33/gitstuff/CS-326-SmallTalk-Project/node_modules/sqlite3/package.json
+175 info preuninstall sqlite3@2.1.7
+176 info uninstall sqlite3@2.1.7
+177 verbose true,/Users/scottyro33/gitstuff/CS-326-SmallTalk-Project/node_modules,/Users/scottyro33/gitstuff/CS-326-SmallTalk-Project/node_modules unbuild sqlite3@2.1.7
+178 info postuninstall sqlite3@2.1.7
+179 error sqlite3@2.1.7 install: `node-gyp rebuild`
+179 error `sh "-c" "node-gyp rebuild"` failed with 1
+180 error Failed at the sqlite3@2.1.7 install script.
+180 error This is most likely a problem with the sqlite3 package,
+180 error not with npm itself.
+180 error Tell the author that this fails on your system:
+180 error     node-gyp rebuild
+180 error You can get their info via:
+180 error     npm owner ls sqlite3
+180 error There is likely additional logging output above.
+181 error System Darwin 11.4.2
+182 error command "node" "/usr/local/bin/npm" "install"
+183 error cwd /Users/scottyro33/gitstuff/CS-326-SmallTalk-Project
+184 error node -v v0.8.21
+185 error npm -v 1.2.11
+186 error code ELIFECYCLE
+187 verbose exit [ 1, true ]
