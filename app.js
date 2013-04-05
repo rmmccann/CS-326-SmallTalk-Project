@@ -38,11 +38,6 @@ app.configure('development',
 	}
 );
 
-/* creating tables here
-* tables.User.sync();
-* tables.Tweet.sync();
-*/
-
 app.get('/', index.index);
 app.get('/signup', index.signup);
 app.get('/:user/profile', user.profile);

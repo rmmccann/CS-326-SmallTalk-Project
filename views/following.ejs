@@ -1,9 +1,9 @@
 <% include template/header.ejs %>
 
-    <h1><%= User.username %></h1>
-    <p>Is Following:</p>
-    <% User.following.forEach(function(follower){ %>
-    	<li><a href="/<%= follower %>/profile"><%= follower %></a></li>
-    <% });%>
+	<h1><%= User.username %></h1>
+	<p>Is Following:</p>
+	<% following.forEach(function(followed){ %>
+		<li><a href="/<%= followed.username %>/profile"><%= followed.username %></a></li>
+	<% });%>
 
 <% include template/footer.ejs %>

@@ -1,4 +1,3 @@
-//var User = require('../lib/tables').User;
 var User = require('../lib/User/');
 var Post = require('../lib/Post/');
 
@@ -56,85 +55,87 @@ exports.submitNewPost = function(req, res)
 
 //Creates a session for the user upon entering username and password
 exports.signin = function(req, res)
-{//find user in database, compare 'stored' password with input password
-		user = User.getUser(req.param("username"));
-
-		if(user != undefined){
-			if(user.password == req.param("password")){
+{
+	//find user in database, compare 'stored' password with input password
+	User.getUser(req.param("username"), function(user)
+	{
+		if(user != undefined)
+		{
+			if(user.password == req.param("password"))
+			{
 				req.session.user = user;
-				res.redirect('home', {})
 			}
 		}
-
-	res.redirect('/');
+		res.redirect("/");
+	});
 }
 
 //Ends the session for the user
 exports.signout = function(req,res)
-{//find user in database, compare 'stored' password with input password
-	var user = req.session.user;
-
-	if (user === undefined) {
-    	res.redirect('/signin');
-  }
-
-  	delete req.session.user;
+{
+	delete req.session.user;
 	console.log("Logging Out");
-	res.redirect('/');
+	res.redirect("/");
 }
 
 
 //Allows the user to follow/unfollow other users
-exports.toggleFollow = function(req, res){
-
-	var toggled_user = req.param("toggle_follow_user");
-	var current_user = req.session.user;
-
-	var index = -1;
-
-	if((index = (current_user.following.indexOf(toggled_user))) == -1){
-		User.getUser(current_user.username).following.push(toggled_user)
-	}else{
-		User.getUser(current_user.username).following.splice(index,1)
-	}
-
-	req.session.user = User.getUser(current_user.username);
-
-	console.log(req.session.user.following)
-	res.redirect("/"+toggled_user+"/profile");
-}
-
-//Validates fields and creates a user in the temporary database
-exports.createNewUser = function(req, res)
+exports.toggleFollow = function(req, res)
 {
-	//forEach(fucntion(objsinarray){objsinarray.getstuff})
+	var toggled_user = req.param("toggle_follow_user");
+	User.getUser(toggled_user, function(other_user)
+	{
+		var current_user = req.session.user;
 
-	var username = req.param("username");
-	var password = req.param("password");
-	var email = req.param("email");
-	var firstname = req.param("firstname");
-	var lastname = req.param("lastname");
-
-	var user = {username: "",password: "",email: "",firstname: "",lastname: "",followers: [],following: []};
-	user.username = username;
-	user.password = password;
-	user.email = email;
-	user.firstname = firstname;//no validations 
-	user.lastname = lastname;// for real names, just add to user object
-
-	if(user.username != "" && user.password != "" && user.email != "")
-	{	
-		tabled_user = User.getUser(user.username);
-
-		if(tabled_user != undefined){//username is already taken
-			res.redirect("/signup"); //if signup is successful, send them to home(cookie required)
+		if(req.param("toggle_follow"))
+		{
+			User.follow(current_user.id, other_user.id);
 		}
 		else
 		{
-			User.UserTable.push(user);
-			req.session.user = user;
-			res.redirect("/");
+			User.unfollow(current_user.id, other_user.id);
 		}
+
+		res.redirect("/"+toggled_user+"/profile");
+	});
+}
+
+//Validates fields and creates a user in the database
+exports.createNewUser = function(req, res)
+{
+	var username = req.param("username");
+	var firstname = req.param("firstname");
+	var lastname = req.param("lastname");
+	var email = req.param("email");
+	var password = req.param("password");
+
+	var user = {
+		$username: username,
+		$firstname: firstname,
+		$lastname: lastname,
+		$email: email,
+		$password: password
+	};
+
+	//TODO: do this check client side instead.
+	if(username!="" && password!="" && email!="") // check that required fields are not blank
+	{
+		User.getUser(username, function(existing_user)
+		{
+			if(existing_user != undefined) //username is already taken
+			{
+				res.redirect("/signup");
+			}
+			else
+			{
+				User.addUser(user, function(){ //parameterless callback invoked when query is complete
+					User.getUser(username, function(new_user){
+						req.session.user = new_user;
+						res.redirect("/"); //if signup is successful, send them to home
+					});				
+				});
+			}
+		});
 	}
 	else
 	{

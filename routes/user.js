@@ -2,18 +2,36 @@ var User = require("../lib/User");
 
 //Displays the profile view
 exports.profile = function(req, res)
-{	var user = User.getUser(req.param("user"))
-	res.render('profile', {User:user , title: user.username+"'s Profile"});
+{
+	User.getUser(req.param("user"), function(user)
+	{
+		User.isFollowing(req.session.user.id, user.id, function(is_following)
+		{
+			res.render('profile', {User:user , title: user.username+"'s Profile", is_following: is_following});
+		});
+	});
 };
 
 //Displays the followers of the current user
 exports.followers = function(req, res)
-{	var user = User.getUser(req.param("user"))
-	res.render('followers', {User: user, title: user.username});
+{
+	User.getUser(req.param("user"), function(user)
+	{
+		User.getFollowers(req.param("user"), function(followers)
+		{
+			res.render('followers', {User: user, title: user.username, followers: followers});
+		});
+	});
 };
 
 //Displays the people the current user is following
 exports.following = function(req, res)
-{	var user = User.getUser(req.param("user"))
-	res.render('following', {User: user, title: user.username});
+{
+	User.getUser(req.param("user"), function(user)
+	{
+		User.getFollowing(req.param("user"), function(following)
+		{
+			res.render('following', {User: user, title: user.username, following: following});
+		});
+	});
 };
