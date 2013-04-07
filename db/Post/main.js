@@ -1,5 +1,5 @@
 var sqlite3 = require("sqlite3");
-var db = new sqlite3.Database('db.sqlite');
+var db = new sqlite3.Database("db/db.sqlite");
 
 
 //List of supported languages for the language hashtag for example: %Java;

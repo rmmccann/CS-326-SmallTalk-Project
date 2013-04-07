@@ -1,5 +1,5 @@
 var sqlite3 = require("sqlite3");
-var db = new sqlite3.Database('db.sqlite');
+var db = new sqlite3.Database("db/db.sqlite");
 
 exports.addUser = function(user_obj, cb)
 {
@@ -21,7 +21,6 @@ exports.getFollowers = function(username, cb)
 {
 	db.all("SELECT A.* FROM Users A, Users B, Follows F WHERE F.follower_id=A.id AND F.followed_id=B.id AND B.username=\""+username+"\"", function(err, rows){ //TODO: cleaner query
 		if(err) console.log("DB ERROR: " + err);
-		console.log(rows);
 		cb(rows);
 	});
 };
@@ -30,7 +29,6 @@ exports.getFollowing = function(username, cb)
 {
 	db.all("SELECT B.* FROM Users A, Users B, Follows F WHERE F.follower_id=A.id AND F.followed_id=B.id AND A.username=\""+username+"\"", function(err, rows){
 		if(err) console.log("DB ERROR: " + err);
-		console.log(rows);
 		cb(rows);
 	});
 };
