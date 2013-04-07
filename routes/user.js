@@ -1,4 +1,4 @@
-var User = require("../lib/User");
+var User = require("../db/User");
 
 //Displays the profile view
 exports.profile = function(req, res)
