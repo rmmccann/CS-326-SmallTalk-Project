@@ -7,7 +7,7 @@ exports.profile = function(req, res)
 	{
 		User.isFollowing(req.session.user.id, user.id, function(is_following)
 		{
-			res.render('profile', {User:user , title: user.username+"'s Profile", is_following: is_following});
+			res.render('profile', {user: user , title: user.username+"'s Profile", is_following: is_following});
 		});
 	});
 };
@@ -19,7 +19,7 @@ exports.followers = function(req, res)
 	{
 		User.getFollowers(req.param("user"), function(followers)
 		{
-			res.render('followers', {User: user, title: user.username, followers: followers});
+			res.render('followers', {user: user, title: user.username, followers: followers});
 		});
 	});
 };
@@ -31,7 +31,7 @@ exports.following = function(req, res)
 	{
 		User.getFollowing(req.param("user"), function(following)
 		{
-			res.render('following', {User: user, title: user.username, following: following});
+			res.render('following', {user: user, title: user.username, following: following});
 		});
 	});
 };

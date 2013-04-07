@@ -1,9 +1,10 @@
 <% include template/header.ejs %>
+<link rel="stylesheet" href="/stylesheets/home.css" />
 
 	<div id="content">
 		<h1><%= title %></h1>
 
-	<p>Welcome home <%= current_user.username %>!</p>
+		<p>Welcome, <%= current_user.username %>!</p>
 
 
 		<form method="POST" action="/submitNewPost">
@@ -12,19 +13,19 @@
 			Like
 			<input id="like" type="checkbox" name="like" /><br>
 			<input id="submitButton" type="submit" value="Post" name="submitButton" class="btn" />
-			
+			<br><br>
 
 			<div id="users-post-area">
-				<p> <%= current_user.username %>'s Posts</p>  
+				<p> <%= current_user.username %>'s Posts</p>
 					<% posts.reverse().forEach(function(post){ %>
 						<div class= "post-container">
 							<table>
 								<tr>
 									<td><img src="/images/User-icon-scaled.png"></img></td>
-									<td style= "background:white; width: 420px;"><p class="post_message"><%= post.message%></p><br></td>
+									<td style= "background:white; width: 420px;"><p class="post_message"><%= post.content %></p><br></td>
 								</tr>
 							</table>
-							<span> <%= post.user  %> </span>
+							<span><%= post.username %></span>
 						</div>
 					<% }) %>
 			</div>

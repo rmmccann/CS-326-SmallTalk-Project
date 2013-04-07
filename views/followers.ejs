@@ -1,6 +1,6 @@
 <% include template/header.ejs %>
 
-	<h1><%= User.username %></h1>
+	<h1><%= user.username %></h1>
 	<p>Here are your Followers</p>
 	<% followers.forEach(function(follower){ %>
 		<li><a href="/<%= follower.username %>/profile"><%= follower.username %></a></li>

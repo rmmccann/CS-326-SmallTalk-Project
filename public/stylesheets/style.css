@@ -1,38 +1,18 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
+/*
+ * Global Stylesheet
+ * Do not put styles here for individual views - use <view>.css for that
+ */
 
-a {
-  color: #00B7FF;
-}
-
-/* for home.ejs, the style for the area in which posts are stored.*/
-#users-post-area
+body
 {
-
-	height: 400px;
-	width: 500px;
-
-	background: lightsteelblue;
-
+	padding: 50px;
+	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-#users-post
+
+a
 {
-	height: 50px;
-	width: 400px;
+	color: #00B7FF;
 }
-#postTextField
-{
-	resize: none;
-	height: 50px;
-	width: 490px;
-}
-.post_message
-{
-	background: white;
-}
-
 
 /* Fixed Position Global Nav Bar */
 #sticky-bar

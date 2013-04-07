@@ -5,12 +5,12 @@ exports.index = function(req, res)
 {
 	//check for cookie to see if user is logged in. If so, send them to the homepage instead of index (login) page.
 	if(req.session.user == undefined){
-		res.render('index', { title: 'SmallTalk', Post:[] });
-	 }else{
-	 	var posts = Post.getFollowedPosts(req.session.user.following, req.session.user.username);
-		res.render('home', {title: "Welcome to SmallTalk", posts: posts});
-
-	 }
+		res.render('index', { title: "SmallTalk" });
+	}else{
+		Post.getPosts(req.session.user, function(posts){
+			res.render('home', {title: "Welcome to SmallTalk", posts: posts});
+		});
+	}
 };
 
 //Display the Sign Up view
@@ -27,8 +27,6 @@ exports.submitNewPost = function(req, res)
 	var liked = req.param("like");
 	var desiredlangs = regexp.exec(postmsg); // takes in the the postmsg and returns an array of any string that fits the regular expression defined above
 
-	var newPost = {message:"", language:[], user:"", relationship: true}; // creates a new post object to be populated
-
 	// if(desiredlangs != null)
 	// {
 	// 	for(var counter = 0; counter < desiredlangs.length; counter++)
@@ -41,16 +39,10 @@ exports.submitNewPost = function(req, res)
 	// 	}
 	// }
 
-	newPost.message = postmsg;
-	newPost.user = req.session.user.username;
-	newPost.language = desiredlangs;
-	newPost.relationship = liked;
-	Post.PostTable.push(newPost);
+
+	Post.insertPost(req.session.user.id, postmsg);
 	
-
-
 	res.redirect("/");
-
 };
 
 //Creates a session for the user upon entering username and password
@@ -77,7 +69,6 @@ exports.signout = function(req,res)
 	console.log("Logging Out");
 	res.redirect("/");
 }
-
 
 //Allows the user to follow/unfollow other users
 exports.toggleFollow = function(req, res)
@@ -132,7 +123,7 @@ exports.createNewUser = function(req, res)
 					User.getUser(username, function(new_user){
 						req.session.user = new_user;
 						res.redirect("/"); //if signup is successful, send them to home
-					});				
+					});
 				});
 			}
 		});
