@@ -1,17 +1,17 @@
-/**
- * Module dependencies.
- */
-
+// Node Module dependencies:
 var express = require('express');
+var http = require('http');
+var path = require('path');
+// Application specific requires:
 var index = require('./routes/index');
 var user = require('./routes/user');
 var hashfeed = require('./routes/hashfeed');
-var http = require('http');
-var path = require('path');
+var chat = require('./routes/chat');
 
-
-app = express();
-
+// Set up Express, socket.io
+app = express(); //global app object
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
 
 app.configure(
 	function()
@@ -19,7 +19,7 @@ app.configure(
 		app.set('port', process.env.PORT || 3000);
 		app.set('views', __dirname + '/views');
 		app.set('view engine', 'ejs');
-		app.use(express.favicon());
+		app.use(express.favicon(__dirname + "/public/images/favicon.ico"));
 		app.use(express.logger('dev'));
 		app.use(express.bodyParser());
 		app.use(express.methodOverride());
@@ -38,24 +38,69 @@ app.configure('development',
 	}
 );
 
+server.listen(app.get('port'), 
+	function()
+	{
+		console.log("Express server listening on port " + app.get('port'));
+	}
+);
+
+var connectedClients = [];
+
+io.sockets.on("connection", function(socket)
+{
+	console.log("new connection:");
+	//console.log(socket);
+	socket.emit("message", {message: "hello from server", from: "Server"});
+
+	socket.on("set nickname", function(username)
+	{
+		socket.set("nickname", username);
+		connectedClients[username] = socket;
+		console.log("CLIENTS: ");
+		console.log(connectedClients);
+	});
+
+	socket.on("echo", function(data)
+	{
+		console.log("echo received");
+		console.log(data);
+		io.sockets.emit("message", {message: "ECHO: "+data, sender: "Server"});
+	});
+
+	socket.on("relay", function(data)
+	{
+		console.log("relay");
+		console.log(data);
+
+		// var tmp = io.sockets.sockets[data.username];
+		// console.log(tmp);
+		// console.log(io.sockets);
+		// console.log(io.sockets.sockets);
+
+		var soc = connectedClients[data.to];
+		soc.emit("message", data);
+
+		//io.sockets.emit("message", {message: data, sender: "Server"});
+	});
+
+	socket.on("disconnect", function()
+	{
+		console.log("client disconnect");
+	});
+});
+
+// Define routes, route handlers
 app.get('/', index.index);
 app.get('/signup', index.signup);
 app.get('/:user/profile', user.profile);
 app.get('/:user/followers', user.followers);
 app.get('/:user/following', user.following);
 app.get('/feed/:language', hashfeed.feed);
+app.get('/chat', chat.index);
 
 app.get('/signout', index.signout);
 app.post('/signin', index.signin);
 app.post('/toggleFollow', index.toggleFollow)
 app.post('/addNewUser', index.createNewUser);
 app.post('/submitNewPost', index.submitNewPost);
-
-
-
-http.createServer(app).listen(app.get('port'), 
-	function()
-	{
-		console.log("Express server listening on port " + app.get('port'));
-	}
-);

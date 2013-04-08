@@ -1,0 +1,33 @@
+<% include template/header.ejs %>
+<link rel="stylesheet" href="/stylesheets/home.css" />
+<script type="text/javascript" src="/javascripts/chat.js"></script>
+<script>
+	var this_user = "<%- current_user.username %>";
+	var that_user = "<%- who %>";
+</script>
+
+	<div id="content">
+		<h1>Chat</h1>
+
+		<p><i>Chatting with <%= who %></i></p>
+
+					
+			<textarea id="postTextField" type="text" placeholder="Send <%= who %> a message..."></textarea>
+			<br>
+			<input id="submitButton" type="submit" value="Post" class="btn" />
+			<br><br>
+
+			<div id="users-post-area">
+				<br>
+				<div class="post-container">
+					<table>
+						<tr>
+							<td><img src="/images/User-icon-scaled.png"></img></td>
+							<td style= "background:white; width: 420px;"><p class="post_message"></p><br></td>
+						</tr>
+					</table>
+					<span class="name"><%= current_user.username %></span>
+				</div>
+			</div>
+	</div>
+<% include template/footer.ejs %>

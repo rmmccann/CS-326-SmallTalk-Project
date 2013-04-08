@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title><%= title %></title>
+	<% this.title = undefined; %>
+	<title><%= title || "SmallTalk" %></title>
 	<link rel="stylesheet" href="/lib/normalize.css" />
 	<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap-responsive.min.css" />
@@ -9,6 +10,7 @@
 	<script type="text/javascript" src="/lib/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="/lib/modernizr-2.6.2.min.js"></script>
 	<script type="text/javascript" src="/lib/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 	<script type="text/javascript" src="/javascripts/main.js"></script>
 </head>
 <body>
@@ -23,7 +25,7 @@
 	<!-- <span class="clearfix"></span> -->
 	<form class="form-search" style="display: inline;">
 		<div class="input-append">
-			<input type="text" class="span2 search-query text-input-small">
+			<input type="text" id="global-search-box" class="span2 search-query text-input-small">
 			<button type="submit" class="btn btn-small"><i class="icon-search"></i></button>
 		</div>
 	</form>
