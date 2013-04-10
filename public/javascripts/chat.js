@@ -1,7 +1,7 @@
 
 $(document).ready(function()
 {
-	var socket = io.connect("http://localhost");
+	var socket = io.connect("http://"+location.host);
 
 	socket.on("connect", function()
 	{
@@ -39,7 +39,6 @@ $(document).ready(function()
 		if(event.which === 13){
 			sendMessage();
 			event.preventDefault();
-			//return false;
 		}
 	});
 });
