@@ -74,20 +74,24 @@ exports.signout = function(req,res)
 exports.toggleFollow = function(req, res)
 {
 	var toggled_user = req.param("toggle_follow_user");
+	console.log(toggled_user);
+
 	User.getUser(toggled_user, function(other_user)
 	{
 		var current_user = req.session.user;
+		console.log(current_user);
 
 		if(req.param("toggle_follow"))
 		{
 			User.follow(current_user.id, other_user.id);
+			console.log("follow");
 		}
 		else
 		{
+			console.log(req.param("toggle_follow") + "ajdbjaksd");
 			User.unfollow(current_user.id, other_user.id);
+			console.log("unfollow");
 		}
-
-		res.redirect("/"+toggled_user+"/profile");
 	});
 }
 

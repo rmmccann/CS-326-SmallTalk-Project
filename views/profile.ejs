@@ -1,4 +1,10 @@
 <% include template/header.ejs %>
+<!-- Danton Added Script Tag-->
+<script type="text/javascript" src="/javascripts/profile.js"></script>
+<script>
+	var pageUser = "<%=user.username%>";
+</script>
+
 <% var fullname = user.firstname+" "+user.lastname; %>
 <h1><%= fullname %></h1>
 
@@ -9,15 +15,12 @@
 <%}%>
 
 <%if(current_user.username != user.username){%>
-	<form method="POST" action="/toggleFollow">
-		<%if(is_following){%>
-			<input id="toggle_follow" type="submit" value="Unfollow" name="toggle_unfollow" class="btn" />
-			<a href="/chat?with=<%= user.username %>">chat</a>
-		<%}else{%>
-			<input id="toggle_follow" type="submit" value="Follow" name="toggle_follow" class="btn" />
-		<%}%>
-		<input id="toggle_follow_user" type="hidden" value="<%=user.username%>" name="toggle_follow_user" class="btn" />
-	</form>
+	<%if(is_following){%>
+		<input id="toggle_follow" type="submit" value="Unfollow" name="toggle_unfollow" class="btn" />
+		<a href="/chat?with=<%= user.username %>">chat</a>
+	<%}else{%>
+		<input id="toggle_follow" type="submit" value="Follow" name="toggle_follow" class="btn" />
+	<%}%>
 <%}%>
 
 <a href="/<%= user.username %>/followers">followers</a> ~ <a href="/<%= user.username %>/following">following</a>
