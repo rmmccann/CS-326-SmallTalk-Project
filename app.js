@@ -47,6 +47,7 @@ server.listen(app.get('port'),
 
 var connectedClients = [];
 
+io.set("log level", 1);
 io.sockets.on("connection", function(socket)
 {
 	console.log("new connection:");
