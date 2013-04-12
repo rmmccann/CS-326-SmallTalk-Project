@@ -11,26 +11,25 @@ $(document).ready(function()
 	//recieve messages
 	socket.on("message", function(data)
 	{
-		var new_msg = $(".post-container").clone()[0];
-		var msg_str = data.message;
-		$(new_msg).children("span.name").html(data.from);
-		$(new_msg).find("p.post_message").html(msg_str);
-		$("#users-post-area").append(new_msg); //display msg
+		displayMessage(data);
 	});
 
 	function sendMessage()
 	{
-		var new_msg = $(".post-container").clone()[0];
 		var msg_str = $("#postTextField").val();
-		//$(new_msg).children("span.name").html("name");
-		$(new_msg).find("p.post_message").html(msg_str);
+		var data = {message: msg_str, to: that_user, from: this_user};
 		$("#postTextField").val(""); //reset text field
-		$("#users-post-area").append(new_msg); //display msg
-		//socket.emit("echo", msg_str); //send message
 
-		console.log(this_user);
-		// socket.emit("relay", "test");
-		socket.emit("relay", {message: msg_str, to: that_user, from: this_user });
+		displayMessage(data);		//update the page
+		socket.emit("relay", data);	//send the messsage
+	}
+
+	function displayMessage(data)
+	{
+		var new_msg = $(".post-container").clone()[0];
+		$(new_msg).children("span.name").html(data.from);
+		$(new_msg).find("p.post_message").html(data.message);
+		$("#users-post-area").prepend(new_msg); //display msg
 	}
 
 	$("#submitButton").click(sendMessage);

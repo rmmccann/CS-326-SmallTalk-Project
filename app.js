@@ -79,7 +79,12 @@ io.sockets.on("connection", function(socket)
 		// console.log(io.sockets.sockets);
 
 		var soc = connectedClients[data.to];
-		soc.emit("message", data);
+		if(!soc){
+			socket.emit("message", {message: "ERROR: USER NOT CONNECTED", from: "SERVER"});
+		}
+		else{
+			soc.emit("message", data);
+		}
 
 		//io.sockets.emit("message", {message: data, sender: "Server"});
 	});
