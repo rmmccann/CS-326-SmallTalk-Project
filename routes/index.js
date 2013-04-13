@@ -73,12 +73,14 @@ exports.signout = function(req,res)
 //Allows the user to follow/unfollow other users
 exports.toggleFollow = function(req, res)
 {
-	var toggled_user = req.param("toggle_follow_user");
+	var toggled_user = req.param("user");
+	var action = req.param("action");	// either 'follow' or 'unfollow'
+
 	User.getUser(toggled_user, function(other_user)
 	{
 		var current_user = req.session.user;
 
-		if(req.param("toggle_follow"))
+		if(action === "follow")
 		{
 			User.follow(current_user.id, other_user.id);
 		}
@@ -86,9 +88,8 @@ exports.toggleFollow = function(req, res)
 		{
 			User.unfollow(current_user.id, other_user.id);
 		}
-
-		res.redirect("/"+toggled_user+"/profile");
 	});
+	res.send("Success");
 }
 
 //Validates fields and creates a user in the database
