@@ -138,3 +138,19 @@ exports.getPosts = function(user, cb)
 		cb(rows);
 	});
 }
+
+exports.getPostsByHashtag = function(hashtag, cb)
+{
+	var str = "%#"+hashtag+"%";
+	db.all("SELECT * FROM Posts WHERE content LIKE ?", [str], function(err, rows){
+		cb(rows);
+	});
+}
+
+exports.getPostsByLanguage = function(language, cb)
+{
+	var str = "%\%"+language+"%";
+	db.all("SELECT * FROM Posts WHERE content LIKE ?", [str], function(err, rows){
+		cb(rows);
+	});
+}

@@ -1,0 +1,13 @@
+<div id="users-post-area">
+	<% posts.reverse().forEach(function(post){ %>
+		<div class= "post-container">
+			<table>
+				<tr>
+					<td><img src="/images/User-icon-scaled.png"></img></td>
+					<td style= "background:white; width: 420px;"><p class="post_message"><%= post.content %></p><br></td>
+				</tr>
+			</table>
+			<span><%= post.username %></span>
+		</div>
+	<% }) %>
+</div>

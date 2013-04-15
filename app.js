@@ -6,6 +6,7 @@ var path = require('path');
 var index = require('./routes/index');
 var user = require('./routes/user');
 var hashfeed = require('./routes/hashfeed');
+var feed = require('./routes/feed');
 var chat = require('./routes/chat');
 
 // Set up Express, socket.io
@@ -103,6 +104,8 @@ app.get('/:user/profile', user.profile);
 app.get('/:user/followers', user.followers);
 app.get('/:user/following', user.following);
 app.get('/feed/:language', hashfeed.feed);
+app.get('/hashtag/:hashtag', feed.hashtag);
+app.get('/language/:language', feed.language);
 app.get('/chat', chat.index);
 
 app.get('/signout', index.signout);
