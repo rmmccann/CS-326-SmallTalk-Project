@@ -97,6 +97,11 @@ exports.help = function( req, res)
 	res.render('help');
 }
 
+exports.settings = function( req, res)
+{
+	res.render('settings');
+}
+
 //Validates fields and creates a user in the database
 exports.createNewUser = function(req, res)
 {
