@@ -6,6 +6,9 @@ Run SmallTalk using this line: `node app.js`
 ##Project Assignment 04
 What we changed: 
 
+added help page:
+It's funny, go look at it please
+
 Ajax implementation:
 We added the ability to follow/unfollow users without refreshing the page.
 More to come: A like/dislike feature, instant search, submitting posts, and more.
