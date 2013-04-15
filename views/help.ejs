@@ -1,0 +1,83 @@
+<% include template/header.ejs %>
+
+		<h1>Help</h1>
+	
+<% if(current_user){ %>
+<p>
+Hey <%= current_user.username %>, I'm guessing that if we already know your name that you know how to sign up. So here is a list of common issuess that you might actually care about. Oh yeah and how we think you should fix them too. Shorty the talk bot at your service!
+
+<h4>Making a Post</h4>
+<ul>
+<li>Step one: Okay, so you're intelligent enough to make an account on SmallTalk, but you seriously can't post things? Wow, just wow. I'm not judging you though. Wait yes I am. Alright seriously though, this is how you do it</li>
+<li>Step two: Write your insignificant thoughts in the text box.</li>
+<li>Step three: You see that button there? Like the only one that makes any sense? The post button, click that.</li>
+</ul>
+
+<h4>Follow your friends</h4>
+<ul>
+<li>Step one: Find some friends.</li>
+<li>Step two: Search for your friend in the search bar at the top of the screen.</li>
+<li>Step three: Once you've found him/her/robot click on their name.</li>
+<li>Step four: Here you should see a button that says "follow". Click that button.</li>
+<li>Step five: Be really nosy and look at all their posts!</li>
+</ul>
+
+<h4>Unfollowing your "friends"</h4>
+<ul>
+<li>Step one: Search for your "friend" in the search bar at the top of the screen.</li>
+<li>Step two: Once you've found him/her click on their name.</li>
+<li>Step three: Click the "unfollow" button to stop being friends with your "friend".</li>
+</ul>
+
+<h4>Chatting</h4>
+<ul>
+<li>Step one: Hopefully by now you can get to your friends profile page. Do that.</li>
+<li>Step two: Click the "chat" button.</li>
+<li>Step three: You have now wandered to the mythical land known as the chat page. Here you can talk about gossip and how attractive the new history teacher is. Like Las Vegas, what happens here stays here. Chat messages are not saved, so the FBI can't ask us about it.</li>
+</ul>
+<h6>Chatting: It's not working still (error: user not connected)</h6>
+<ul>
+<li>Step one: This is REALLY hard to grasp, so bear with me. There actually has to be another person willing to talk to you for this to work, so find one.</li>
+<li>Step two: This is the hard part, well for people with friends anyway. Make sure that both you, and your imagin..*cough* friend are both online.</li>
+<li>Step three: Go to your friends page.</li>
+<li>Step four: Click Chat and start talking.</li>
+</ul>
+
+</p>
+ 	
+<% }else{ %>
+		
+	<p> 
+
+Hey new user, having some trouble? Here is a list of common issues and their solutions!
+<h4>What is SmallTalk?</h4>
+<p>
+What is love, baby don't hurt me. No but seriously don't, really. Okay so what is SmallTalk? Well we aren't just your average run of the mill social networking site. We are here for your programming lifestyle (You know, that lifestyle that means you forget what the sun is like?). Imagine Twitter, Stack Overflow, and Github got promiscuous one night. Well SmallTalk is the result of that. Need I say more?
+</p>
+
+<h4>Signing Up</h4>
+<ul>
+<li>Step one: Navigate to the SmallTalk web page.</li>
+<li>Step two: See that blue link that says Sign Up Here!? Yeah click that thing.</li>
+<li>Step three: Enter the correct information into the textfields you see on this page.</li>
+<li>Step four: Click submit! And Hooray! You are now a proud member of the SmallTalk community.</li>
+<li>Note: You will automatically be taken to the home page.</li>
+</ul>
+
+<h4>Logging In</h4>
+<ul>
+<li>Step one: Navigate to the SmallTalk web page.</li>
+<li>Step two: This isn't brain surgery, so enter your username and password...</li>
+<li>Step three: Surprise surprise, click Login.</li>
+<li>Step four: If you're reading this looking for another step, question life.</li>
+</ul>
+
+
+	</p>	
+
+		
+<% } %>
+
+		
+
+<% include template/footer.ejs %>

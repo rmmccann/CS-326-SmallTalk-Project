@@ -104,6 +104,7 @@ app.get('/:user/followers', user.followers);
 app.get('/:user/following', user.following);
 app.get('/feed/:language', hashfeed.feed);
 app.get('/chat', chat.index);
+app.get('/help', index.help);
 
 app.get('/signout', index.signout);
 app.post('/signin', index.signin);
