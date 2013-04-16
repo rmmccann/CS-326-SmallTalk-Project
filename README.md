@@ -2,6 +2,7 @@
 
 ###How you can run SmallTalk:
 Run SmallTalk using this line: `node app.js`
+We also have a website now! www.small-talk.org
 
 ##Project Assignment 04
 What we changed: 
