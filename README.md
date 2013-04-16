@@ -1,4 +1,5 @@
 #CMPSCI 326: Team Wachusett
+Scott Rojee, Ryan McCann, Justin Ivey, Derek Anton
 
 ###How you can run SmallTalk:
 Run SmallTalk using this line: `node app.js`
