@@ -1,6 +1,6 @@
 var Post = require("../db/Post");
 
-
+//This is for normal hashtags, like Twitter uses
 exports.hashtag = function(req, res)
 {
 	var tag = req.param("hashtag");
@@ -9,7 +9,7 @@ exports.hashtag = function(req, res)
 		res.render("hashtag", {title: "#"+tag, posts: (posts || [])});
 	});
 }
-
+//This is for our new language tag. Specific for programming languages
 exports.language = function(req, res)
 {
 	var lang = req.param("language");

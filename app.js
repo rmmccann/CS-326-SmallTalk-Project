@@ -31,21 +31,21 @@ app.configure(
 		app.use(express.static(path.join(__dirname, 'public')));
 	}
 );
-
-app.configure('development', 
+//error handling
+app.configure('development',    
 	function()
 	{
 		app.use(express.errorHandler());
 	}
 );
-
-server.listen(app.get('port'), 
+//Tells the console it is listening on the given port
+server.listen(app.get('port'),   
 	function()
 	{
 		console.log("Express server listening on port " + app.get('port'));
 	}
 );
-
+//array of connected users
 var connectedClients = [];
 
 io.set("log level", 1);
