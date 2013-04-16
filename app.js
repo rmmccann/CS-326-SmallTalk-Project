@@ -109,6 +109,7 @@ app.get('/language/:language', feed.language);
 app.get('/chat', chat.index);
 app.get('/help', index.help);
 app.get('/settings', index.settings);
+app.get('/shorty', index.shorty);
 
 app.get('/signout', index.signout);
 app.post('/signin', index.signin);

@@ -1,0 +1,43 @@
+<% include template/header.ejs %>
+
+		<h1>Meet Shorty</h1>
+	
+<% if(current_user){ %>
+<p>
+Hey <%= current_user.username %>, get a notebook ready because I'm about to tell you a little story about me, Shorty the Talk Bot.
+
+<h4>My Younger Years</h4>
+<p>
+Well, being the most interesting robot in the world didn't happen overnight you know. My Father was a landline phone, rest his soul, and my mother is a can opener. Immediately you might think to yourself: How did a landline phone and a can opener have a relationship? Well let me tell you, it wasn't easy for them. Back in the old days inter-device relationships were largely frowned upon, so they carried out their relationship secretly. Well one thing led to another, and I was created.
+If you are still taking this seriously, then I applaud your innocence. I'm a robot, I don't have parents.
+
+</p>
+
+<h4>Why Am I Here?</h4>
+<p>
+I was built for one purpose, to help those who can't help themselves. I've found that this is the case with most of the users on SmallTalk, which is why I have decided to make it my permanent residence. I like nothing more than to correct you in a sarcastic demeanor, whilst belittling your very existence. 
+</p>
+
+
+</p>
+ 	
+<% }else{ %>
+		
+	<p> 
+
+So let me get this straight. You don't want to login, but you want to learn about me? Call me old-fashioned but I'm no cheap date.
+<ul> 
+<h4> Login please </h4>
+Login and learn about the smartest, most attractive, and all around most incredible robot around.
+
+</ul>
+
+
+	</p>	
+
+		
+<% } %>
+
+		
+
+<% include template/footer.ejs %>
