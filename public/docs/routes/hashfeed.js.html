@@ -35,28 +35,11 @@
 <div class="pilwrap">
   <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
 </div>
-
-        </td>
-        <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">Post</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;../lib/Post&quot;</span><span class="p">);</span>
-
-
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs">
-<div class="pilwrap">
-  <a class="pilcrow" href="#section-2" id="section-2">&#182;</a>
-</div>
 <p>Will check for either # or % and bring the user to the correct hashfeed</p>
         </td>
-        <td class="code highlight"><div class="highlight"><pre>
-<span class="nx">exports</span><span class="p">.</span><span class="nx">feed</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span>
+        <td class="code highlight"><div class="highlight"><pre><span class="nx">exports</span><span class="p">.</span><span class="nx">feed</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span>
 <span class="p">{</span> 
-  <span class="kd">var</span> <span class="nx">language</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s2">&quot;language&quot;</span><span class="p">);</span>
-  <span class="nx">language</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">();</span>
-
-
+  <span class="kd">var</span> <span class="nx">hashtag</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s2">&quot;hashtag&quot;</span><span class="p">);</span>
   <span class="k">if</span><span class="p">(</span><span class="nx">hashtag</span> <span class="o">==</span> <span class="kc">undefined</span><span class="p">){</span>
     <span class="nx">hashtag</span> <span class="o">=</span> <span class="s2">&quot;All&quot;</span>
   <span class="p">}</span>

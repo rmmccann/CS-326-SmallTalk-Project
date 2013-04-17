@@ -2,11 +2,16 @@
 
 ###How you can run SmallTalk:
 Run SmallTalk using this line: `node app.js`
+We also have a website now! www.small-talk.org
 
 ##Project Assignment 04
 What we changed: 
 
+We started to intoduce our avatar:
+Shorty the Talk Bot. You can find him in the help page.
+
 added help page:
+It is different for users who are logging in and for users who have yet to login.
 It's funny, go look at it please
 
 Ajax implementation:

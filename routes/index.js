@@ -101,6 +101,10 @@ exports.settings = function( req, res)
 {
 	res.render('settings');
 }
+exports.shorty = function( req, res)
+{
+	res.render('shorty');
+}
 
 //Validates fields and creates a user in the database
 exports.createNewUser = function(req, res)

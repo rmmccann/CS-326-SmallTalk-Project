@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>main.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../../doc-style.css" />
+  <script src="../../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../../", thisFile = "db/User/main.js", defaultSidebar = true;
+  </script>
+  <script src="../../doc-script.js"></script>
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs">
+          <h1>main.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">sqlite3</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;sqlite3&quot;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">sqlite3</span><span class="p">.</span><span class="nx">Database</span><span class="p">(</span><span class="s2">&quot;db/db.sqlite&quot;</span><span class="p">);</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">addUser</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">user_obj</span><span class="p">,</span> <span class="nx">cb</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="nx">db</span><span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="s2">&quot;INSERT INTO Users VALUES(NULL,$username,$firstname,$lastname,$email,$password)&quot;</span><span class="p">,</span> <span class="nx">user_obj</span><span class="p">);</span>
+  <span class="nx">cb</span><span class="p">();</span>
+<span class="p">};</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">getUser</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">cb</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">username</span><span class="p">)</span> <span class="nx">username</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+
+  <span class="nx">db</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM Users WHERE username=\&quot;&quot;</span><span class="o">+</span><span class="nx">username</span><span class="o">+</span><span class="s2">&quot;\&quot;&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">row</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;DB ERROR: &quot;</span> <span class="o">+</span> <span class="nx">err</span><span class="p">);</span>
+    <span class="nx">cb</span><span class="p">(</span><span class="nx">row</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">};</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">getFollowers</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">cb</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="nx">db</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="s2">&quot;SELECT A.* FROM Users A, Users B, Follows F WHERE F.follower_id=A.id AND F.followed_id=B.id AND B.username=\&quot;&quot;</span><span class="o">+</span><span class="nx">username</span><span class="o">+</span><span class="s2">&quot;\&quot;&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">rows</span><span class="p">){</span> <span class="c1">//TODO: cleaner query</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;DB ERROR: &quot;</span> <span class="o">+</span> <span class="nx">err</span><span class="p">);</span>
+    <span class="nx">cb</span><span class="p">(</span><span class="nx">rows</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">};</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">getFollowing</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">cb</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="nx">db</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="s2">&quot;SELECT B.* FROM Users A, Users B, Follows F WHERE F.follower_id=A.id AND F.followed_id=B.id AND A.username=\&quot;&quot;</span><span class="o">+</span><span class="nx">username</span><span class="o">+</span><span class="s2">&quot;\&quot;&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">rows</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;DB ERROR: &quot;</span> <span class="o">+</span> <span class="nx">err</span><span class="p">);</span>
+    <span class="nx">cb</span><span class="p">(</span><span class="nx">rows</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">};</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>make user1 follow user2</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">follow</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">user1_id</span><span class="p">,</span> <span class="nx">user2_id</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="nx">db</span><span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="s2">&quot;INSERT INTO Follows VALUES($id1, $id2)&quot;</span><span class="p">,</span> <span class="p">{</span><span class="nx">$id1</span><span class="o">:</span> <span class="nx">user1_id</span><span class="p">,</span> <span class="nx">$id2</span><span class="o">:</span> <span class="nx">user2_id</span><span class="p">});</span>
+<span class="p">};</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>make user1 unfollow user2</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">unfollow</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">user1_id</span><span class="p">,</span> <span class="nx">user2_id</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="nx">db</span><span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="s2">&quot;DELETE FROM Follows WHERE follower_id=$id1 AND followed_id=$id2&quot;</span><span class="p">,</span> <span class="p">{</span><span class="nx">$id1</span><span class="o">:</span> <span class="nx">user1_id</span><span class="p">,</span> <span class="nx">$id2</span><span class="o">:</span> <span class="nx">user2_id</span><span class="p">});</span>
+<span class="p">};</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">isFollowing</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">user1_id</span><span class="p">,</span> <span class="nx">user2_id</span><span class="p">,</span> <span class="nx">cb</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="nx">db</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM Follows WHERE follower_id=$id1 AND followed_id=$id2&quot;</span><span class="p">,</span> <span class="p">{</span><span class="nx">$id1</span><span class="o">:</span> <span class="nx">user1_id</span><span class="p">,</span> <span class="nx">$id2</span><span class="o">:</span> <span class="nx">user2_id</span><span class="p">},</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">row</span><span class="p">){</span>
+    <span class="nx">cb</span><span class="p">(</span><span class="nx">row</span><span class="o">!==</span><span class="kc">undefined</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">};</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>
