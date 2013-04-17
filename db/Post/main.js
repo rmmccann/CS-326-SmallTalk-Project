@@ -154,3 +154,11 @@ exports.getPostsByLanguage = function(language, cb)
 		cb(rows);
 	});
 }
+
+exports.getPostsByKeyword = function(keyword, cb)
+{
+	var str = "%"+keyword+"%";
+	db.all("SELECT * FROM Posts WHERE content LIKE ?", [str], function(err, rows){
+		cb(rows);
+	});
+}

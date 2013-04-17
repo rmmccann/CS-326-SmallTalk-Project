@@ -11,13 +11,18 @@
 	<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap-responsive.min.css" />
 	<link rel="stylesheet" href="/stylesheets/style.css" />
-	<link rel="stylesheet" href="/stylesheets/<%= stylesheet || "" %>" />
+	<% if(stylesheet){ %>
+	<link rel="stylesheet" href="/stylesheets/<%= stylesheet %>" />
+	<% } %>
 	<script type="text/javascript" src="/lib/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="/lib/modernizr-2.6.2.min.js"></script>
 	<script type="text/javascript" src="/lib/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript" src="/javascripts/jQueryInstantSearch.js"></script>
 	<script type="text/javascript" src="/javascripts/main.js"></script>
-	<script type="text/javascript" src="/javascripts/<%= javascript || "" %>"></script>
+	<% if(javascript){ %>
+	<script type="text/javascript" src="/javascripts/<%= javascript %>"></script>
+	<% } %>
 </head>
 <body>
 
@@ -29,12 +34,13 @@
 	<% if(current_user){%><span><a href="/<%= current_user.username %>/profile">profile</a></span><%}%>
 
 	<!-- <span class="clearfix"></span> -->
-	<form class="form-search" style="display: inline;">
+	<form method="GET" action="/search" autocomplete="off" class="form-search" style="display: inline;">
 		<div class="input-append">
-			<input type="text" id="global-search-box" class="span2 search-query text-input-small">
+			<input type="text" id="global-search-box" class="span2 search-query text-input-small" data-provide="typeahead">
 			<button type="submit" class="btn btn-small"><i class="icon-search"></i></button>
 		</div>
 	</form>
+	<div id="search-results" style="width: 200px; min-height: 30px; position:absolute; left:0px; display: none; border:1px solid; background:white;"></div>
 
 	<div id="gear-menu" class="btn-group pull-right">
 		<a class="btn btn-mini dropdown-toggle" data-toggle="dropdown"><i class="icon-cog"></i></a>

@@ -55,3 +55,11 @@ exports.isFollowing = function(user1_id, user2_id, cb)
 		cb(row!==undefined);
 	});
 };
+
+exports.getUsers = function(search_string, cb)
+{
+	var str = "%"+search_string+"%";
+	db.all("SELECT * FROM Users WHERE username LIKE ?", [str], function(err, rows){
+		cb(rows);
+	});
+};

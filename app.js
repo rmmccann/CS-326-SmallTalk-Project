@@ -8,6 +8,7 @@ var user = require('./routes/user');
 var hashfeed = require('./routes/hashfeed');
 var feed = require('./routes/feed');
 var chat = require('./routes/chat');
+var search = require('./routes/search');
 
 // Set up Express, socket.io
 app = express(); //global app object
@@ -112,6 +113,8 @@ app.get('/settings', index.settings);
 
 app.get('/signout', index.signout);
 app.post('/signin', index.signin);
-app.post('/toggleFollow', index.toggleFollow)
+app.post('/toggleFollow', index.toggleFollow);
 app.post('/addNewUser', index.createNewUser);
 app.post('/submitNewPost', index.submitNewPost);
+app.post('/search', search.searchAll);
+app.get('/search', search.searchAll);
