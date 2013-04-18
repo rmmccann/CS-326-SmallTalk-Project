@@ -1,6 +1,8 @@
 <% include template/header.ejs %>
 
 		<h1>Settings</h1>
+		<% if(current_user){ %>
+
 		<p> Shorty is back, and ready to help you out. We all know you need it. </p>
 
 
@@ -12,5 +14,16 @@
 <h3> Delete Your Account </h3>
 <p> We can SmallTalk through this. Don't be rash now! I didn't mean to belittle you (yes I did). </p>
 <a href='/delete'> Delete </a>
+
+
+<% }else{ %>
+
+<p> 
+So are you here to learn how to set the table? You aren't even logged in yet. Go login you hasty mongral!
+
+</p>	
+
+		
+<% } %>
 
 <% include template/footer.ejs %>
