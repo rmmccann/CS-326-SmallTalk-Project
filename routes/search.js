@@ -38,17 +38,25 @@ exports.searchAll = function(req, res)
 			{
 				var name = users[i].username;
 				results["@"+name] = "/"+name+"/profile";
+				//TODO add alt attribute here too
 			}
 			for(var i=0; i<posts.length; i++)
 			{
-				var keywords = [];
-				keywords = posts[i].content.match(/(#|%)\w+/);
+				var keywords, hashes, langs = [];
+				hashes = posts[i].content.match(/#\w+/) || [];
+				langs = posts[i].content.match(/%\w+/) || [];
+				keywords = hashes.concat(langs);
 				if(keywords==null) keywords = [];
 				for(var j=0; j<keywords.length; j++)
 				{
 					// if(keyword) console.log(keyword.length);
 					var keyword = keywords[j];
-					results[keyword] = "/hashtag/"+keyword.substring(1,keyword.length);
+					if(keyword.charAt(0) === "#"){
+						results[keyword] = "/hashtag/"+keyword.substring(1,keyword.length);
+					}
+					else {
+						results[keyword] = "/language/"+keyword.substring(1,keyword.length);
+					}
 				}
 			}
 
@@ -62,5 +70,32 @@ exports.searchAll = function(req, res)
 
 			res.json(json_resp);
 		});
+	});
+}
+
+exports.searchUsers = function(req, res)
+{
+	var query = req.param("query");
+	searchUsersHelper(query, function(results){
+		res.json(results);
+	});
+}
+
+var searchUsersHelper = function(searchText, cb)
+{
+	User.getUsers(searchText.substring(1,searchText.length), function(users)
+	{
+		var results = [];
+		for(var i=0; i<users.length; i++)
+		{
+			var u = users[i];
+			results.push(
+				{
+					text: "@"+u.username,
+					url: "/"+u.username+"/profile",
+					alt: u.firstname+" "+u.lastname
+				});
+		}
+		cb(results);
 	});
 }

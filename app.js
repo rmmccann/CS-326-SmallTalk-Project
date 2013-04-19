@@ -118,4 +118,5 @@ app.post('/toggleFollow', index.toggleFollow);
 app.post('/addNewUser', index.createNewUser);
 app.post('/submitNewPost', index.submitNewPost);
 app.post('/search', search.searchAll);
+app.post('/search/users', search.searchUsers);
 app.get('/search', search.searchAll);

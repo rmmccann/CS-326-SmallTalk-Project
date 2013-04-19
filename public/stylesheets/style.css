@@ -49,6 +49,12 @@ a
 	margin: auto;
 	width: 1000px;
 }
+#bar-inner
+{
+	display: inline;
+	/*margin: auto;*/
+	width: 1000px;
+}
 
 /* why does this not already exist in bootstrap? oh well */
 .text-input-small
@@ -62,8 +68,64 @@ a
 		border-radius: 3px;*/
 }
 
+#global-search-box::-moz-placeholder
+{
+	transition: color 800ms;
+	color: transparent;
+}
+#global-search-box:focus::-moz-placeholder
+{
+	font-style: italic;
+	color: #626262;
+	transition: color 800ms;
+}
+
 #global-search-box
 {
 	margin-top: -5px;
 	height: 16px;
+	transition: width 200ms;
+}
+#global-search-box:focus
+{
+	width: 250px;
+}
+#search-results
+{
+	width: 220px;
+	/*min-height: 30px;*/
+	height: auto;
+	position: absolute;
+	left: 0px;
+	display: none;
+	border: 1px solid;
+	background: white;
+	padding-left: 15px;
+
+	transition: height 500ms;
+	transition: width 200ms;
+}
+#search-results:hover
+{
+	/*transition: height 500ms;*/
+	/*height: 300px;*/
+	/*transition: width 200ms;*/
+	/*width: 350px;*/
+}
+
+.single-result:hover
+{
+	background: #D4F0FC;
+}
+.search-alt-text
+{
+	color: #aaaaaa;
+}
+
+#clear-box-x
+{
+	opacity: 0.5;
+	position: absolute;
+	margin-top: 6px;
+	margin-left: -20px;
 }

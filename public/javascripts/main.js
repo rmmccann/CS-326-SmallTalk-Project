@@ -7,9 +7,9 @@ $(document).ready(function()
 	var results_box = $("#search-results");
 	var search_box = $("#global-search-box");
 	results_box.css("left", search_box.offset().left);
-	results_box.css("width", search_box.width()+30);
+	// results_box.css("width", search_box.width()+30);
 
-	var temp = ["ryan", "mccann", "rmmccann", "r", "ry", "rya", "ryan mccann"];
+	var temp = null;
 	$("#global-search-box").instantSearch(temp, "/search", function(results){
 		results_box.show();
 		results_box.html("");
@@ -28,16 +28,25 @@ $(document).ready(function()
 		// });
 		// if(matches.length===0) results_box.append("No results found");
 
-		$.each(results, function(index, value)
-		{
-			results_box.append("<div><a href='"+value.url+"'>"+value.text+"</a></div>");
-		});
+		console.log(results);
+
+		// $.each(results, function(index, value)
+		// {
+		// 	if(!value.alt) value.alt = "";
+		// 	results_box.append("<div><a href='"+value.url+"'>"+value.text+"</a> &mdash; "+value.alt+"</div>");
+		// });
+
+		// results = results || [];
+		var source = $("#results-template").html();
+		var template = Handlebars.compile(source);
+		results_box.append(template({results: results}));
+
 		if(results.length===0) results_box.append("No results found");
 
 	});
 
 	$("#global-search-box").blur(function(){
-		setTimeout(function(){results_box.hide();}, 300); //hide after 300ms
+		setTimeout(function(){results_box.hide(200);}, 100); //hide after 300ms
 	});
 
 
