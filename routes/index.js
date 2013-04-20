@@ -134,6 +134,7 @@ exports.createNewUser = function(req, res)
 			if(existing_user != undefined) //username is already taken
 			{
 				req.flash('error', 'That Username already Exists');
+				req.flash('newUser', user);
 				res.redirect("/signup");
 			}
 			else
@@ -156,6 +157,7 @@ exports.createNewUser = function(req, res)
 		if(password == ""){ error += " Password ";}
 		if(email == ""){ error += " Email ";}
 		req.flash('error', error );
+		req.flash('newUser', user);
 		res.redirect("/signup");
 	}
 };

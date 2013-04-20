@@ -21,12 +21,16 @@
 			<p>Welcome to SmallTalk.</p>
 			
 			<form method="POST" action="/addNewUser">
-				
-				<input id="firstname" type="text" name="firstname" placeholder="First" />
-				<input id="lastname" type="text" name="lastname" placeholder="Last" /><br>
-				<input id="username" type="text" name="username" placeholder="Username" /><br>
-				<input id="email" type="email" name="email" placeholder="Email" /><br>
+				<input id="firstname" type="text" name="firstname" placeholder="First" value="<%= ((message.newUser !== undefined ) ? message.newUser[0].$firstname : '' )%>"/>
+
+				<input id="lastname" type="text" name="lastname" placeholder="Last" value="<%= ((message.newUser !== undefined ) ? message.newUser[0].$lastname : '' )%>"/><br>
+
+				<input id="username" type="text" name="username" placeholder="Username" value="<%= ((message.newUser !== undefined ) ? message.newUser[0].$username : '' )%>"/><br>
+
+				<input id="email" type="email" name="email" placeholder="Email" value="<%= ((message.newUser !== undefined ) ? message.newUser[0].$email : '' )%>" /><br>
+
 				<input id="password" type="password" name="password" placeholder="Password" /><br>
+
 				<input id="validatePass" type="password" placeholder="Confirm Password" /><i id="ok" class="icon-ok" style="display: none;"></i><br>
 
 				<input id="submitButton" type="submit" value="Submit" name="submitButton" class="btn" />
