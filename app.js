@@ -43,6 +43,7 @@ function Handle404(req, res, next)
 {
 	res.render('404');
 }
+
 //error handling
 app.configure('development',    
 	function()
