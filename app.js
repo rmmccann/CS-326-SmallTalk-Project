@@ -30,8 +30,15 @@ app.configure(
 		app.use(function(req, res, next){ res.locals.current_user = req.session.user; next(); });
 		app.use(app.router);
 		app.use(express.static(path.join(__dirname, 'public')));
+		app.use(Handle404);
 	}
 );
+
+//Handles 404 page
+function Handle404(req, res, next)
+{
+	res.render('404');
+}
 //error handling
 app.configure('development',    
 	function()
