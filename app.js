@@ -10,8 +10,10 @@ var feed = require('./routes/feed');
 var chat = require('./routes/chat');
 var search = require('./routes/search');
 
+
 // Set up Express, socket.io
 app = express(); //global app object
+var flash = require('connect-flash');
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 
@@ -27,7 +29,9 @@ app.configure(
 		app.use(express.methodOverride());
 		app.use(express.cookieParser('your secret here'));
 		app.use(express.session());
+		app.use(flash());
 		app.use(function(req, res, next){ res.locals.current_user = req.session.user; next(); });
+		app.use(function(req, res, next) { res.locals.message = req.flash(); next(); });
 		app.use(app.router);
 		app.use(express.static(path.join(__dirname, 'public')));
 		app.use(Handle404);
