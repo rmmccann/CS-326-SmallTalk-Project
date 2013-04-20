@@ -19,3 +19,7 @@
 {
 	background: white;
 }
+#submitButton:hover
+{
+	color: green;
+}

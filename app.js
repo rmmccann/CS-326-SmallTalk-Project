@@ -112,6 +112,7 @@ app.get('/help', index.help);
 app.get('/settings', index.settings);
 app.get('/shorty', index.shorty);
 
+
 app.get('/signout', index.signout);
 app.post('/signin', index.signin);
 app.post('/toggleFollow', index.toggleFollow);
@@ -120,3 +121,4 @@ app.post('/submitNewPost', index.submitNewPost);
 app.post('/search', search.searchAll);
 app.post('/search/users', search.searchUsers);
 app.get('/search', search.searchAll);
+

@@ -17,6 +17,8 @@ $(document).ready(function()
 		{
 			$("#toggle-follow").val(newButtonName);
 			$("#toggle-follow").attr("name", newName);
+			$("#toggle-follow").toggleClass('followButton');
+			$("#toggle-follow").toggleClass('unfollowButton');
 		});
 	});
 });
