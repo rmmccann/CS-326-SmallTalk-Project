@@ -41,7 +41,25 @@ a
 
 #gear-menu > a
 {
-	margin: 4px;
+	/*margin: 4px;*/
+}
+
+#notification-button
+{
+	font-weight: bold;
+	margin: 0px;
+	margin-left: 4px;
+	margin-right: 0px;
+	padding-left: 7px;
+	padding-right: 7px;
+}
+#settings-button
+{
+	margin: 0px;
+	margin-left: 0px;
+	margin-right: 4px;
+	padding-left: 5px;
+	padding-right: 5px;
 }
 
 #content
@@ -128,4 +146,66 @@ a
 	position: absolute;
 	margin-top: 6px;
 	margin-left: -20px;
+}
+
+
+/*
+force the little up-arrow thing to appear on dropdowns
+*/
+.dropdown-menu.arrow-left::before
+{
+	position: absolute;
+	top: -7px;
+	left: 9px;
+	display: inline-block;
+	border-right: 7px solid transparent;
+	border-bottom: 7px solid #CCC;
+	border-left: 7px solid transparent;
+	border-bottom-color: rgba(0, 0, 0, 0.2);
+	content: '';
+}
+.dropdown-menu.arrow-left::after
+{
+	position: absolute;
+	top: -6px;
+	left: 10px;
+	display: inline-block;
+	border-right: 6px solid transparent;
+	border-bottom: 6px solid white;
+	border-left: 6px solid transparent;
+	content: '';
+}
+
+.dropdown-menu.arrow-right::before
+{
+	position: absolute;
+	top: -7px;
+	right: 9px;
+	display: inline-block;
+	border-right: 7px solid transparent;
+	border-bottom: 7px solid #CCC;
+	border-left: 7px solid transparent;
+	border-bottom-color: rgba(0, 0, 0, 0.2);
+	content: '';
+}
+.dropdown-menu.arrow-right::after
+{
+	position: absolute;
+	top: -6px;
+	right: 10px;
+	display: inline-block;
+	border-right: 6px solid transparent;
+	border-bottom: 6px solid white;
+	border-left: 6px solid transparent;
+	content: '';
+}
+
+/* Override dropdown background color */
+.dropdown-menu li > a:hover, .dropdown-menu li > a:focus, .dropdown-submenu:hover > a
+{
+	background-image: none;
+	background-color: lightsteelblue;
+	
+	/*background: #D4F0FC;
+	color: black;*/
 }

@@ -1,0 +1,16 @@
+.post-container
+{
+	padding-top: 10px;
+	background-color: lightsteelblue;
+}
+
+.post_message
+{
+	background: white;
+}
+
+#users-post-area
+{
+	width: 500px;
+	background: lightsteelblue;
+}

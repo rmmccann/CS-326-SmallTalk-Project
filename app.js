@@ -5,7 +5,6 @@ var path = require('path');
 // Application specific requires:
 var index = require('./routes/index');
 var user = require('./routes/user');
-var hashfeed = require('./routes/hashfeed');
 var feed = require('./routes/feed');
 var chat = require('./routes/chat');
 var search = require('./routes/search');
@@ -104,7 +103,6 @@ app.get('/signup', index.signup);
 app.get('/:user/profile', user.profile);
 app.get('/:user/followers', user.followers);
 app.get('/:user/following', user.following);
-app.get('/feed/:language', hashfeed.feed);
 app.get('/hashtag/:hashtag', feed.hashtag);
 app.get('/language/:language', feed.language);
 app.get('/chat', chat.index);

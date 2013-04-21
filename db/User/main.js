@@ -13,7 +13,9 @@ exports.getUser = function(username, cb)
 
 	db.get("SELECT * FROM Users WHERE username=\""+username+"\"", function(err, row){
 		if(err) console.log("DB ERROR: " + err);
-		cb(row);
+		var user = row;
+		user.name = user.firstname+" "+user.lastname;
+		cb(user);
 	});
 };
 

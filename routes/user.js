@@ -1,13 +1,25 @@
 var User = require("../db/User");
+var Post = require("../db/Post");
 
 //Displays the profile view
 exports.profile = function(req, res)
 {
 	User.getUser(req.param("user"), function(user)
 	{
-		User.isFollowing(req.session.user.id, user.id, function(is_following)
+		Post.getPosts(user, function(posts)
 		{
-			res.render('profile', {user: user , title: user.username+"'s Profile", is_following: is_following});
+			var cur_usr = req.session.user || null;
+			if(cur_usr)
+			{
+				User.isFollowing(cur_usr.id, user.id, function(is_following)
+				{
+					res.render('profile', {user: user , title: user.name+"'s Profile", posts: posts, is_following: is_following});
+				});
+			}
+			else
+			{
+				res.render('profile', {user: user, title: user.name, posts: posts, is_following: null});
+			}
 		});
 	});
 };

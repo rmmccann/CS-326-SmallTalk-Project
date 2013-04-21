@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap-responsive.min.css" />
 	<link rel="stylesheet" href="/stylesheets/style.css" />
+	<link rel="stylesheet" href="/stylesheets/post.css" />
 	<% if(stylesheet){ %>
 	<link rel="stylesheet" href="/stylesheets/<%= stylesheet %>" />
 	<% } %>
@@ -58,10 +59,11 @@
 	{{/each}}
 	</script>
 
-	
+	<!-- Notifications and Settings buttons -->
 	<div id="gear-menu" class="btn-group pull-right">
-		<a class="btn btn-mini dropdown-toggle" data-toggle="dropdown"><i class="icon-cog"></i></a>
-		<ul class="dropdown-menu">
+		<a id="notification-button" class="btn btn-mini btn-dangerr" data-toggle="tooltip" title="">!!!</a>
+		<a id="settings-button" class="btn btn-mini dropdown-toggle" data-toggle="dropdown"><i class="icon-cog"></i></a>
+		<ul class="dropdown-menu arrow-right">
 			<li><a tabindex="-1" href="/settings">Settings</a></li>
 			<li><a tabindex="-1" href="/help">Get Help</a></li>
 			<li><a tabindex="-1" href="/shorty">Meet Shorty</a></li>

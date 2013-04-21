@@ -7,7 +7,7 @@ exports.index = function(req, res)
 	if(req.session.user == undefined){
 		res.render('index', { title: "SmallTalk" });
 	}else{
-		Post.getPosts(req.session.user, function(posts){
+		Post.getFollowedPosts(req.session.user, function(posts){
 			res.render('home', {title: "Welcome to SmallTalk", posts: posts});
 		});
 	}

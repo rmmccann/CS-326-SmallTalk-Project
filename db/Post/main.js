@@ -134,6 +134,13 @@ exports.insertPost = function(user_id, text)
 
 exports.getPosts = function(user, cb)
 {
+	db.all("SELECT P.*, U.username FROM Posts P, Users U, Follows F WHERE P.author_id=$uid AND U.id=P.author_id GROUP BY P.id", {$uid: user.id}, function(err, rows){
+		cb(rows);
+	});
+}
+
+exports.getFollowedPosts = function(user, cb)
+{
 	db.all("SELECT P.*, U.username FROM Posts P, Users U, Follows F WHERE (P.author_id=$uid OR (F.follower_id=$uid AND F.followed_id=author_id)) AND U.id=P.author_id GROUP BY P.id", {$uid: user.id}, function(err, rows){
 		cb(rows);
 	});
@@ -142,7 +149,7 @@ exports.getPosts = function(user, cb)
 exports.getPostsByHashtag = function(hashtag, cb)
 {
 	var str = "%#"+hashtag+"%";
-	db.all("SELECT * FROM Posts WHERE content LIKE ?", [str], function(err, rows){
+	db.all("SELECT P.*, U.username FROM Posts P, Users U WHERE P.author_id=U.id AND content LIKE ?", [str], function(err, rows){
 		cb(rows);
 	});
 }
@@ -150,7 +157,7 @@ exports.getPostsByHashtag = function(hashtag, cb)
 exports.getPostsByLanguage = function(language, cb)
 {
 	var str = "%\%"+language+"%";
-	db.all("SELECT * FROM Posts WHERE content LIKE ?", [str], function(err, rows){
+	db.all("SELECT P.*, U.username FROM Posts P, Users U WHERE P.author_id=U.id AND content LIKE ?", [str], function(err, rows){
 		cb(rows);
 	});
 }
