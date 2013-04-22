@@ -11,7 +11,7 @@ exports.getUser = function(username, cb)
 {
 	if(!username) username = "";
 
-	db.get("SELECT * FROM Users WHERE username=\""+username+"\"", function(err, row){
+	db.get("SELECT * FROM Users WHERE username=?", [username], function(err, row){
 		if(err) console.log("DB ERROR: " + err);
 		var user = row;
 		user.name = user.firstname+" "+user.lastname;
@@ -21,7 +21,7 @@ exports.getUser = function(username, cb)
 
 exports.getFollowers = function(username, cb)
 {
-	db.all("SELECT A.* FROM Users A, Users B, Follows F WHERE F.follower_id=A.id AND F.followed_id=B.id AND B.username=\""+username+"\"", function(err, rows){ //TODO: cleaner query
+	db.all("SELECT A.* FROM Users A, Users B, Follows F WHERE F.follower_id=A.id AND F.followed_id=B.id AND B.username=?", [username], function(err, rows){
 		if(err) console.log("DB ERROR: " + err);
 		cb(rows);
 	});
@@ -29,7 +29,7 @@ exports.getFollowers = function(username, cb)
 
 exports.getFollowing = function(username, cb)
 {
-	db.all("SELECT B.* FROM Users A, Users B, Follows F WHERE F.follower_id=A.id AND F.followed_id=B.id AND A.username=\""+username+"\"", function(err, rows){
+	db.all("SELECT B.* FROM Users A, Users B, Follows F WHERE F.follower_id=A.id AND F.followed_id=B.id AND A.username=?", [username], function(err, rows){
 		if(err) console.log("DB ERROR: " + err);
 		cb(rows);
 	});

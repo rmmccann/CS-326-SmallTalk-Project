@@ -31,6 +31,7 @@ $(document).ready(function()
 	$("#notification-button").tooltip(
 		{
 			placement: 'bottom',
+			animation: false,
 			title: '0'//if no title is defined in the html or is empty	
 		}
 	);

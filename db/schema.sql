@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS Follows;
 CREATE TABLE Posts(id integer PRIMARY KEY NOT NULL, author_id integer, content text, created_at datetime DEFAULT (DATETIME()));
 CREATE TABLE Users(id integer PRIMARY KEY NOT NULL, username varchar(30), firstname varchar(30), lastname varchar(30), email varchar(30), password varchar(30));
 CREATE TABLE Follows(follower_id integer, followed_id integer);
+CREATE TABLE Notifications(user_id integer, message text);
 
 -- Test Data
 INSERT INTO Users values(NULL, 'rmmccann', 'Ryan', 'McCann', 'rmmccann@student.umass.edu', 'password');
