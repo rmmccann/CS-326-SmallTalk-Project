@@ -8,6 +8,8 @@ var user = require('./routes/user');
 var feed = require('./routes/feed');
 var chat = require('./routes/chat');
 var search = require('./routes/search');
+var viewHelpers = require('./views/helpers');
+
 
 
 // Set up Express, socket.io
@@ -34,6 +36,7 @@ app.configure(
 		app.use(app.router);
 		app.use(express.static(path.join(__dirname, 'public')));
 		app.use(Handle404);
+		app.locals.helpers = viewHelpers;
 	}
 );
 

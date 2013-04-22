@@ -1,5 +1,5 @@
-var User = require('../db/User/');
-var Post = require('../db/Post/');
+var User = require('../db/User');
+var Post = require('../db/Post');
 
 exports.index = function(req, res)
 {
