@@ -27,6 +27,10 @@ $(document).ready(function()
 		setTimeout(function(){results_box.hide(200);}, 100); //hide after 300ms
 	});
 
+	$("#clear-button").click(function(){
+		$("#global-search-box").val("");
+	});
+
 
 	$("#notification-button").tooltip(
 		{

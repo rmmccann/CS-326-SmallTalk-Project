@@ -6,14 +6,21 @@
 
 	$.fn.instantSearch = function(search_list, jsonUrl, cb)
 	{
-		// this.keyup(checkMatch);
-		// this.keydown(checkMatch);
-		this.keypress(checkMatch);
 		this.focus(checkMatch);
+		this.keypress(checkMatch);
+		//Trigger a keypress event on backspace keydown event (for IE/Chrome/Safari)
+		this.on('keydown', function(e){
+			if(e.keyCode===8){
+				$(this).trigger({
+					type: 'keypress',
+					which: 8
+				});
+			}
+		});
 		function checkMatch(event)
-		{			
+		{
+			console.log(event.which);
 			var searchText = $(this).val().trim().toLowerCase();
-			console.log(searchText);
 			if(event.which===8) //backspace
 			{
 				searchText = searchText.substring(0, searchText.length-1);
@@ -22,7 +29,6 @@
 			{
 				searchText = searchText + String.fromCharCode(event.which).trim();
 			}
-			console.log(searchText);
 
 			//TODO implement trigger characters
 			if(searchText.charAt(0) === "@")
@@ -40,9 +46,6 @@
 					cb(data);
 				});
 			}
-
-			// var matches = checkArray(searchText);
-			// cb(matches); // pass results array to callback
 		}
 
 		function checkArray(str) //returns array of matching indices

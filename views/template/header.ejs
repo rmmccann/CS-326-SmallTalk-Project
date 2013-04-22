@@ -30,21 +30,33 @@
 
 <div id="sticky-bar">
 	<!-- <h4 style="margin: 3px;">Welcome to SmallTalk!</h4> -->
-	<span>Welcome to SmallTalk</span>
+	&nbsp;Welcome to <strong>SmallTalk</strong>
 
 	<span><a href="/">home</a></span>
 	<% if(current_user){%><span><a href="/<%= current_user.username %>/profile">profile</a></span><%}%>
 
 	<div id="bar-inner">
-		<!-- <span class="clearfix"></span> -->
+
 		<form method="GET" action="/search" autocomplete="off" class="form-search" style="display: inline;">
 			<div class="input-append">
 				<input type="text" id="global-search-box" class="span2 search-query text-input-small" data-provide="typeahead" placeholder="Find people, hashtags, and languages">
-				<i id="clear-box-x" class="icon-remove-sign"></i>
+				<a id="clear-button" type="hidden"><i id="clear-box-x" class="icon-remove-sign"></i></a>
 				<button type="submit" class="btn btn-small"><i class="icon-search"></i></button>
 			</div>
 		</form>
 		<div id="search-results"></div>
+
+		<!-- Notifications and Settings buttons -->
+		<div id="gear-menu" class="btn-group pull-right">
+			<a id="notification-button" class="btn btn-mini" data-toggle="tooltip" title="">!!!</a>
+			<a id="settings-button" class="btn btn-mini dropdown-toggle" data-toggle="dropdown"><i class="icon-cog"></i></a>
+			<ul class="dropdown-menu arrow-right">
+				<li><a tabindex="-1" href="/settings">Settings</a></li>
+				<li><a tabindex="-1" href="/help">Get Help</a></li>
+				<li><a tabindex="-1" href="/shorty">Meet Shorty</a></li>
+				<li><a id="signout" tabindex="-1" href="/signout">Sign Out</a></li>
+			</ul>
+		</div>
 	</div>
 
 	<!-- Handlebars template for search results -->
@@ -59,17 +71,6 @@
 	{{/each}}
 	</script>
 
-	<!-- Notifications and Settings buttons -->
-	<div id="gear-menu" class="btn-group pull-right">
-		<a id="notification-button" class="btn btn-mini btn-dangerr" data-toggle="tooltip" title="">!!!</a>
-		<a id="settings-button" class="btn btn-mini dropdown-toggle" data-toggle="dropdown"><i class="icon-cog"></i></a>
-		<ul class="dropdown-menu arrow-right">
-			<li><a tabindex="-1" href="/settings">Settings</a></li>
-			<li><a tabindex="-1" href="/help">Get Help</a></li>
-			<li><a tabindex="-1" href="/shorty">Meet Shorty</a></li>
-			<li><a id="signout" tabindex="-1" href="/signout">Sign Out</a></li>
-		</ul>
-	</div>
 </div>
 
 <div id="container">
