@@ -1,0 +1,30 @@
+<% if (message !== undefined) { %>
+
+	<% if (message.error) { %>
+		<% for(var i = 0; i< message.error.length; i++){ %>
+			<div class = "alert alert-error">
+		  		<button type="button" class="close" data-dismiss="alert">&times;</button>
+				<p><%= message.error[i] %></p>
+			</div>
+		<% } %>		
+	<% } %>
+
+	<% if (message.success) { %>
+		<% for(var i = 0; i< message.success.length; i++){ %>
+			<div class = "alert alert-success">
+		  		<button type="button" class="close" data-dismiss="alert">&times;</button>
+				<p><%= message.success[i] %></p>
+			</div>
+		<% } %>		
+	<% } %>
+
+	<% if (message.info) { %>
+		<% for(var i = 0; i< message.info.length; i++){ %>
+			<div class = "alert alert-info">
+		  		<button type="button" class="close" data-dismiss="alert">&times;</button>
+				<p><%= message.info[i] %></p>
+			</div>
+		<% } %>		
+	<% } %>
+
+<% } %>

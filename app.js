@@ -9,8 +9,10 @@ var feed = require('./routes/feed');
 var chat = require('./routes/chat');
 var search = require('./routes/search');
 
+
 // Set up Express, socket.io
 app = express(); //global app object
+var flash = require('connect-flash');
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 
@@ -26,11 +28,21 @@ app.configure(
 		app.use(express.methodOverride());
 		app.use(express.cookieParser('your secret here'));
 		app.use(express.session());
+		app.use(flash());
 		app.use(function(req, res, next){ res.locals.current_user = req.session.user; next(); });
+		app.use(function(req, res, next) { res.locals.message = req.flash(); next(); });
 		app.use(app.router);
 		app.use(express.static(path.join(__dirname, 'public')));
+		app.use(Handle404);
 	}
 );
+
+//Handles 404 page
+function Handle404(req, res, next)
+{
+	res.render('404');
+}
+
 //error handling
 app.configure('development',    
 	function()
@@ -110,6 +122,7 @@ app.get('/help', index.help);
 app.get('/settings', index.settings);
 app.get('/shorty', index.shorty);
 
+
 app.get('/signout', index.signout);
 app.post('/signin', index.signin);
 app.post('/toggleFollow', index.toggleFollow);
@@ -118,3 +131,4 @@ app.post('/submitNewPost', index.submitNewPost);
 app.post('/search', search.searchAll);
 app.post('/search/users', search.searchUsers);
 app.get('/search', search.searchAll);
+

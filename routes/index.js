@@ -16,6 +16,7 @@ exports.index = function(req, res)
 //Display the Sign Up view
 exports.signup = function(req, res)
 {
+
 	res.render('signup', {title: 'Sign Up'});
 };
 
@@ -56,6 +57,8 @@ exports.signin = function(req, res)
 			if(user.password == req.param("password"))
 			{
 				req.session.user = user;
+			}else{
+				req.flash('error', 'Username/Password do not match');
 			}
 		}
 		res.redirect("/");
@@ -66,7 +69,7 @@ exports.signin = function(req, res)
 exports.signout = function(req,res)
 {
 	delete req.session.user;
-	console.log("Logging Out");
+	req.flash('info', "You have Logged Out")
 	res.redirect("/");
 }
 
@@ -130,13 +133,17 @@ exports.createNewUser = function(req, res)
 		{
 			if(existing_user != undefined) //username is already taken
 			{
+				req.flash('error', 'That Username already Exists');
+				req.flash('newUser', user);
 				res.redirect("/signup");
 			}
 			else
 			{
 				User.addUser(user, function(){ //parameterless callback invoked when query is complete
 					User.getUser(username, function(new_user){
+
 						req.session.user = new_user;
+						req.flash('success', 'Thank you for signing up with SmallTalk '+new_user.username);
 						res.redirect("/"); //if signup is successful, send them to home
 					});
 				});
@@ -145,6 +152,12 @@ exports.createNewUser = function(req, res)
 	}
 	else
 	{
+		var error = "These fields must be filled out: ";
+		if(username == ""){ error += " Username ";}
+		if(password == ""){ error += " Password ";}
+		if(email == ""){ error += " Email ";}
+		req.flash('error', error );
+		req.flash('newUser', user);
 		res.redirect("/signup");
 	}
 };

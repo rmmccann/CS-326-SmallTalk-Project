@@ -1,4 +1,7 @@
 <% include template/header.ejs %>
+<% include template/flash.ejs %>
+
+<link rel="stylesheet" href="/stylesheets/profile.css" />
 <!-- Danton Added Script Tag-->
 <script type="text/javascript" src="/javascripts/profile.js"></script>
 <script>
@@ -9,22 +12,24 @@
 <h1><%= fullname %></h1>
 
 <% if(current_user){ %>
+
 	<% if(current_user.username == user.username){ %>
 		<p>My profile page!</p>
-	<%}else{%>
+	<% }else{ %>
 		<p><%= fullname %>'s profile page!</p>
-	<%}%>
+	<% } %>
 
 	<!-- Follow/Unfollow and chat buttons -->
 	<%if(current_user.username != user.username){%>
 		<%if(is_following){%>
-			<input id="toggle-follow" type="button" value="Unfollow" name="unfollow" class="btn" />
+			<input id="toggle-follow" type="button" value="Unfollow" name="unfollow" class="btn unfollowButton" />
 			<a id="chat-link" href="/chat?with=<%= user.username %>">chat</a><br>
 		<%}else{%>
-			<input id="toggle-follow" type="button" value="Follow" name="follow" class="btn" />
+			<input id="toggle-follow" type="button" value="Follow" name="follow" class="btn followButton" />
 			<a id="chat-link" href="/chat?with=<%= user.username %>">chat</a><br>
-		<%}%>
+		<%}%>		
 	<%}%>
+
 <%}%>
 <a href="/<%= user.username %>/followers">followers</a> ~ <a href="/<%= user.username %>/following">following</a>
 <br><br>

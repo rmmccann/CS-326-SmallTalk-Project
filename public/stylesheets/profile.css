@@ -1,0 +1,13 @@
+/* for home.ejs, the style for the area in which posts are stored.*/
+#toggle-follow:hover
+{
+	color: white;
+}
+.followButton:hover
+{
+	background: green;
+}
+.unfollowButton:hover
+{
+	background: red;
+}
