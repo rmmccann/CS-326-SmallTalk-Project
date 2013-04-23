@@ -74,6 +74,44 @@ a
 	margin-top: -30px;
 }
 
+#home-link
+{
+	display: inline-block;
+	transition: -moz-transform 500ms;
+	transition: -webkit-transform 500ms;	
+}
+#profile-link
+{
+	transition: -moz-transform 500ms;
+	transition: -webkit-transform 500ms;
+}
+
+/* Rotates 'Welcome to Smalltalk' and 'profile' when the screen is too small */
+@media (max-width: 1300px)
+{
+	#home-link
+	{
+		transition: -moz-transform 500ms;
+		transition: -webkit-transform 500ms;
+		/*-webkit-transform: rotate(-90deg);*/
+		/*-moz-transform: rotate(-90deg);*/
+		-moz-transform: matrix(0,-1,1,0,-50,100);
+		-webkit-transform: matrix(0,-1,1,0,-50,100);
+	}
+}
+@media (max-width: 1100px)
+{
+	#profile-link
+	{
+		transition: -moz-transform 500ms;
+		transition: -webkit-transform 500ms;
+		/*-moz-transform: rotate(90deg);*/
+		/*-webkit-transform: rotate(90deg);*/
+		-moz-transform: matrix(0,1,-1,0,0,40);
+		-webkit-transform: matrix(0,1,-1,0,0,40);
+	}
+}
+
 /* why does this not already exist in bootstrap? oh well */
 .text-input-small
 {

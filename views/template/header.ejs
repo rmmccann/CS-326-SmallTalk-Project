@@ -29,11 +29,8 @@
 <body>
 
 <div id="sticky-bar">
-	<!-- <h4 style="margin: 3px;">Welcome to SmallTalk!</h4> -->
-	&nbsp;Welcome to <strong>SmallTalk</strong>
-
-	<span><a href="/">home</a></span>
-	<% if(current_user){%><span><a href="/<%= current_user.username %>/profile">profile</a></span><%}%>
+	<div id="home-link" class="wide-overflow">&nbsp;Welcome to <a href="/" style="color: rgb(51, 51, 51);"><strong>SmallTalk</strong></a></div>
+	<!-- <div id="home-link-a" class="wide-overflow">Just a test</div> -->
 
 	<div id="bar-inner">
 
@@ -58,6 +55,8 @@
 			</ul>
 		</div>
 	</div>
+
+	<% if(current_user){%><span id="profile-link" class="wide-overflow pull-right" style="margin-top:-30px; margin-right:6px;"><a href="/<%= current_user.username %>/profile" style="color:black;">profile</a></span><%}%>
 
 	<!-- Handlebars template for search results -->
 	<script id="results-template" type="text/x-handlebars-template">

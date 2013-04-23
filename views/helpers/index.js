@@ -3,7 +3,7 @@ exports.processPost = function(str)
 	str = replaceHashTags(str);
 	str = replaceLangTags(str);
 	str = replaceAtTags(str);
-
+	str = addLineBreaks(str);
 	return str; 
 };
 
@@ -42,8 +42,13 @@ function replaceAtTags(str)
 	
 	for(var i = 0; i < matches.length; i++)
 	{
-		str = str.replace(matches[i], "<a href = '/user/"+ matches[i].substring(1,matches[i].length) + "'>" + matches[0] + "</a>");
+		str = str.replace(matches[i], "<a href = '/"+ matches[i].substring(1,matches[i].length) + "/profile'>" + matches[0] + "</a>");
 	}
 
 	return str;
+}
+
+function addLineBreaks(str)
+{
+	return str.replace(/\n/g, "<br>");
 }
