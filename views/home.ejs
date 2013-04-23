@@ -12,9 +12,12 @@
 			<textarea id="postTextField" type="text" name="postTextField" placeholder="Compose a new post..."></textarea>
 			<!--
 			Like
-			<input id="like" type="checkbox" name="like" /><br>
+			<input id="like" type="checkbox" name="like" />
 			-->
-			<input id="submitButton" type="submit" value="Post" name="submitButton" class="btn" />
+			<br>
+			<div style="width: 500px;">
+				<input id="submitButton" type="submit" value="Post" name="submitButton" class="btn pull-right" />
+			</div>
 			<br><br>
 
 			<p><%= current_user.username %>'s Posts</p>

@@ -7,7 +7,7 @@
 					<td style= "background:white; width: 420px;"><p class="post_message"><%- helpers.processPost(post.content) %></p><br></td>
 				</tr>
 			</table>
-			<span><%= post.username %></span>
+			<span><%- "<a href='/"+post.username+"/profile' style='color: rgb(0, 85, 128);'>"+post.username+"</a>" %></span>
 		</div>
 	<% }) %>
 </div>
