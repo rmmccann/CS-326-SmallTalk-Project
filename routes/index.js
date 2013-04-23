@@ -8,7 +8,7 @@ exports.index = function(req, res)
 		res.render('index', { title: "SmallTalk" });
 	}else{
 		Post.getFollowedPosts(req.session.user, function(posts){
-			res.render('home', {title: "Welcome to SmallTalk", posts: posts});
+			res.render('home', {title: "Welcome to SmallTalk, where everything is made up and your posts don't matter.", posts: posts});
 		});
 	}
 };
@@ -57,7 +57,7 @@ exports.signin = function(req, res)
 			{
 				req.session.user = user;
 			}else{
-				req.flash('error', 'Username/Password do not match');
+				req.flash('error', 'Username/Password do not match. I enjoy watching you struggle with this.');
 			}
 		}
 		res.redirect("/");
@@ -68,7 +68,7 @@ exports.signin = function(req, res)
 exports.signout = function(req,res)
 {
 	delete req.session.user;
-	req.flash('info', "You have Logged Out")
+	req.flash('info', "You have Logged Out. Back to your uneventful life.")
 	res.redirect("/");
 }
 
@@ -132,7 +132,7 @@ exports.createNewUser = function(req, res)
 		{
 			if(existing_user != undefined) //username is already taken
 			{
-				req.flash('error', 'That Username already Exists');
+				req.flash('error', 'That Username already Exists. You are unoriginal and dull.');
 				req.flash('newUser', user);
 				res.redirect("/signup");
 			}
@@ -142,7 +142,7 @@ exports.createNewUser = function(req, res)
 					User.getUser(username, function(new_user){
 
 						req.session.user = new_user;
-						req.flash('success', 'Thank you for signing up with SmallTalk '+new_user.username);
+						req.flash('success', 'Thank you for signing up with SmallTalk!'+new_user.username);
 						res.redirect("/"); //if signup is successful, send them to home
 					});
 				});
