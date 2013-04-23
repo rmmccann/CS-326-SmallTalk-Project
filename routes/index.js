@@ -1,5 +1,5 @@
-var User = require('../db/User/');
-var Post = require('../db/Post/');
+var User = require('../db/User');
+var Post = require('../db/Post');
 
 exports.index = function(req, res)
 {
@@ -52,7 +52,7 @@ exports.signin = function(req, res)
 	//find user in database, compare 'stored' password with input password
 	User.getUser(req.param("username"), function(user)
 	{
-		if(user != undefined)
+		if(user !== undefined)
 		{
 			if(user.password == req.param("password"))
 			{

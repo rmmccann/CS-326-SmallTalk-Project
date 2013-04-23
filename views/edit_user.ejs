@@ -11,23 +11,22 @@
 		<script type="text/javascript" src="/lib/jquery-1.9.1.min.js"></script>
 		<script type="text/javascript" src="/javascripts/signup.js"></script>
 	</head>
+	<% include template/flash.ejs %>
 	<body>
-		<% include template/flash.ejs %>
 		<div id="sticky-bar">
 			<h4>Welcome to SmallTalk!</h4>
 		</div>
 		<div id="container">
-			<h1><%= title %></h1>
-			<p>Welcome to SmallTalk.</p>
+			<h1>Editing <%= current_user.username %></h1>
 			
-			<form method="POST" action="/addNewUser">
-				<input id="firstname" type="text" name="firstname" placeholder="First" value="<%= ((message.newUser !== undefined ) ? message.newUser[0].$firstname : '' )%>"/>
+			<form method="POST" action="/updateUser">
+				<input id="firstname" type="text" name="firstname" placeholder="First" value="<%= ((message.editUser !== undefined ) ? message.editUser[0].$firstname : '' )%>"/>
 
-				<input id="lastname" type="text" name="lastname" placeholder="Last" value="<%= ((message.newUser !== undefined ) ? message.newUser[0].$lastname : '' )%>"/><br>
+				<input id="lastname" type="text" name="lastname" placeholder="Last" value="<%= ((message.editUser !== undefined ) ? message.editUser[0].$lastname : '' )%>"/><br>
 
-				<input id="username" type="text" name="username" placeholder="Username" value="<%= ((message.newUser !== undefined ) ? message.newUser[0].$username : '' )%>"/><br>
+				<input id="username" type="text" name="username" placeholder="Username" value="<%= ((message.editUser !== undefined ) ? message.editUser[0].$username : '' )%>"/><br>
 
-				<input id="email" type="email" name="email" placeholder="Email" value="<%= ((message.newUser !== undefined ) ? message.newUser[0].$email : '' )%>" /><br>
+				<input id="email" type="email" name="email" placeholder="Email" value="<%= ((message.editUser !== undefined ) ? message.editUser[0].$email : '' )%>" /><br>
 
 				<input id="password" type="password" name="password" placeholder="Password" /><br>
 

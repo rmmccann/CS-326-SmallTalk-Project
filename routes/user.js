@@ -47,3 +47,41 @@ exports.following = function(req, res)
 		});
 	});
 };
+
+
+exports.edit = function(req, res)
+{
+	//find user in database to edit, if the found user is the current user
+	User.getUser(req.param("user"), function(user)
+	{
+		if(user.name != 'N/A')
+		{
+			if(user.username == res.locals.current_user.username)
+			{
+				req.flash('editUser', user);
+				res.render('edit_user');
+				return ;
+
+			}else{
+				req.flash('error', 'Editing other\'s accounts if forbidden');
+				res.redirect("/");
+			}
+
+		}else{
+
+			req.flash('error', 'User: '+ req.param("user") +' does not exist');
+			res.redirect("/");
+		}
+	});
+
+};
+
+exports.update = function(req, res) // function for the post call to update user attributes
+{
+	res.redirect("/");
+};
+
+exports.delete = function(req, res)// to delete a users account if they want to
+{
+	res.redirect("/");
+};
