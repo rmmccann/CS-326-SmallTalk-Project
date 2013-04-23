@@ -35,7 +35,7 @@ $(document).ready(function()
 
 	$("#notification-button").tooltip(
 		{
-			placement: 'bottom',
+			placement: 'left',
 			animation: false,
 			title: '0'//if no title is defined in the html or is empty	
 		}
@@ -43,10 +43,21 @@ $(document).ready(function()
 	$("#notification-button").popover(
 		{
 			placement: 'bottom',
-			title: 'Notifications',
 			trigger: 'click',
-			content: '<a href="#">test</a>',
+			title: 'Notifications',
+			content: getNotificationText(),
 			html: true
 		}
 	);
+	$("#notification-button").click(function(){
+		$(this).removeClass("btn-danger");
+	});
+	function getNotificationText()
+	{
+		var out = "blah blah blah, sample text<hr>";
+		notifications.forEach(function(notif){
+			out += (notif + "<hr>");
+		});
+		return out;
+	}
 });

@@ -9,8 +9,7 @@ var feed = require('./routes/feed');
 var chat = require('./routes/chat');
 var search = require('./routes/search');
 var viewHelpers = require('./views/helpers');
-
-
+var Notification = require('./db/Notification');
 
 // Set up Express, socket.io
 app = express(); //global app object
@@ -32,13 +31,30 @@ app.configure(
 		app.use(express.session());
 		app.use(flash());
 		app.use(function(req, res, next){ res.locals.current_user = req.session.user; next(); });
-		app.use(function(req, res, next) { res.locals.message = req.flash(); next(); });
+		app.use(function(req, res, next){ res.locals.message = req.flash(); next(); });
+		app.use(checkNotifications);
 		app.use(app.router);
 		app.use(express.static(path.join(__dirname, 'public')));
 		app.use(Handle404);
 		app.locals.helpers = viewHelpers;
 	}
 );
+
+function checkNotifications(req, res, next)
+{
+	res.locals.notifications = undefined;
+	if(req.session.user)
+	{
+		Notification.getNotifications(req.session.user, function(rows){
+			res.locals.notifications = rows;
+			next();
+		});
+	}
+	else
+	{
+		next();
+	}
+}
 
 //Handles 404 page
 function Handle404(req, res, next)
@@ -68,7 +84,7 @@ io.sockets.on("connection", function(socket)
 {
 	console.log("new connection:");
 	//console.log(socket);
-	socket.emit("message", {message: "hello from server", from: "Server"});
+	// socket.emit("message", {message: "hello from server", from: "Server"});
 
 	socket.on("set nickname", function(username)
 	{
@@ -87,8 +103,8 @@ io.sockets.on("connection", function(socket)
 
 	socket.on("relay", function(data)
 	{
-		console.log("relay");
-		console.log(data);
+		// console.log("relay");
+		// console.log(data);
 
 		// var tmp = io.sockets.sockets[data.username];
 		// console.log(tmp);
@@ -127,7 +143,6 @@ app.get('/shorty', index.shorty);
 app.get('/:user/edit', user.edit);
 app.delete('/:user/delete', user.delete);
 
-
 app.get('/signout', index.signout);
 app.post('/signin', index.signin);
 app.post('/toggleFollow', index.toggleFollow);
@@ -137,4 +152,3 @@ app.post('/search', search.searchAll);
 app.post('/search/users', search.searchUsers);
 app.get('/search', search.searchAll);
 app.put('/update', user.update);
-

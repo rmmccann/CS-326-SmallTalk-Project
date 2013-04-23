@@ -62,6 +62,11 @@ a
 	padding-right: 5px;
 }
 
+#gear-menu > .popover
+{
+	min-width: 200px;
+}
+
 #content
 {
 	width: 1000px;

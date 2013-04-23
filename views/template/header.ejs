@@ -45,7 +45,11 @@
 
 		<!-- Notifications and Settings buttons -->
 		<div id="gear-menu" class="btn-group pull-right">
+			<% if(notifications!==undefined){ %>
+			<a id="notification-button" class="btn btn-mini btn-danger" data-toggle="tooltip" title="<%= notifications.length %>">!!!</a>
+			<% } else { %>
 			<a id="notification-button" class="btn btn-mini" data-toggle="tooltip" title="">!!!</a>
+			<% } %>
 			<a id="settings-button" class="btn btn-mini dropdown-toggle" data-toggle="dropdown"><i class="icon-cog"></i></a>
 			<ul class="dropdown-menu arrow-right">
 				<li><a tabindex="-1" href="/settings">Settings</a></li>
@@ -68,6 +72,19 @@
 			{{/if}}
 		</div>
 	{{/each}}
+	</script>
+
+	<!-- TODO: Create Handlebars template for notifications here -->
+	<script id="notifications-script">
+		var notifications =
+		[
+			<% if(notifications){ %>
+				<% notifications.forEach(function(notif){ %>
+					"<%= notif.message %>",
+				<% }) %>
+			<% } %>
+			"DUMMY"
+		];
 	</script>
 
 </div>
