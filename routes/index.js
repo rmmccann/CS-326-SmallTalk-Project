@@ -16,8 +16,7 @@ exports.index = function(req, res)
 //Display the Sign Up view
 exports.signup = function(req, res)
 {
-
-	res.render('signup', {title: 'Sign Up'});
+	res.render('signup', {title: 'Sign Up', javascript: 'signup.js', stylesheet: 'signup.css'});
 };
 
 //Submits a new post by the user to the database

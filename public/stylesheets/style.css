@@ -169,7 +169,7 @@ a
 	display: none;
 	border: 1px solid;
 	background: white;
-	padding-left: 15px;
+	/*padding-left: 15px;*/
 
 	transition: height 500ms;
 	transition: width 200ms;
@@ -182,9 +182,20 @@ a
 	/*width: 350px;*/
 }
 
+.single-result
+{
+	padding-left: 15px;
+}
 .single-result:hover
 {
-	background: #D4F0FC;
+	/*background: #D4F0FC;*/
+	background: lightsteelblue;
+}
+.single-result:hover > a
+{
+	/*color: #CCC;*/
+	/*color: #EEE;*/
+	color: #555;
 }
 .search-alt-text
 {

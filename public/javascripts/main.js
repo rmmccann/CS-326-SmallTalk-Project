@@ -8,6 +8,7 @@ $(document).ready(function()
 	var search_box = $("#global-search-box");
 	results_box.css("left", search_box.offset().left);
 	// results_box.css("width", search_box.width()+30);
+	// results_box.css("width", 265);
 
 	var source = $("#results-template").html();
 	var search_template = Handlebars.compile(source);
