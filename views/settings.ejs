@@ -9,13 +9,16 @@
 
 <h3> Editing Your Information </h3>
 <p> Want to edit some of your personal information? <p>
-<a href='/<%= current_user.username %>/edit'> Update Your Information </a>
+<a href='/<%= current_user.username %>/edit' class="btn"> Update Your Information </a>
 
 
 <h3> Delete Your Account </h3>
 <p> We can SmallTalk through this. Don't be rash now! I didn't mean to belittle you (yes I did). </p>
-<a href='/delete'> Delete </a>
-
+	<form method="POST" action="/delete">
+		<input type="hidden" value="<%= current_user.username %>" name="user" class="btn" />
+		<input type="password" name="password" placeholder="Password" /></br>
+		<input id="submitButton" type="submit" value="Delete Account" name="submitButton" class="btn btn-danger" />
+	</form>
 
 <% }else{ %>
 
