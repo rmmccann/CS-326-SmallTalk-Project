@@ -8,7 +8,7 @@ exports.index = function(req, res)
 		res.render('index', { title: "SmallTalk" });
 	}else{
 		Post.getFollowedPosts(req.session.user, function(posts){
-			res.render('home', {title: "Welcome to SmallTalk, where everything is made up and your posts don't matter.", posts: posts});
+			res.render('home', {title: "Welcome to SmallTalk", posts: posts});
 		});
 	}
 };
