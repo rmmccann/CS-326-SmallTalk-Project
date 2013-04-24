@@ -58,7 +58,6 @@ exports.edit = function(req, res)
 		{
 			if(user.username == res.locals.current_user.username)
 			{
-				req.flash('editUser', user);
 				res.render('edit_user');
 				return ;
 
@@ -78,10 +77,61 @@ exports.edit = function(req, res)
 
 exports.update = function(req, res) // function for the post call to update user attributes
 {
-	res.redirect("/");
+	console.log(JSON.stringify(req.param("newpassword")));
+
+	var firstname = req.param("firstname");
+	var lastname = req.param("lastname");
+
+	var oldpassword = req.param("oldpassword");
+	var newpassword = req.param("newpassword");
+	var confirmpassword = req.param("confirmpassword");
+
+
+	User.getUser(req.param(res.locals.current_user.username), function(user)
+	{	
+		if(firstname) user.firstname = firstname;
+		if(lastname) user.lastname = lastname;
+
+		if(oldpassword && newpassword && confirmpassword && (newpassword == confirmpassword ) && (oldpassword == user.password ))
+		{
+			user.password = newpassword;
+
+		}else{
+			req.flash('error', 'Password was not updated');
+			res.redirect("/" +res.locals.current_user.username + "/edit");
+		}
+
+		//update user in DB here
+
+
+		req.flash('success', 'Update was successful');
+		res.redirect("/" +res.locals.current_user.username + "/edit");
+
+	});
+
+
 };
 
 exports.delete = function(req, res)// to delete a users account if they want to
-{
+{	
+	var user = req.param("user");
+	var password = req.param("password");
+
+	if(user && (user == res.locals.current_user.username) && (res.locals.current_user.password == password))
+	{
+		//delete the user from the DB, including all relations like posts and following/follower stuff
+
+
+
+		delete req.session.user;	//deleted user account's can't be in the session
+
+
+	}else if(res.locals.current_user.password != password){
+		req.flash('error', 'Wrong Password');
+		res.redirect("/settings");
+	}
+
+	req.flash('success', res.locals.current_user.username +	"'s Profile has been deleted");
 	res.redirect("/");
+
 };
