@@ -51,6 +51,11 @@ $(document).ready(function()
 	);
 	$("#notification-button").click(function(){
 		$(this).removeClass("btn-danger");
+
+		$(".tooltip").hide();
+	});
+	$("#notification-button").blur(function(){
+		$(".popover").hide();
 	});
 	function getNotificationText()
 	{
@@ -60,4 +65,12 @@ $(document).ready(function()
 		});
 		return out;
 	}
+
+
+	var debug = true;
+	$(window).resize(function(e){
+		if(debug){
+			console.log("X:"+$(this).width()+" Y:"+$(this).height());
+		}
+	});
 });

@@ -130,7 +130,7 @@ exports.createNewUser = function(req, res)
 	{
 		User.getUser(username, function(existing_user)
 		{
-			if(existing_user != undefined) //username is already taken
+			if(existing_user.name != "N/A") //username is already taken
 			{
 				req.flash('error', 'That Username already Exists. You are unoriginal and dull.');
 				req.flash('newUser', user);
@@ -142,7 +142,7 @@ exports.createNewUser = function(req, res)
 					User.getUser(username, function(new_user){
 
 						req.session.user = new_user;
-						req.flash('success', 'Thank you for signing up with SmallTalk!'+new_user.username);
+						req.flash('success', 'Thank you for signing up with SmallTalk, '+new_user.username);
 						res.redirect("/"); //if signup is successful, send them to home
 					});
 				});

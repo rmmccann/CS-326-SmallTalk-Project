@@ -3,7 +3,7 @@
 		<div class="post-container">
 			<table>
 				<tr>
-					<td><img src="/images/User-icon-scaled.png"></img></td>
+					<td><%- helpers.profile_picture(post.email) %></td>
 					<td style= "background:white; width: 420px;"><p class="post_message"><%- helpers.processPost(post.content) %></p><br></td>
 				</tr>
 			</table>

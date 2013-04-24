@@ -9,16 +9,10 @@
 </script>
 
 <% var fullname = user.firstname+" "+user.lastname; %>
+<%- helpers.profile_picture(user.email, 120) %>
 <h1><%= fullname %></h1>
 
 <% if(current_user){ %>
-
-	<% if(current_user.username == user.username){ %>
-		<p>My profile page!</p>
-	<% }else{ %>
-		<p><%= fullname %>'s profile page!</p>
-	<% } %>
-
 	<!-- Follow/Unfollow and chat buttons -->
 	<%if(current_user.username != user.username){%>
 		<%if(is_following){%>
@@ -27,10 +21,11 @@
 		<%}else{%>
 			<input id="toggle-follow" type="button" value="Follow" name="follow" class="btn followButton" />
 			<a id="chat-link" href="/chat?with=<%= user.username %>">chat</a><br>
-		<%}%>		
+		<%}%>
+		<br>
 	<%}%>
-
 <%}%>
+
 <a href="/<%= user.username %>/followers">followers</a> ~ <a href="/<%= user.username %>/following">following</a>
 <br><br>
 <% include template/post_list.ejs %>

@@ -64,17 +64,18 @@ a
 
 #gear-menu > .popover
 {
-	min-width: 200px;
+	/*min-width: 200px;*/
+	min-width: 150px; /* TODO change back after presentation */
 }
 
 #content
 {
-	width: 1000px;
+	width: 900px; /* TODO: change back to 1000 after presentation */
 	margin: auto;
 }
 #bar-inner
 {
-	width: 1000px;
+	width: 900px; /* TODO: change back to 1000 after presentation */
 	margin: auto;
 	margin-top: -30px;
 }
@@ -104,7 +105,7 @@ a
 		-webkit-transform: matrix(0,-1,1,0,-50,100);
 	}
 }
-@media (max-width: 1100px)
+@media (max-width: 1050px)
 {
 	#profile-link
 	{
@@ -112,8 +113,10 @@ a
 		transition: -webkit-transform 500ms;
 		/*-moz-transform: rotate(90deg);*/
 		/*-webkit-transform: rotate(90deg);*/
-		-moz-transform: matrix(0,1,-1,0,0,40);
-		-webkit-transform: matrix(0,1,-1,0,0,40);
+		/*-moz-transform: matrix(0,1,-1,0,0,40);*/
+		/*-webkit-transform: matrix(0,1,-1,0,0,40);*/
+		-moz-transform: matrix(0,1,1,0,0,40);
+		-webkit-transform: matrix(1,0,0,1,35,20);
 	}
 }
 

@@ -60,7 +60,10 @@
 		</div>
 	</div>
 
-	<% if(current_user){%><span id="profile-link" class="wide-overflow pull-right" style="margin-top:-30px; margin-right:6px;"><a href="/<%= current_user.username %>/profile" style="color:black;">profile</a></span><%}%>
+	<% if(current_user){%>
+	<span id="profile-link" class="wide-overflow pull-right" style="margin-top:-30px; margin-right:36px;"><a href="/<%= current_user.username %>/profile" style="color:black;">profile</a></span>
+	<span class="pull-right" style="margin-top:-32px;"><a href="/<%= current_user.username %>/profile" style=""><%- helpers.profile_picture(current_user.email, 30) %></a></span>
+	<%}%>
 
 	<!-- Handlebars template for search results -->
 	<script id="results-template" type="text/x-handlebars-template">

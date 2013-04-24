@@ -52,3 +52,13 @@ function addLineBreaks(str)
 {
 	return str.replace(/\n/g, "<br>");
 }
+
+
+exports.profile_picture = function(email, size)
+{
+	email = email || "";
+	size = size || 60;
+	var hash = require("crypto").createHash("md5").update(email).digest("hex");
+	var html = "<img src='http://www.gravatar.com/avatar/"+hash+"?s="+size+"&d=identicon' width='"+size+"'/>";
+	return html;
+}
