@@ -35,9 +35,107 @@
 <div class="pilwrap">
   <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
 </div>
+<div class="dox">
+  <div class="summary"><p>Main Javascript file included on every page. Used for global functions like search.</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">results_box</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#search-results&quot;</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">search_box</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#global-search-box&quot;</span><span class="p">);</span>
+  <span class="nx">results_box</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="nx">search_box</span><span class="p">.</span><span class="nx">offset</span><span class="p">().</span><span class="nx">left</span><span class="p">);</span>
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2">&#182;</a>
+</div>
+<p>results_box.css("width", search_box.width()+30);
+results_box.css("width", 265);</p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
+
+  <span class="kd">var</span> <span class="nx">source</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#results-template&quot;</span><span class="p">).</span><span class="nx">html</span><span class="p">();</span>
+  <span class="kd">var</span> <span class="nx">search_template</span> <span class="o">=</span> <span class="nx">Handlebars</span><span class="p">.</span><span class="nx">compile</span><span class="p">(</span><span class="nx">source</span><span class="p">);</span>
+
+  <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#global-search-box&quot;</span><span class="p">).</span><span class="nx">instantSearch</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="s2">&quot;/search&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">results</span><span class="p">){</span>
+    <span class="nx">results_box</span><span class="p">.</span><span class="nx">show</span><span class="p">();</span>
+    <span class="nx">results_box</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+</div>
+<p>console.log(results);</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+    <span class="nx">results_box</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">search_template</span><span class="p">({</span><span class="nx">results</span><span class="o">:</span> <span class="nx">results</span><span class="p">}));</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="nx">results</span><span class="p">.</span><span class="nx">length</span><span class="o">===</span><span class="mi">0</span><span class="p">)</span> <span class="nx">results_box</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&quot;No results found&quot;</span><span class="p">);</span>
+  <span class="p">});</span>
+
+  <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#global-search-box&quot;</span><span class="p">).</span><span class="nx">blur</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span><span class="nx">results_box</span><span class="p">.</span><span class="nx">hide</span><span class="p">(</span><span class="mi">200</span><span class="p">);},</span> <span class="mi">100</span><span class="p">);</span> <span class="c1">//hide after 300ms</span>
+  <span class="p">});</span>
+
+  <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#clear-button&quot;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#global-search-box&quot;</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+  <span class="p">});</span>
+
+
+  <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#notification-button&quot;</span><span class="p">).</span><span class="nx">tooltip</span><span class="p">(</span>
+    <span class="p">{</span>
+      <span class="nx">placement</span><span class="o">:</span> <span class="s1">&#39;left&#39;</span><span class="p">,</span>
+      <span class="nx">animation</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;0&#39;</span><span class="c1">//if no title is defined in the html or is empty  </span>
+    <span class="p">}</span>
+  <span class="p">);</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#notification-button&quot;</span><span class="p">).</span><span class="nx">popover</span><span class="p">(</span>
+    <span class="p">{</span>
+      <span class="nx">placement</span><span class="o">:</span> <span class="s1">&#39;bottom&#39;</span><span class="p">,</span>
+      <span class="nx">trigger</span><span class="o">:</span> <span class="s1">&#39;click&#39;</span><span class="p">,</span>
+      <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Notifications&#39;</span><span class="p">,</span>
+      <span class="nx">content</span><span class="o">:</span> <span class="nx">getNotificationText</span><span class="p">(),</span>
+      <span class="nx">html</span><span class="o">:</span> <span class="kc">true</span>
+    <span class="p">}</span>
+  <span class="p">);</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#notification-button&quot;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="s2">&quot;btn-danger&quot;</span><span class="p">);</span>
+
+    <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.tooltip&quot;</span><span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
+  <span class="p">});</span>
+  <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#notification-button&quot;</span><span class="p">).</span><span class="nx">blur</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;.popover&quot;</span><span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
+  <span class="p">});</span>
+  <span class="kd">function</span> <span class="nx">getNotificationText</span><span class="p">()</span>
+  <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="s2">&quot;blah blah blah, sample text&lt;hr&gt;&quot;</span><span class="p">;</span>
+    <span class="nx">notifications</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">notif</span><span class="p">){</span>
+      <span class="nx">out</span> <span class="o">+=</span> <span class="p">(</span><span class="nx">notif</span> <span class="o">+</span> <span class="s2">&quot;&lt;hr&gt;&quot;</span><span class="p">);</span>
+    <span class="p">});</span>
+    <span class="k">return</span> <span class="nx">out</span><span class="p">;</span>
+  <span class="p">}</span>
+
+
+  <span class="kd">var</span> <span class="nx">debug</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">).</span><span class="nx">resize</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">debug</span><span class="p">){</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;X:&quot;</span><span class="o">+</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">width</span><span class="p">()</span><span class="o">+</span><span class="s2">&quot; Y:&quot;</span><span class="o">+</span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">height</span><span class="p">());</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+<span class="p">});</span>
 </pre></div>
         </td>
       </tr>

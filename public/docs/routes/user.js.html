@@ -38,6 +38,7 @@
 
         </td>
         <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">User</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;../db/User&quot;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">Post</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;../db/Post&quot;</span><span class="p">);</span>
 
 
 </pre></div>
@@ -55,9 +56,20 @@
 <span class="p">{</span>
   <span class="nx">User</span><span class="p">.</span><span class="nx">getUser</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s2">&quot;user&quot;</span><span class="p">),</span> <span class="kd">function</span><span class="p">(</span><span class="nx">user</span><span class="p">)</span>
   <span class="p">{</span>
-    <span class="nx">User</span><span class="p">.</span><span class="nx">isFollowing</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span> <span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">is_following</span><span class="p">)</span>
+    <span class="nx">Post</span><span class="p">.</span><span class="nx">getPosts</span><span class="p">(</span><span class="nx">user</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">posts</span><span class="p">)</span>
     <span class="p">{</span>
-      <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;profile&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">user</span><span class="o">:</span> <span class="nx">user</span> <span class="p">,</span> <span class="nx">title</span><span class="o">:</span> <span class="nx">user</span><span class="p">.</span><span class="nx">username</span><span class="o">+</span><span class="s2">&quot;&#39;s Profile&quot;</span><span class="p">,</span> <span class="nx">is_following</span><span class="o">:</span> <span class="nx">is_following</span><span class="p">});</span>
+      <span class="kd">var</span> <span class="nx">cur_usr</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span> <span class="o">||</span> <span class="kc">null</span><span class="p">;</span>
+      <span class="k">if</span><span class="p">(</span><span class="nx">cur_usr</span><span class="p">)</span>
+      <span class="p">{</span>
+        <span class="nx">User</span><span class="p">.</span><span class="nx">isFollowing</span><span class="p">(</span><span class="nx">cur_usr</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span> <span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">is_following</span><span class="p">)</span>
+        <span class="p">{</span>
+          <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;profile&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">user</span><span class="o">:</span> <span class="nx">user</span> <span class="p">,</span> <span class="nx">title</span><span class="o">:</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="o">+</span><span class="s2">&quot;&#39;s Profile&quot;</span><span class="p">,</span> <span class="nx">posts</span><span class="o">:</span> <span class="nx">posts</span><span class="p">,</span> <span class="nx">is_following</span><span class="o">:</span> <span class="nx">is_following</span><span class="p">});</span>
+        <span class="p">});</span>
+      <span class="p">}</span>
+      <span class="k">else</span>
+      <span class="p">{</span>
+        <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;profile&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">user</span><span class="o">:</span> <span class="nx">user</span><span class="p">,</span> <span class="nx">title</span><span class="o">:</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="nx">posts</span><span class="o">:</span> <span class="nx">posts</span><span class="p">,</span> <span class="nx">is_following</span><span class="o">:</span> <span class="kc">null</span><span class="p">});</span>
+      <span class="p">}</span>
     <span class="p">});</span>
   <span class="p">});</span>
 <span class="p">};</span>
@@ -106,6 +118,127 @@
       <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;following&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">user</span><span class="o">:</span> <span class="nx">user</span><span class="p">,</span> <span class="nx">title</span><span class="o">:</span> <span class="nx">user</span><span class="p">.</span><span class="nx">username</span><span class="p">,</span> <span class="nx">following</span><span class="o">:</span> <span class="nx">following</span><span class="p">});</span>
     <span class="p">});</span>
   <span class="p">});</span>
+<span class="p">};</span>
+
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">edit</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span>
+<span class="p">{</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5">&#182;</a>
+</div>
+<p>find user in database to edit, if the found user is the current user</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="nx">User</span><span class="p">.</span><span class="nx">getUser</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s2">&quot;user&quot;</span><span class="p">),</span> <span class="kd">function</span><span class="p">(</span><span class="nx">user</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span> <span class="o">!=</span> <span class="s1">&#39;N/A&#39;</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">username</span> <span class="o">==</span> <span class="nx">res</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">current_user</span><span class="p">.</span><span class="nx">username</span><span class="p">)</span>
+      <span class="p">{</span>
+        <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;edit_user&#39;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="p">;</span>
+
+      <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+        <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;Editing other\&#39;s accounts if forbidden&#39;</span><span class="p">);</span>
+        <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">);</span>
+      <span class="p">}</span>
+
+    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+
+      <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;User: &#39;</span><span class="o">+</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s2">&quot;user&quot;</span><span class="p">)</span> <span class="o">+</span><span class="s1">&#39; does not exist&#39;</span><span class="p">);</span>
+      <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+
+<span class="p">};</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">update</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="c1">// function for the post call to update user attributes</span>
+<span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s2">&quot;newpassword&quot;</span><span class="p">)));</span>
+
+  <span class="kd">var</span> <span class="nx">firstname</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s2">&quot;firstname&quot;</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">lastname</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s2">&quot;lastname&quot;</span><span class="p">);</span>
+
+  <span class="kd">var</span> <span class="nx">oldpassword</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s2">&quot;oldpassword&quot;</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">newpassword</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s2">&quot;newpassword&quot;</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">confirmpassword</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s2">&quot;confirmpassword&quot;</span><span class="p">);</span>
+
+
+  <span class="nx">User</span><span class="p">.</span><span class="nx">getUser</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">current_user</span><span class="p">.</span><span class="nx">username</span><span class="p">),</span> <span class="kd">function</span><span class="p">(</span><span class="nx">user</span><span class="p">)</span>
+  <span class="p">{</span> 
+    <span class="k">if</span><span class="p">(</span><span class="nx">firstname</span><span class="p">)</span> <span class="nx">user</span><span class="p">.</span><span class="nx">firstname</span> <span class="o">=</span> <span class="nx">firstname</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">lastname</span><span class="p">)</span> <span class="nx">user</span><span class="p">.</span><span class="nx">lastname</span> <span class="o">=</span> <span class="nx">lastname</span><span class="p">;</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="nx">oldpassword</span> <span class="o">&amp;&amp;</span> <span class="nx">newpassword</span> <span class="o">&amp;&amp;</span> <span class="nx">confirmpassword</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">newpassword</span> <span class="o">==</span> <span class="nx">confirmpassword</span> <span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">oldpassword</span> <span class="o">==</span> <span class="nx">user</span><span class="p">.</span><span class="nx">password</span> <span class="p">))</span>
+    <span class="p">{</span>
+      <span class="nx">user</span><span class="p">.</span><span class="nx">password</span> <span class="o">=</span> <span class="nx">newpassword</span><span class="p">;</span>
+
+    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+      <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;Password was not updated&#39;</span><span class="p">);</span>
+      <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s2">&quot;/&quot;</span> <span class="o">+</span><span class="nx">res</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">current_user</span><span class="p">.</span><span class="nx">username</span> <span class="o">+</span> <span class="s2">&quot;/edit&quot;</span><span class="p">);</span>
+    <span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6">&#182;</a>
+</div>
+<p>update user in DB here</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+
+    <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="s1">&#39;success&#39;</span><span class="p">,</span> <span class="s1">&#39;Update was successful&#39;</span><span class="p">);</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s2">&quot;/&quot;</span> <span class="o">+</span><span class="nx">res</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">current_user</span><span class="p">.</span><span class="nx">username</span> <span class="o">+</span> <span class="s2">&quot;/edit&quot;</span><span class="p">);</span>
+
+  <span class="p">});</span>
+
+
+<span class="p">};</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="k">delete</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span><span class="c1">// to delete a users account if they want to</span>
+<span class="p">{</span> 
+  <span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s2">&quot;user&quot;</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">password</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s2">&quot;password&quot;</span><span class="p">);</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="nx">user</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">user</span> <span class="o">==</span> <span class="nx">res</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">current_user</span><span class="p">.</span><span class="nx">username</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">current_user</span><span class="p">.</span><span class="nx">password</span> <span class="o">==</span> <span class="nx">password</span><span class="p">))</span>
+  <span class="p">{</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-7" id="section-7">&#182;</a>
+</div>
+<p>delete the user from the DB, including all relations like posts and following/follower stuff</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+
+
+    <span class="k">delete</span> <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">;</span>  <span class="c1">//deleted user account&#39;s can&#39;t be in the session</span>
+
+
+  <span class="p">}</span><span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">current_user</span><span class="p">.</span><span class="nx">password</span> <span class="o">!=</span> <span class="nx">password</span><span class="p">){</span>
+    <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="s1">&#39;Wrong Password&#39;</span><span class="p">);</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s2">&quot;/settings&quot;</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="s1">&#39;success&#39;</span><span class="p">,</span> <span class="nx">res</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">current_user</span><span class="p">.</span><span class="nx">username</span> <span class="o">+</span> <span class="s2">&quot;&#39;s Profile has been deleted&quot;</span><span class="p">);</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">);</span>
+
 <span class="p">};</span>
 </pre></div>
         </td>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>search.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../", thisFile = "routes/search.js", defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs">
+          <h1>search.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">User</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;../db/User&quot;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">Post</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;../db/Post&quot;</span><span class="p">);</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">searchAll</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">query</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s2">&quot;query&quot;</span><span class="p">);</span>
+
+  <span class="nx">User</span><span class="p">.</span><span class="nx">getUsers</span><span class="p">(</span><span class="nx">query</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">users</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="nx">Post</span><span class="p">.</span><span class="nx">getPostsByKeyword</span><span class="p">(</span><span class="nx">query</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">posts</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">results</span> <span class="o">=</span> <span class="p">[];</span>
+      <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">users</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span>
+      <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">users</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">username</span><span class="p">;</span>
+        <span class="nx">results</span><span class="p">[</span><span class="s2">&quot;@&quot;</span><span class="o">+</span><span class="nx">name</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="nx">name</span><span class="o">+</span><span class="s2">&quot;/profile&quot;</span><span class="p">;</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2">&#182;</a>
+</div>
+<p>TODO add alt attribute here too</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+      <span class="p">}</span>
+      <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">posts</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span>
+      <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">keywords</span><span class="p">,</span> <span class="nx">hashes</span><span class="p">,</span> <span class="nx">langs</span> <span class="o">=</span> <span class="p">[];</span>
+        <span class="nx">hashes</span> <span class="o">=</span> <span class="nx">posts</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">content</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/#\w+/</span><span class="p">)</span> <span class="o">||</span> <span class="p">[];</span>
+        <span class="nx">langs</span> <span class="o">=</span> <span class="nx">posts</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">content</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/%\w+/</span><span class="p">)</span> <span class="o">||</span> <span class="p">[];</span>
+        <span class="nx">keywords</span> <span class="o">=</span> <span class="nx">hashes</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">langs</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">keywords</span><span class="o">==</span><span class="kc">null</span><span class="p">)</span> <span class="nx">keywords</span> <span class="o">=</span> <span class="p">[];</span>
+        <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">j</span><span class="o">&lt;</span><span class="nx">keywords</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+</div>
+<p>if(keyword) console.log(keyword.length);</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+          <span class="kd">var</span> <span class="nx">keyword</span> <span class="o">=</span> <span class="nx">keywords</span><span class="p">[</span><span class="nx">j</span><span class="p">];</span>
+          <span class="k">if</span><span class="p">(</span><span class="nx">keyword</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">===</span> <span class="s2">&quot;#&quot;</span><span class="p">){</span>
+            <span class="nx">results</span><span class="p">[</span><span class="nx">keyword</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;/hashtag/&quot;</span><span class="o">+</span><span class="nx">keyword</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nx">keyword</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+          <span class="p">}</span>
+          <span class="k">else</span> <span class="p">{</span>
+            <span class="nx">results</span><span class="p">[</span><span class="nx">keyword</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;/language/&quot;</span><span class="o">+</span><span class="nx">keyword</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nx">keyword</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+
+      <span class="kd">var</span> <span class="nx">json_resp</span> <span class="o">=</span> <span class="p">[];</span>
+      <span class="k">for</span><span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">results</span><span class="p">)</span>
+      <span class="p">{</span>
+        <span class="nx">json_resp</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nx">text</span><span class="o">:</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="o">:</span><span class="nx">results</span><span class="p">[</span><span class="nx">key</span><span class="p">]});</span>
+      <span class="p">}</span>
+
+      <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">(</span><span class="nx">json_resp</span><span class="p">);</span>
+    <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">searchUsers</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">query</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">param</span><span class="p">(</span><span class="s2">&quot;query&quot;</span><span class="p">);</span>
+  <span class="nx">searchUsersHelper</span><span class="p">(</span><span class="nx">query</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">results</span><span class="p">){</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">(</span><span class="nx">results</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">searchUsersHelper</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">searchText</span><span class="p">,</span> <span class="nx">cb</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="nx">User</span><span class="p">.</span><span class="nx">getUsers</span><span class="p">(</span><span class="nx">searchText</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nx">searchText</span><span class="p">.</span><span class="nx">length</span><span class="p">),</span> <span class="kd">function</span><span class="p">(</span><span class="nx">users</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">results</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">users</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">u</span> <span class="o">=</span> <span class="nx">users</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+      <span class="nx">results</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span>
+        <span class="p">{</span>
+          <span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;@&quot;</span><span class="o">+</span><span class="nx">u</span><span class="p">.</span><span class="nx">username</span><span class="p">,</span>
+          <span class="nx">url</span><span class="o">:</span> <span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="nx">u</span><span class="p">.</span><span class="nx">username</span><span class="o">+</span><span class="s2">&quot;/profile&quot;</span><span class="p">,</span>
+          <span class="nx">alt</span><span class="o">:</span> <span class="nx">u</span><span class="p">.</span><span class="nx">firstname</span><span class="o">+</span><span class="s2">&quot; &quot;</span><span class="o">+</span><span class="nx">u</span><span class="p">.</span><span class="nx">lastname</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+    <span class="nx">cb</span><span class="p">(</span><span class="nx">results</span><span class="p">);</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>
