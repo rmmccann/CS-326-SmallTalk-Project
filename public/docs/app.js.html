@@ -54,9 +54,11 @@
         <td class="code highlight"><div class="highlight"><pre>
 <span class="kd">var</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./routes/index&#39;</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./routes/user&#39;</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">hashfeed</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./routes/hashfeed&#39;</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">feed</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./routes/feed&#39;</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">chat</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./routes/chat&#39;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">search</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./routes/search&#39;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">viewHelpers</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./views/helpers&#39;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">Notification</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./db/Notification&#39;</span><span class="p">);</span>
 
 
 </pre></div>
@@ -71,6 +73,7 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre>
 <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span> <span class="c1">//global app object</span>
+<span class="kd">var</span> <span class="nx">flash</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;connect-flash&#39;</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="nx">app</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">io</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;socket.io&#39;</span><span class="p">).</span><span class="nx">listen</span><span class="p">(</span><span class="nx">server</span><span class="p">);</span>
 
@@ -86,11 +89,33 @@
     <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">methodOverride</span><span class="p">());</span>
     <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">cookieParser</span><span class="p">(</span><span class="s1">&#39;your secret here&#39;</span><span class="p">));</span>
     <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">session</span><span class="p">());</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">flash</span><span class="p">());</span>
     <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">){</span> <span class="nx">res</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">current_user</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">;</span> <span class="nx">next</span><span class="p">();</span> <span class="p">});</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">){</span> <span class="nx">res</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">message</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">();</span> <span class="nx">next</span><span class="p">();</span> <span class="p">});</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">checkNotifications</span><span class="p">);</span>
     <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">app</span><span class="p">.</span><span class="nx">router</span><span class="p">);</span>
     <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="kr">static</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">&#39;public&#39;</span><span class="p">)));</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">Handle404</span><span class="p">);</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">helpers</span> <span class="o">=</span> <span class="nx">viewHelpers</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">checkNotifications</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">notifications</span> <span class="o">=</span> <span class="kc">undefined</span><span class="p">;</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">)</span>
+  <span class="p">{</span>
+    <span class="nx">Notification</span><span class="p">.</span><span class="nx">getNotifications</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">rows</span><span class="p">){</span>
+      <span class="nx">res</span><span class="p">.</span><span class="nx">locals</span><span class="p">.</span><span class="nx">notifications</span> <span class="o">=</span> <span class="nx">rows</span><span class="p">;</span>
+      <span class="nx">next</span><span class="p">();</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+  <span class="k">else</span>
+  <span class="p">{</span>
+    <span class="nx">next</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
 
 </pre></div>
         </td>
@@ -99,6 +124,23 @@
         <td class="docs">
 <div class="pilwrap">
   <a class="pilcrow" href="#section-4" id="section-4">&#182;</a>
+</div>
+<p>Handles 404 page</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="kd">function</span> <span class="nx">Handle404</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;404&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5">&#182;</a>
 </div>
 <p>error handling</p>
         </td>
@@ -116,7 +158,7 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-5" id="section-5">&#182;</a>
+  <a class="pilcrow" href="#section-6" id="section-6">&#182;</a>
 </div>
 <p>Tells the console it is listening on the given port</p>
         </td>
@@ -134,7 +176,7 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-6" id="section-6">&#182;</a>
+  <a class="pilcrow" href="#section-7" id="section-7">&#182;</a>
 </div>
 <p>array of connected users</p>
         </td>
@@ -152,12 +194,12 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-7" id="section-7">&#182;</a>
+  <a class="pilcrow" href="#section-8" id="section-8">&#182;</a>
 </div>
-<p>console.log(socket);</p>
+<p>console.log(socket);
+socket.emit("message", {message: "hello from server", from: "Server"});</p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-  <span class="nx">socket</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s2">&quot;message&quot;</span><span class="p">,</span> <span class="p">{</span><span class="nx">message</span><span class="o">:</span> <span class="s2">&quot;hello from server&quot;</span><span class="p">,</span> <span class="nx">from</span><span class="o">:</span> <span class="s2">&quot;Server&quot;</span><span class="p">});</span>
 
   <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;set nickname&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">)</span>
   <span class="p">{</span>
@@ -176,8 +218,19 @@
 
   <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;relay&quot;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
   <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;relay&quot;</span><span class="p">);</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-9" id="section-9">&#182;</a>
+</div>
+<p>console.log("relay");
+console.log(data);</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
 
 
 </pre></div>
@@ -186,7 +239,7 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-8" id="section-8">&#182;</a>
+  <a class="pilcrow" href="#section-10" id="section-10">&#182;</a>
 </div>
 <p>var tmp = io.sockets.sockets[data.username];
 console.log(tmp);
@@ -210,7 +263,7 @@ console.log(io.sockets.sockets);</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-9" id="section-9">&#182;</a>
+  <a class="pilcrow" href="#section-11" id="section-11">&#182;</a>
 </div>
 <p>io.sockets.emit("message", {message: data, sender: "Server"});</p>
         </td>
@@ -230,7 +283,7 @@ console.log(io.sockets.sockets);</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-10" id="section-10">&#182;</a>
+  <a class="pilcrow" href="#section-12" id="section-12">&#182;</a>
 </div>
 <p>Define routes, route handlers</p>
         </td>
@@ -240,19 +293,25 @@ console.log(io.sockets.sockets);</p>
 <span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/:user/profile&#39;</span><span class="p">,</span> <span class="nx">user</span><span class="p">.</span><span class="nx">profile</span><span class="p">);</span>
 <span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/:user/followers&#39;</span><span class="p">,</span> <span class="nx">user</span><span class="p">.</span><span class="nx">followers</span><span class="p">);</span>
 <span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/:user/following&#39;</span><span class="p">,</span> <span class="nx">user</span><span class="p">.</span><span class="nx">following</span><span class="p">);</span>
-<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/feed/:language&#39;</span><span class="p">,</span> <span class="nx">hashfeed</span><span class="p">.</span><span class="nx">feed</span><span class="p">);</span>
 <span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/hashtag/:hashtag&#39;</span><span class="p">,</span> <span class="nx">feed</span><span class="p">.</span><span class="nx">hashtag</span><span class="p">);</span>
 <span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/language/:language&#39;</span><span class="p">,</span> <span class="nx">feed</span><span class="p">.</span><span class="nx">language</span><span class="p">);</span>
 <span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/chat&#39;</span><span class="p">,</span> <span class="nx">chat</span><span class="p">.</span><span class="nx">index</span><span class="p">);</span>
 <span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/help&#39;</span><span class="p">,</span> <span class="nx">index</span><span class="p">.</span><span class="nx">help</span><span class="p">);</span>
 <span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/settings&#39;</span><span class="p">,</span> <span class="nx">index</span><span class="p">.</span><span class="nx">settings</span><span class="p">);</span>
 <span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/shorty&#39;</span><span class="p">,</span> <span class="nx">index</span><span class="p">.</span><span class="nx">shorty</span><span class="p">);</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/:user/edit&#39;</span><span class="p">,</span> <span class="nx">user</span><span class="p">.</span><span class="nx">edit</span><span class="p">);</span>
+
 
 <span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/signout&#39;</span><span class="p">,</span> <span class="nx">index</span><span class="p">.</span><span class="nx">signout</span><span class="p">);</span>
 <span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/signin&#39;</span><span class="p">,</span> <span class="nx">index</span><span class="p">.</span><span class="nx">signin</span><span class="p">);</span>
-<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/toggleFollow&#39;</span><span class="p">,</span> <span class="nx">index</span><span class="p">.</span><span class="nx">toggleFollow</span><span class="p">)</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/toggleFollow&#39;</span><span class="p">,</span> <span class="nx">index</span><span class="p">.</span><span class="nx">toggleFollow</span><span class="p">);</span>
 <span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/addNewUser&#39;</span><span class="p">,</span> <span class="nx">index</span><span class="p">.</span><span class="nx">createNewUser</span><span class="p">);</span>
 <span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/submitNewPost&#39;</span><span class="p">,</span> <span class="nx">index</span><span class="p">.</span><span class="nx">submitNewPost</span><span class="p">);</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/search&#39;</span><span class="p">,</span> <span class="nx">search</span><span class="p">.</span><span class="nx">searchAll</span><span class="p">);</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/search/users&#39;</span><span class="p">,</span> <span class="nx">search</span><span class="p">.</span><span class="nx">searchUsers</span><span class="p">);</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/search&#39;</span><span class="p">,</span> <span class="nx">search</span><span class="p">.</span><span class="nx">searchAll</span><span class="p">);</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/update&#39;</span><span class="p">,</span> <span class="nx">user</span><span class="p">.</span><span class="nx">update</span><span class="p">);</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/delete&#39;</span><span class="p">,</span> <span class="nx">user</span><span class="p">.</span><span class="k">delete</span><span class="p">);</span>
 </pre></div>
         </td>
       </tr>
