@@ -9,6 +9,7 @@ var feed = require('./routes/feed');
 var chat = require('./routes/chat');
 var search = require('./routes/search');
 var viewHelpers = require('./views/helpers');
+var notifications = require('./routes/notifications');
 var Notification = require('./db/Notification');
 
 // Set up Express, socket.io
@@ -42,11 +43,12 @@ app.configure(
 
 function checkNotifications(req, res, next)
 {
-	res.locals.notifications = undefined;
+	res.locals.notifications = [];
 	if(req.session.user)
 	{
 		Notification.getNotifications(req.session.user, function(rows){
 			res.locals.notifications = rows;
+			// console.log(rows);
 			next();
 		});
 	}
@@ -113,6 +115,7 @@ io.sockets.on("connection", function(socket)
 
 		var soc = connectedClients[data.to];
 		if(!soc){
+			//TODO: emit("error")
 			socket.emit("message", {message: "ERROR: USER NOT CONNECTED", from: "SERVER"});
 		}
 		else{
@@ -140,8 +143,9 @@ app.get('/chat', chat.index);
 app.get('/help', index.help);
 app.get('/settings', index.settings);
 app.get('/shorty', index.shorty);
-app.get('/:user/edit', user.edit);
 
+app.get('/:user/edit', user.edit);
+app.delete('/:user/delete', user.delete);
 
 app.get('/signout', index.signout);
 app.post('/signin', index.signin);
@@ -151,6 +155,5 @@ app.post('/submitNewPost', index.submitNewPost);
 app.post('/search', search.searchAll);
 app.post('/search/users', search.searchUsers);
 app.get('/search', search.searchAll);
-app.post('/update', user.update);
-app.post('/delete', user.delete);
-
+app.put('/update', user.update);
+app.post('/dismiss_notification', notifications.remove);

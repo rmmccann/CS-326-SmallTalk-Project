@@ -16,11 +16,8 @@ $(document).ready(function()
 	$("#global-search-box").instantSearch(null, "/search", function(results){
 		results_box.show();
 		results_box.html("");
-
 		// console.log(results);
-
 		results_box.append(search_template({results: results}));
-
 		if(results.length===0) results_box.append("No results found");
 	});
 
@@ -32,41 +29,73 @@ $(document).ready(function()
 		$("#global-search-box").val("");
 	});
 
-
+/**
+ * Notifications stuff
+ */
 	$("#notification-button").tooltip(
 		{
 			placement: 'left',
 			animation: false,
-			title: '0'//if no title is defined in the html or is empty	
+			title: numNotifications()
 		}
 	);
 	$("#notification-button").popover(
 		{
 			placement: 'bottom',
 			trigger: 'click',
-			title: 'Notifications',
-			content: getNotificationText(),
-			html: true
+			html: true,
+			title: getNotificationTitle(),
+			content: getNotificationText()
 		}
 	);
+	function getNotificationTitle()
+	{
+		var dismiss = "<button id='dismiss-all' type='button' class='close dismiss-notification'>&times;</button>";
+		dismiss = "";
+		return "<strong>"+numNotifications()+" Notification(s)"+"</strong>" + dismiss;
+	}
+	function dismissMe()
+	{
+		alert("asldf");
+	}
+	function getNotificationText()
+	{
+		var out = "";
+		var open_dismiss = "<button type='button' class='close dismiss-notification' data-id='";
+		var close_dismiss = "'>&times;</button>";
+		notifications.forEach(function(notif){
+			out += ("<span>"+notif.message + open_dismiss+notif.id+close_dismiss + "<hr></span>");
+		});
+		return out;
+	}
+	function numNotifications()
+	{
+		return notifications.length;
+	}
 	$("#notification-button").click(function(){
 		$(this).removeClass("btn-danger");
-
 		$(".tooltip").hide();
+		$("head > title").html($("head > title").html().replace(/\(\d\)/, ""));
+		$(".dismiss-notification").click(function(){
+			var $id = $(this).attr("data-id");
+			$.ajax({url:"/dismiss_notification", type: "post", data: "id="+$id});
+			console.log($id);
+			$(this).parent().hide();
+			//TODO remove from notifications array
+			for(var i=0; i<notifications.length; i++){
+				if(notifications[i].id === $id){
+					// notifications.splice(i,1);
+					delete notifications[i];
+				}
+			}
+		});
 	});
 	$("#notification-button").blur(function(){
 		$(".popover").hide();
 	});
-	function getNotificationText()
-	{
-		var out = "blah blah blah, sample text<hr>";
-		notifications.forEach(function(notif){
-			out += (notif + "<hr>");
-		});
-		return out;
-	}
-
-
+	if(numNotifications()>0) $("head > title").html("("+numNotifications()+") "+$("head > title").html());
+	
+	//Debugging Stuff
 	var debug = true;
 	$(window).resize(function(e){
 		if(debug){
