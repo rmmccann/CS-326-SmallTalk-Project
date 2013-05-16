@@ -11,7 +11,9 @@ CREATE TABLE Notifications(id integer PRIMARY KEY NOT NULL, user_id integer, mes
 -- Create a notification when a user follows another user
 CREATE TRIGGER NotifyOnFollow AFTER INSERT ON Follows
 BEGIN
-	INSERT INTO Notifications values(NULL, new.followed_id, 'You have a new follower');
+	INSERT INTO Notifications values(NULL, new.followed_id,
+		(SELECT '@' || U.username || ' is now following you.' FROM Users U WHERE U.id = new.follower_id)
+	);
 END;
 
 -- Test Data
