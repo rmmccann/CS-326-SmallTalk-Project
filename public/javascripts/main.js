@@ -70,7 +70,7 @@ $(document).ready(function()
 	}
 	function numNotifications()
 	{
-		return notifications.length;
+		return notifications.length || 0;
 	}
 	$("#notification-button").click(function(){
 		$(this).removeClass("btn-danger");
