@@ -2,6 +2,7 @@
 <html>
 <head>
 	<%
+		/* these will be overridden if passed in to the ejs renderer, otherwise they must be initialized to undefined */
 		this.title = undefined;
 		this.javascript = undefined;
 		this.stylesheet = undefined;
@@ -45,7 +46,7 @@
 
 		<!-- Notifications and Settings buttons -->
 		<div id="gear-menu" class="btn-group pull-right">
-			<% if(notifications.length > 0){ %>
+			<% if(notifications && notifications.length > 0) { %>
 			<a id="notification-button" class="btn btn-mini btn-danger" data-toggle="tooltip">!!!</a>
 			<% } else { %>
 			<a id="notification-button" class="btn btn-mini" data-toggle="tooltip" title="0">!!!</a>
